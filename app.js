@@ -751,6 +751,7 @@ function renderAttendance(participantsData) {
 
   document.getElementById('btn-open-add-participant')?.addEventListener('click', () => {
     document.getElementById('form-add-participant')?.reset();
+    renderEnrolList('enrol-class-list', []);
     document.getElementById('modal-add-participant').classList.remove('hidden');
   });
 
@@ -762,33 +763,79 @@ function renderAttendance(participantsData) {
   });
 }
 
+// Populates a checklist of template classes into a container div.
+// checkedIds: array of classIds that should be pre-ticked (for edit modal)
+function renderEnrolList(containerId, checkedIds = []) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const template = lsGet(LS.TEMPLATE_CLASSES, []);
+  if (!template.length) {
+    container.innerHTML = `<p style="font-size:0.8rem;color:var(--muted)">No classes in template yet. Add classes first.</p>`;
+    return;
+  }
+  container.innerHTML = template.map(cls => `
+    <label class="enrol-item">
+      <input type="checkbox" name="enrol_class" value="${esc(cls.id)}"
+        ${checkedIds.includes(cls.id) ? 'checked' : ''}>
+      <span>${esc(cls.name)} — ${esc(cls.day)} ${esc(cls.time)}</span>
+    </label>`).join('');
+}
+
 function addParticipant() {
   const form = document.getElementById('form-add-participant');
   const fd = new FormData(form);
   const sessTotal = fd.get('sessions_total') ? parseInt(fd.get('sessions_total')) : null;
+
+  // Collect checked class IDs
+  const checkedIds = Array.from(
+    form.querySelectorAll('input[name="enrol_class"]:checked')
+  ).map(cb => cb.value);
+
+  if (!checkedIds.length) {
+    alert('Please select at least one class to enrol this participant in.');
+    return;
+  }
+
   const newP = {
-    id:               `par_custom_${Date.now()}`,
-    name:             fd.get('name'),
-    plan:             fd.get('plan'),
-    rate:             parseInt(fd.get('rate') || '0'),
-    sessions_total:   sessTotal,
+    id:                crypto.randomUUID(),
+    name:              fd.get('name'),
+    plan:              fd.get('plan'),
+    rate:              parseInt(fd.get('rate') || '0'),
+    sessions_total:    sessTotal,
     sessions_attended: 0,
-    invoice_status:   'pending',
+    invoice_status:    'pending',
   };
-  const classId = state.currentClassId;
-  if (!classId) { alert('Please select a class first.'); return; }
-  const participants = getClassParticipants(classId);
-  participants.push(newP);
-  setClassParticipants(classId, participants);
+
+  // Add to every ticked class
+  checkedIds.forEach(classId => {
+    const list = getClassParticipants(classId);
+    list.push(newP);
+    setClassParticipants(classId, list);
+  });
+
   document.getElementById('modal-add-participant').classList.add('hidden');
   form.reset();
   if (state.data) renderAttendance();
 }
 
 function openEditParticipant(id) {
-  const participants = getClassParticipants(state.currentClassId);
-  const p = participants.find(x => x.id === id);
+  // Find the participant — search current class first, then all classes
+  let p = getClassParticipants(state.currentClassId).find(x => x.id === id);
+  if (!p) {
+    const map = lsGet(LS.PARTICIPANTS, {});
+    for (const list of Object.values(map)) {
+      p = list.find(x => x.id === id);
+      if (p) break;
+    }
+  }
   if (!p) return;
+
+  // Find all class IDs this participant is currently enrolled in
+  const map = lsGet(LS.PARTICIPANTS, {});
+  const enrolledIn = Object.entries(map)
+    .filter(([, list]) => list.some(x => x.id === id))
+    .map(([classId]) => classId);
+
   const form = document.getElementById('form-edit-participant');
   form.elements['id'].value                = p.id;
   form.elements['name'].value              = p.name;
@@ -797,6 +844,10 @@ function openEditParticipant(id) {
   form.elements['sessions_total'].value    = p.sessions_total ?? '';
   form.elements['sessions_attended'].value = p.sessions_attended || 0;
   form.elements['invoice_status'].value    = p.invoice_status || 'pending';
+
+  // Populate enrolment checklist with current classes pre-ticked
+  renderEnrolList('edit-enrol-class-list', enrolledIn);
+
   document.getElementById('modal-edit-participant').classList.remove('hidden');
 }
 
@@ -804,13 +855,10 @@ function saveEditParticipant() {
   const form = document.getElementById('form-edit-participant');
   const fd = new FormData(form);
   const id = fd.get('id');
-  const classId = state.currentClassId;
-  const participants = getClassParticipants(classId);
-  const idx = participants.findIndex(p => p.id === id);
-  if (idx === -1) return;
   const sessTotal = fd.get('sessions_total') ? parseInt(fd.get('sessions_total')) : null;
-  participants[idx] = {
-    ...participants[idx],
+
+  const updatedP = {
+    id,
     name:              fd.get('name'),
     plan:              fd.get('plan'),
     rate:              parseInt(fd.get('rate') || '0'),
@@ -818,7 +866,31 @@ function saveEditParticipant() {
     sessions_attended: parseInt(fd.get('sessions_attended') || '0'),
     invoice_status:    fd.get('invoice_status'),
   };
-  setClassParticipants(classId, participants);
+
+  // Collect newly checked class IDs
+  const newEnrolment = Array.from(
+    form.querySelectorAll('input[name="enrol_class"]:checked')
+  ).map(cb => cb.value);
+
+  // Update every template class: add/remove/update the participant
+  const allTemplate = lsGet(LS.TEMPLATE_CLASSES, []);
+  allTemplate.forEach(cls => {
+    const list = getClassParticipants(cls.id);
+    const idx = list.findIndex(p => p.id === id);
+    if (newEnrolment.includes(cls.id)) {
+      // Should be enrolled — add or update
+      if (idx !== -1) list[idx] = { ...list[idx], ...updatedP };
+      else list.push(updatedP);
+      setClassParticipants(cls.id, list);
+    } else {
+      // Should not be enrolled — remove if present
+      if (idx !== -1) {
+        list.splice(idx, 1);
+        setClassParticipants(cls.id, list);
+      }
+    }
+  });
+
   document.getElementById('modal-edit-participant').classList.add('hidden');
   if (state.data) renderAttendance();
 }

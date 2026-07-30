@@ -1436,3 +1436,43 @@ form textarea { resize: vertical; min-height: 72px; }
   font-size: 1.1rem;
   color: var(--cream);
 }
+
+/* ── Enrolment Class Checklist ───────────────────────── */
+.enrol-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.enrol-class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--cream);
+}
+
+.enrol-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 4px 2px;
+}
+
+.enrol-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--forest);
+  flex-shrink: 0;
+  cursor: pointer;
+}
