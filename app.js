@@ -640,17 +640,31 @@ function renderAttendance(participantsData) {
       </tr>`;
   });
 
-  // Invoice list
+  // Invoice list — calculate amounts per plan type
   const invoices = lsGet(LS.INVOICES, participants);
-  let invoiceRows = invoices.map(p => `
+  let grandTotal = 0;
+  let invoiceRows = invoices.map(p => {
+    const amount = calcAmount(p);
+    grandTotal += p.invoice_status !== 'paid' ? amount : 0;
+    const subLabel = p.plan === 'dropin'
+      ? `Drop-in · ₹${(p.rate || 0).toLocaleString('en-IN')}/session this month`
+      : `${esc(p.plan)} · flat rate`;
+    return `
     <div class="invoice-row">
       <div>
         <div class="invoice-name">${esc(p.name)}</div>
-        <div class="invoice-plan">${esc(p.plan)} · ${p.sessions_attended} sessions</div>
+        <div class="invoice-plan">${subLabel}</div>
       </div>
-      <span class="invoice-amount">₹${(p.rate || 0).toLocaleString('en-IN')}</span>
+      <span class="invoice-amount">₹${amount.toLocaleString('en-IN')}</span>
       <span class="badge badge--${esc(p.invoice_status)}">${esc(p.invoice_status)}</span>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+
+  const totalRow = invoices.length ? `
+    <div class="invoice-total-summary">
+      <span>Total Outstanding</span>
+      <strong>₹${grandTotal.toLocaleString('en-IN')}</strong>
+    </div>` : '';
 
   panel.innerHTML = `
     <h2 style="color:var(--bark);margin-bottom:12px">Attendance & Invoicing</h2>
@@ -678,6 +692,7 @@ function renderAttendance(participantsData) {
 
     <div class="section-label">💳 Invoices</div>
     <div id="invoice-list">${invoiceRows}</div>
+    ${totalRow}
     <button class="btn-generate" id="btn-generate-invoices">📄 Generate All Pending Invoices</button>
   `;
 
@@ -789,6 +804,31 @@ function toggleAttendance(participantId, classId, dateStr) {
   lsSet(LS.ATTENDANCE, rec);
 }
 
+// Calculates the amount due for a participant based on their plan type.
+// monthly / event → flat rate as entered
+// dropin          → rate × sessions attended in the current calendar month
+function calcAmount(participant) {
+  const plan = participant.plan || '';
+  if (plan === 'dropin') {
+    const rec = lsGet(LS.ATTENDANCE, {});
+    const now = new Date();
+    const monthPrefix = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    // Count keys matching *_YYYY-MM-*_participantId that are true
+    const sessionsThisMonth = Object.entries(rec).filter(([key, present]) => {
+      if (!present) return false;
+      // key format: classId_YYYY-MM-DD_participantId
+      const parts = key.split('_');
+      if (parts.length < 3) return false;
+      const dateStr = parts[parts.length - 2]; // second-to-last segment
+      const pid     = parts[parts.length - 1]; // last segment
+      return pid === participant.id && dateStr.startsWith(monthPrefix);
+    }).length;
+    return (participant.rate || 0) * sessionsThisMonth;
+  }
+  // monthly or event: flat rate
+  return participant.rate || 0;
+}
+
 function generateInvoices(participants) {
   const printArea = document.getElementById('invoice-print-area');
   const pending = participants.filter(p => p.invoice_status !== 'paid');
@@ -798,7 +838,13 @@ function generateInvoices(participants) {
     return;
   }
 
-  printArea.innerHTML = pending.map((p, i) => `
+  const monthLabel = new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+  printArea.innerHTML = pending.map((p, i) => {
+    const amount = calcAmount(p);
+    const rateDetail = p.plan === 'dropin'
+      ? `Drop-in · ₹${(p.rate || 0).toLocaleString('en-IN')} per session`
+      : `${esc(p.plan)} · flat rate`;
+    return `
     <div class="invoice-card-print">
       <div class="invoice-print-header">
         <div>
@@ -812,15 +858,17 @@ function generateInvoices(participants) {
         </div>
       </div>
       <div class="invoice-row-print"><span>Participant</span><strong>${esc(p.name)}</strong></div>
-      <div class="invoice-row-print"><span>Plan</span><span>${esc(p.plan)} package</span></div>
+      <div class="invoice-row-print"><span>Plan</span><span>${rateDetail}</span></div>
+      <div class="invoice-row-print"><span>Billing Period</span><span>${monthLabel}</span></div>
       <div class="invoice-row-print"><span>Sessions Attended</span><span>${p.sessions_attended}</span></div>
-      ${p.sessions_total ? `<div class="invoice-row-print"><span>Total Sessions</span><span>${p.sessions_total}</span></div>` : ''}
-      <div class="invoice-row-print invoice-total-row"><span>Amount Due</span><strong>₹${(p.rate || 0).toLocaleString('en-IN')}</strong></div>
+      ${p.sessions_total ? `<div class="invoice-row-print"><span>Total Sessions (Package)</span><span>${p.sessions_total}</span></div>` : ''}
+      <div class="invoice-row-print invoice-total-row"><span>Amount Due</span><strong>₹${amount.toLocaleString('en-IN')}</strong></div>
       <div class="upi-placeholder">
         💳 Scan UPI QR to pay · samavayaniramaya@upi<br>
         <small>Please quote invoice SN-${String(i + 1).padStart(3, '0')} in payment reference</small>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   printArea.classList.remove('hidden');
   setTimeout(() => {

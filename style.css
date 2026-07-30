@@ -1418,3 +1418,21 @@ form textarea { resize: vertical; min-height: 72px; }
   color: var(--bark);
   font-weight: 600;
 }
+
+/* ── Invoice Total Summary ───────────────────────────── */
+.invoice-total-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--forest);
+  color: var(--cream);
+  border-radius: var(--radius-card);
+  padding: 12px 16px;
+  margin: 8px 0 12px;
+  font-size: 0.95rem;
+}
+
+.invoice-total-summary strong {
+  font-size: 1.1rem;
+  color: var(--cream);
+}
