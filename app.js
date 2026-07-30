@@ -681,8 +681,12 @@ function renderAttendance(participantsData) {
     <button class="btn-generate" id="btn-generate-invoices">📄 Generate All Pending Invoices</button>
   `;
 
+  // Restore selected class in dropdown after re-render
+  const selectEl = document.getElementById('class-select');
+  if (selectEl && currentId) selectEl.value = currentId;
+
   // Listeners
-  document.getElementById('class-select')?.addEventListener('change', e => {
+  selectEl?.addEventListener('change', e => {
     state.currentClassId = e.target.value;
     renderAttendance();
   });
