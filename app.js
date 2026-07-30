@@ -164,6 +164,11 @@ function seedLocalStorage(sections) {
     }
     lsSet(LS.WEEK_OVERRIDES, {});
   }
+
+  // Ensure WEEK_OVERRIDES always exists (in case it was cleared independently)
+  if (!localStorage.getItem(LS.WEEK_OVERRIDES)) {
+    lsSet(LS.WEEK_OVERRIDES, {});
+  }
 }
 
 // ── Week Data Layer ───────────────────────────────────────
@@ -304,8 +309,8 @@ function switchTab(tabName) {
 function renderSchedule(schedData) {
   const panel = document.getElementById('panel-schedule');
   const todayDay = todayName();
-  // All classes come from customClasses (JSON classes seeded in on first load)
-  const allClasses = state.customClasses;
+  // All classes come from templateClasses (seeded from JSON on first load, managed as CRUD source)
+  const allClasses = state.templateClasses;
 
   // Group by day
   const grouped = {};
@@ -425,7 +430,7 @@ function renderMiniCalendar(classDays) {
 }
 
 function openEditClass(id) {
-  const cls = state.customClasses.find(c => c.id === id);
+  const cls = state.templateClasses.find(c => c.id === id);
   if (!cls) return;
   const form = document.getElementById('form-edit-class');
   form.elements['id'].value    = cls.id;
@@ -441,8 +446,8 @@ function openEditClass(id) {
 
 function deleteClass(id) {
   if (!confirm('Delete this class?')) return;
-  state.customClasses = state.customClasses.filter(c => c.id !== id);
-  lsSet(LS.CUSTOM_CLASSES, state.customClasses);
+  state.templateClasses = state.templateClasses.filter(c => c.id !== id);
+  lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
   if (state.data) renderSchedule(state.data.sections.schedule);
 }
 
@@ -452,7 +457,7 @@ function deleteClass(id) {
 function renderAttendance(schedData, participantsData) {
   const panel = document.getElementById('panel-attend');
   const participants = lsGet(LS.PARTICIPANTS, participantsData || []);
-  const allClasses = [...(schedData?.classes || []), ...state.customClasses];
+  const allClasses = state.templateClasses;
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
@@ -1035,8 +1040,8 @@ function setupModals() {
       rate_type: fd.get('type') === 'dropin' ? 'dropin' : fd.get('type') === 'event' ? 'flat_event' : 'monthly',
       rate:     parseInt(fd.get('rate') || '0'),
     };
-    state.customClasses.push(newClass);
-    lsSet(LS.CUSTOM_CLASSES, state.customClasses);
+    state.templateClasses.push(newClass);
+    lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
     document.getElementById('modal-add-class').classList.add('hidden');
     e.target.reset();
     // Re-render schedule
@@ -1071,10 +1076,10 @@ function setupModals() {
     e.preventDefault();
     const fd = new FormData(e.target);
     const id = fd.get('id');
-    const idx = state.customClasses.findIndex(c => c.id === id);
+    const idx = state.templateClasses.findIndex(c => c.id === id);
     if (idx === -1) return;
-    state.customClasses[idx] = {
-      ...state.customClasses[idx],
+    state.templateClasses[idx] = {
+      ...state.templateClasses[idx],
       name:     fd.get('name'),
       day:      fd.get('day'),
       time:     fd.get('time'),
@@ -1083,7 +1088,7 @@ function setupModals() {
       rate:     parseInt(fd.get('rate') || '0'),
       capacity: parseInt(fd.get('capacity') || '10'),
     };
-    lsSet(LS.CUSTOM_CLASSES, state.customClasses);
+    lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
     document.getElementById('modal-edit-class').classList.add('hidden');
     if (state.data) renderSchedule(state.data.sections.schedule);
   });
