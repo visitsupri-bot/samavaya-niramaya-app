@@ -1134,3 +1134,282 @@ form textarea { resize: vertical; min-height: 72px; }
   .invoice-card-print { page-break-after: always; box-shadow: none; }
   .invoice-card-print:last-child { page-break-after: avoid; }
 }
+
+/* ── Week Navigation Bar ─────────────────────────────── */
+.week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.week-nav-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.week-nav-center {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.week-nav-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2d1f0e;
+}
+
+.week-nav-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.week-current-badge {
+  color: var(--moss);
+  font-weight: 600;
+}
+
+/* ── Schedule Toolbar ────────────────────────────────── */
+.schedule-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.btn-edit-template {
+  background: #e8f0e8;
+  border: 1px solid #a0c0a0;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  color: var(--forest);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ── Class card status variants ──────────────────────── */
+.class-row--overridden {
+  background: #fff8f0;
+  border-color: #ffb74d;
+}
+
+.class-row--cancelled {
+  background: #f5f5f5;
+  border: 1px dashed #bbb;
+  opacity: 0.75;
+}
+
+.class-row--adhoc {
+  background: #f0f7ff;
+  border-color: #90caf9;
+}
+
+.class-status-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ── Class action buttons ────────────────────────────── */
+.btn-class-action {
+  flex-shrink: 0;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.btn-override {
+  background: #fff3e0;
+  border-color: #ffb74d;
+  color: #e65100;
+}
+
+.btn-restore {
+  background: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #2e7d32;
+}
+
+.btn-restore--remove {
+  background: #fce4ec;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+.btn-delete-adhoc {
+  background: #fce4ec;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+.btn-add-adhoc {
+  width: 100%;
+  background: #f0f7f0;
+  border: 2px dashed #a0c0a0;
+  border-radius: var(--radius-card);
+  padding: 12px;
+  font-size: 0.875rem;
+  color: var(--moss);
+  cursor: pointer;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ── Template Editor Modal ───────────────────────────── */
+.modal-sheet--full {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-subtitle {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.te-day-group { margin-bottom: 12px; }
+
+.te-day-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.te-class-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+}
+
+.te-class-name { font-weight: 600; font-size: 0.9rem; }
+.te-class-meta { font-size: 0.75rem; color: var(--muted); }
+
+.te-actions { display: flex; gap: 6px; }
+
+.btn-te-edit {
+  background: #e8f0ff;
+  border: 1px solid #90b0ff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #1a3a9a;
+}
+
+.btn-te-remove {
+  background: #fce4ec;
+  border: 1px solid #ef9a9a;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #b71c1c;
+}
+
+.btn-add-template {
+  width: 100%;
+  background: #f0f7f0;
+  border: 2px dashed #a0c0a0;
+  border-radius: var(--radius-card);
+  padding: 12px;
+  font-size: 0.875rem;
+  color: var(--moss);
+  cursor: pointer;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ── Week Picker Calendar ────────────────────────────── */
+.modal-sheet--calendar {
+  max-width: 340px;
+}
+
+.wp-grid-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+
+.wp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  padding: 0 4px;
+}
+
+.wp-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #2d1f0e;
+}
+
+.wp-cell:hover { background: #e8f5e8; }
+.wp-cell--empty { cursor: default; }
+.wp-cell--empty:hover { background: none; }
+
+.wp-cell--today {
+  background: #e8f5e8;
+  color: var(--forest);
+  font-weight: 700;
+}
+
+.wp-cell--selected {
+  background: var(--forest);
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.wp-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+}
+
+/* ── Override Modal extras ───────────────────────────── */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  margin: 12px 0;
+  cursor: pointer;
+  color: var(--bark);
+  font-weight: 600;
+}
