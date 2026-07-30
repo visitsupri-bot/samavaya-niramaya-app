@@ -7,14 +7,16 @@
 const GCS_BASE = 'https://storage.googleapis.com/samavaya-niramaya/daily';
 
 const LS = {
-  PARTICIPANTS:   'sn_participants',
-  ATTENDANCE:     'sn_attendance',
-  INVOICES:       'sn_invoices',
-  VENUES:         'sn_venues',
-  WISDOM_FAVS:    'sn_wisdom_favourites',
-  ACTIVE_TAB:     'sn_active_tab',
-  WISDOM_SOURCE:  'sn_wisdom_source',
-  CUSTOM_CLASSES: 'sn_custom_classes',
+  PARTICIPANTS:    'sn_participants',
+  ATTENDANCE:      'sn_attendance',
+  INVOICES:        'sn_invoices',
+  VENUES:          'sn_venues',
+  WISDOM_FAVS:     'sn_wisdom_favourites',
+  ACTIVE_TAB:      'sn_active_tab',
+  WISDOM_SOURCE:   'sn_wisdom_source',
+  CUSTOM_CLASSES:  'sn_custom_classes',   // deprecated — kept for migration
+  TEMPLATE_CLASSES:'sn_template_classes',
+  WEEK_OVERRIDES:  'sn_week_overrides',
 };
 
 const DAYS_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
@@ -34,13 +36,15 @@ const WISDOM_SOURCES = [
 
 // ── App State ─────────────────────────────────────────────
 const state = {
-  data:           null,
-  activeTab:      'schedule',
-  wisdomSource:   'yoga_sutras',
-  currentClassId: null,
-  customClasses:  [],
-  customVenues:   [],
+  data:            null,
+  activeTab:       'schedule',
+  wisdomSource:    'yoga_sutras',
+  currentClassId:  null,
+  customClasses:   [],   // deprecated, kept for migration read
+  templateClasses: [],
+  customVenues:    [],
   activeCondition: null,
+  selectedWeek:    null, // Date object for the Monday of the viewed week; null = current week
 };
 
 // ── Helpers ───────────────────────────────────────────────
@@ -80,7 +84,43 @@ function venueBadgeClass(badge) {
 }
 
 function esc(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');
+}
+
+// Returns "YYYY-Www" for the ISO week containing `date`
+function isoWeekKey(date) {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7)); // shift to nearest Thursday
+  const yearStart = new Date(d.getFullYear(), 0, 4);
+  const weekNum = Math.round(
+    ((d - yearStart) / 86400000 - 3 + ((yearStart.getDay() + 6) % 7)) / 7
+  ) + 1;
+  return `${d.getFullYear()}-W${String(weekNum).padStart(2, '0')}`;
+}
+
+// Returns the Monday of the ISO week that contains `date`
+function weekMonday(date) {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay(); // 0=Sun
+  const diff = (day === 0) ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
+// Returns "28 Jul – 3 Aug 2026" for the week containing `date`
+function weekRangeLabel(date) {
+  const mon = weekMonday(date);
+  const sun = new Date(mon);
+  sun.setDate(mon.getDate() + 6);
+  const fmt = d => d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+  return `${fmt(mon)} – ${fmt(sun)} ${sun.getFullYear()}`;
+}
+
+// Returns week number string for display e.g. "31"
+function weekNumber(date) {
+  return isoWeekKey(date).split('-W')[1];
 }
 
 // ── Init ─────────────────────────────────────────────────
@@ -88,8 +128,8 @@ async function init() {
   // Restore persisted state
   state.activeTab     = lsGet(LS.ACTIVE_TAB, 'schedule');
   state.wisdomSource  = lsGet(LS.WISDOM_SOURCE, 'yoga_sutras');
-  state.customClasses = lsGet(LS.CUSTOM_CLASSES, []);
-  state.customVenues  = lsGet(LS.VENUES, []);
+  state.templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
+  state.customVenues    = lsGet(LS.VENUES, []);
 
   // Set header date
   document.getElementById('app-date').textContent =
@@ -106,17 +146,80 @@ async function init() {
 
 // ── localStorage Seeding ──────────────────────────────────
 function seedLocalStorage(sections) {
-  // Seed participants only on first load (key absent)
+  // Seed participants only on first load
   if (!localStorage.getItem(LS.PARTICIPANTS) && sections.participants) {
     lsSet(LS.PARTICIPANTS, sections.participants);
   }
-  // Seed schedule classes into customClasses on first load so they are editable.
-  // Re-seed if the stored list is empty (upgrade from previous version that seeded []).
-  const stored = lsGet(LS.CUSTOM_CLASSES, null);
-  if (!stored || stored.length === 0) {
-    const jsonClasses = sections.schedule?.classes || [];
-    lsSet(LS.CUSTOM_CLASSES, jsonClasses);
+
+  // Migrate sn_custom_classes → sn_template_classes (one-time)
+  if (!localStorage.getItem(LS.TEMPLATE_CLASSES)) {
+    const legacy = lsGet(LS.CUSTOM_CLASSES, null);
+    if (legacy && legacy.length > 0) {
+      // Promote existing custom classes to be the template
+      lsSet(LS.TEMPLATE_CLASSES, legacy);
+    } else {
+      // No legacy data — seed from the daily JSON
+      const jsonClasses = sections.schedule?.classes || [];
+      lsSet(LS.TEMPLATE_CLASSES, jsonClasses);
+    }
+    lsSet(LS.WEEK_OVERRIDES, {});
   }
+}
+
+// ── Week Data Layer ───────────────────────────────────────
+
+// Returns the resolved class list for a given ISO week key.
+// Each class has a `_status` field: 'template' | 'overridden' | 'cancelled' | 'adhoc'
+function getWeekClasses(weekKey) {
+  const templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
+  const allOverrides    = lsGet(LS.WEEK_OVERRIDES, {});
+  const weekOverrides   = allOverrides[weekKey] || {};
+  const adhoc           = allOverrides[`${weekKey}-adhoc`] || [];
+
+  const resolved = templateClasses.map(cls => {
+    const ov = weekOverrides[cls.id];
+    if (!ov) return { ...cls, _status: 'template' };
+    if (ov.action === 'cancelled') return { ...cls, _status: 'cancelled' };
+    // action === 'override': merge changed fields over template
+    return { ...cls, ...ov, action: undefined, _status: 'overridden' };
+  });
+
+  adhoc.forEach(cls => resolved.push({ ...cls, _status: 'adhoc' }));
+  return resolved;
+}
+
+function saveOverride(weekKey, classId, overrideData) {
+  const all = lsGet(LS.WEEK_OVERRIDES, {});
+  if (!all[weekKey]) all[weekKey] = {};
+  all[weekKey][classId] = overrideData;
+  lsSet(LS.WEEK_OVERRIDES, all);
+}
+
+function removeOverride(weekKey, classId) {
+  const all = lsGet(LS.WEEK_OVERRIDES, {});
+  if (all[weekKey]) {
+    delete all[weekKey][classId];
+    if (Object.keys(all[weekKey]).length === 0) delete all[weekKey];
+  }
+  lsSet(LS.WEEK_OVERRIDES, all);
+}
+
+function addAdhocClass(weekKey, cls) {
+  const all = lsGet(LS.WEEK_OVERRIDES, {});
+  const key = `${weekKey}-adhoc`;
+  if (!all[key]) all[key] = [];
+  all[key].push(cls);
+  lsSet(LS.WEEK_OVERRIDES, all);
+}
+
+function deleteAdhocClass(weekKey, classId) {
+  const all = lsGet(LS.WEEK_OVERRIDES, {});
+  const key = `${weekKey}-adhoc`;
+  if (all[key]) {
+    all[key] = all[key].filter(c => c.id !== classId);
+    if (all[key].length === 0) delete all[key];
+  }
+  lsSet(LS.WEEK_OVERRIDES, all);
 }
 
 // ── Data Fetch ────────────────────────────────────────────
@@ -155,7 +258,7 @@ async function fetchData() {
   // Seed localStorage on first run, then reload into state
   if (state.data?.sections) {
     seedLocalStorage(state.data.sections);
-    state.customClasses = lsGet(LS.CUSTOM_CLASSES, []);
+    state.templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
   }
 
   skeleton.classList.add('hidden');
