@@ -1216,6 +1216,11 @@ form textarea { resize: vertical; min-height: 72px; }
   opacity: 0.75;
 }
 
+.class-name--cancelled {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
 .class-row--adhoc {
   background: #f0f7ff;
   border-color: #90caf9;

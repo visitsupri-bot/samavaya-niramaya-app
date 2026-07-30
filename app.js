@@ -186,7 +186,8 @@ function getWeekClasses(weekKey) {
     if (!ov) return { ...cls, _status: 'template' };
     if (ov.action === 'cancelled') return { ...cls, _status: 'cancelled' };
     // action === 'override': merge changed fields over template
-    return { ...cls, ...ov, action: undefined, _status: 'overridden' };
+    const { action: _action, ...ovFields } = ov;
+    return { ...cls, ...ovFields, _status: 'overridden' };
   });
 
   adhoc.forEach(cls => resolved.push({ ...cls, _status: 'adhoc' }));
@@ -434,13 +435,11 @@ function renderClassCard(cls) {
     actionBtn = `<button class="btn-class-action btn-delete-adhoc" data-id="${esc(cls.id)}">Delete</button>`;
   }
 
-  const nameStyle = cls._status === 'cancelled' ? ' style="text-decoration:line-through;color:var(--muted)"' : '';
-
   return `
     <div class="class-row${statusClass}${isEvent ? ' class-row--event' : ''}">
       <span class="class-dot dot--${esc(cls.type)}"></span>
       <div class="class-info">
-        <div class="class-name"${nameStyle}>${esc(cls.name)}</div>
+        <div class="class-name${cls._status === 'cancelled' ? ' class-name--cancelled' : ''}">${esc(cls.name)}</div>
         <div class="class-meta">${esc(cls.time)} · ${esc(cls.venue)} · <span class="class-status-label">${statusLabel}</span></div>
       </div>
       ${actionBtn}
@@ -533,7 +532,6 @@ function renderTemplateEditor() {
       const tpl = lsGet(LS.TEMPLATE_CLASSES, []);
       const cls = tpl.find(c => c.id === btn.dataset.id);
       if (!cls) return;
-      state._editingTemplateClassId = cls.id;
       const form = document.getElementById('form-edit-class');
       form.elements['id'].value       = cls.id;
       form.elements['name'].value     = cls.name;
@@ -1190,15 +1188,22 @@ function setupModals() {
     const weekKey = fd.get('weekKey');
     const cancel  = fd.get('cancel_this_week') === 'on';
 
-    // Only validate name/time when not cancelling (required attrs removed from HTML)
-    if (!cancel && !fd.get('name')?.trim()) return;
+    if (!cancel) {
+      if (!fd.get('name')?.trim()) {
+        const nameInput = e.target.elements['name'];
+        nameInput.setCustomValidity('Please enter a class name');
+        nameInput.reportValidity();
+        nameInput.setCustomValidity('');
+        return;
+      }
+    }
 
     if (cancel) {
       saveOverride(weekKey, classId, { action: 'cancelled' });
     } else {
       saveOverride(weekKey, classId, {
         action: 'override',
-        name:   fd.get('name'),
+        name:   fd.get('name').trim(),
         time:   fd.get('time'),
         venue:  fd.get('venue') || 'TBD',
       });
@@ -1239,7 +1244,7 @@ function setupModals() {
     e.preventDefault();
     const fd = new FormData(e.target);
     const newClass = {
-      id:       `cls_${Date.now()}`,
+      id:       crypto.randomUUID(),
       name:     fd.get('name'),
       type:     fd.get('type'),
       day:      fd.get('day'),
@@ -1309,7 +1314,6 @@ function setupModals() {
       lsSet(LS.TEMPLATE_CLASSES, tpl);
       state.templateClasses = tpl;
     }
-    state._editingTemplateClassId = null;
     document.getElementById('modal-edit-class').classList.add('hidden');
     if (!document.getElementById('modal-template-editor').classList.contains('hidden')) {
       renderTemplateEditor();
