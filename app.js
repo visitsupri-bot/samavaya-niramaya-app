@@ -306,28 +306,37 @@ function switchTab(tabName) {
 // ═══════════════════════════════════════════════════════════
 // TAB 1 — SCHEDULE
 // ═══════════════════════════════════════════════════════════
+function currentViewWeekMonday() {
+  return state.selectedWeek ? new Date(state.selectedWeek) : weekMonday(new Date());
+}
+
 function renderSchedule() {
-  const panel = document.getElementById('panel-schedule');
-  const todayDay = todayName();
-  // All classes come from templateClasses (seeded from JSON on first load, managed as CRUD source)
-  const allClasses = state.templateClasses;
+  const panel      = document.getElementById('panel-schedule');
+  const viewMon    = currentViewWeekMonday();
+  const weekKey    = isoWeekKey(viewMon);
+  const todayKey   = isoWeekKey(new Date());
+  const isThisWeek = weekKey === todayKey;
+  const todayDay   = todayName();
+  const classes    = getWeekClasses(weekKey);
 
   // Group by day
   const grouped = {};
   DAYS_ORDER.forEach(d => { grouped[d] = []; });
-  allClasses.forEach(cls => {
-    if (grouped[cls.day]) grouped[cls.day].push(cls);
-  });
+  classes.forEach(cls => { if (grouped[cls.day]) grouped[cls.day].push(cls); });
 
-  // Days that have classes (for calendar dots)
-  const classDays = new Set(allClasses.map(c => c.day));
-
+  // Week nav bar
   let html = `
-    <div class="section-header">
-      <h2>Weekly Schedule</h2>
-      <button class="btn-add" id="btn-open-add-class">＋ Add Class</button>
+    <div class="week-nav">
+      <button class="week-nav-btn" id="btn-week-prev">‹</button>
+      <div class="week-nav-center" id="btn-week-picker">
+        <div class="week-nav-label">${weekRangeLabel(viewMon)}</div>
+        <div class="week-nav-sub">Week ${weekNumber(viewMon)}${isThisWeek ? ' · <span class="week-current-badge">Current week</span>' : ''}</div>
+      </div>
+      <button class="week-nav-btn" id="btn-week-next">›</button>
     </div>
-    <div id="mini-calendar-wrap"></div>
+    <div class="schedule-toolbar">
+      <button class="btn-edit-template" id="btn-open-template-editor">✏️ Edit Template</button>
+    </div>
     <div class="legend">
       <span class="legend-item"><span class="class-dot dot--fixed"></span> Fixed</span>
       <span class="legend-item"><span class="class-dot dot--dropin"></span> Drop-in</span>
@@ -335,97 +344,106 @@ function renderSchedule() {
     </div>
   `;
 
+  // Day groups
   DAYS_ORDER.forEach(day => {
-    const classes = grouped[day];
-    if (!classes.length) return;
-    const isToday = day === todayDay;
-    html += `<div class="day-group">
-      <div class="day-label${isToday ? ' day-label--today' : ''}">${isToday ? '📍 Today — ' : ''}${day}</div>`;
+    const dayCls = grouped[day];
+    if (!dayCls.length) return;
+    const isToday = isThisWeek && day === todayDay;
+    const dayDate = new Date(viewMon);
+    dayDate.setDate(viewMon.getDate() + DAYS_ORDER.indexOf(day));
+    const dayLabel = dayDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
 
-    classes.forEach(cls => {
-      const isEvent = cls.type === 'event';
-      html += `
-        <div class="class-row${isEvent ? ' class-row--event' : ''}">
-          <span class="class-dot dot--${esc(cls.type)}"></span>
-          <div class="class-info">
-            <div class="class-name">${esc(cls.name)}</div>
-            <div class="class-meta">${esc(cls.time)} · ${esc(cls.venue)}</div>
-          </div>
-          <span class="class-enrolled">${esc(cls.enrolled)}/${esc(cls.capacity)}</span>
-          <button class="btn-icon btn-edit-class" data-id="${esc(cls.id)}" title="Edit">✏️</button>
-          <button class="btn-icon btn-icon--danger btn-delete-class" data-id="${esc(cls.id)}" title="Delete">🗑️</button>
-        </div>`;
+    html += `<div class="day-group">
+      <div class="day-label${isToday ? ' day-label--today' : ''}">${isToday ? '📍 Today — ' : ''}${day} · ${dayLabel}</div>`;
+
+    dayCls.forEach(cls => {
+      html += renderClassCard(cls, weekKey);
     });
+
     html += `</div>`;
   });
 
-  // Next week preview note
-  html += `
-    <div class="card card--forest mt-12">
-      <div class="card-title card-title--bark">📆 Next Week</div>
-      <p>Your recurring fixed classes continue on the same schedule. Add events or changes using the ＋ Add Class button above.</p>
-    </div>`;
+  // Add one-off button
+  html += `<button class="btn-add-adhoc" id="btn-open-add-adhoc">＋ Add one-off class this week</button>`;
 
   panel.innerHTML = html;
 
-  // Render mini calendar after HTML is injected
-  renderMiniCalendar(classDays);
-
-  document.getElementById('btn-open-add-class')?.addEventListener('click', () => {
+  // Wire navigation
+  document.getElementById('btn-week-prev').addEventListener('click', () => {
+    const m = currentViewWeekMonday();
+    m.setDate(m.getDate() - 7);
+    state.selectedWeek = m;
+    renderSchedule();
+  });
+  document.getElementById('btn-week-next').addEventListener('click', () => {
+    const m = currentViewWeekMonday();
+    m.setDate(m.getDate() + 7);
+    state.selectedWeek = m;
+    renderSchedule();
+  });
+  document.getElementById('btn-week-picker').addEventListener('click', () => openWeekPicker());
+  document.getElementById('btn-open-template-editor').addEventListener('click', () => openTemplateEditor());
+  document.getElementById('btn-open-add-adhoc').addEventListener('click', () => {
+    state._addingAdhocForWeek = weekKey;
     document.getElementById('modal-add-class').classList.remove('hidden');
   });
 
-  panel.querySelectorAll('.btn-edit-class').forEach(btn => {
-    btn.addEventListener('click', () => openEditClass(btn.dataset.id));
+  // Override / restore / delete buttons
+  panel.querySelectorAll('.btn-override').forEach(btn => {
+    btn.addEventListener('click', () => openOverrideModal(btn.dataset.id, weekKey));
   });
-  panel.querySelectorAll('.btn-delete-class').forEach(btn => {
-    btn.addEventListener('click', () => deleteClass(btn.dataset.id));
+  panel.querySelectorAll('.btn-restore').forEach(btn => {
+    btn.addEventListener('click', () => {
+      removeOverride(weekKey, btn.dataset.id);
+      renderSchedule();
+    });
+  });
+  panel.querySelectorAll('.btn-delete-adhoc').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!confirm('Remove this one-off class?')) return;
+      deleteAdhocClass(weekKey, btn.dataset.id);
+      renderSchedule();
+    });
   });
 }
 
-// ── Mini Calendar ─────────────────────────────────────────
-function renderMiniCalendar(classDays) {
-  const wrap = document.getElementById('mini-calendar-wrap');
-  if (!wrap) return;
+function renderClassCard(cls, weekKey) {
+  const isEvent = cls.type === 'event';
+  const statusClass = {
+    template:   '',
+    overridden: ' class-row--overridden',
+    cancelled:  ' class-row--cancelled',
+    adhoc:      ' class-row--adhoc',
+  }[cls._status] || '';
 
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const todayDate = now.getDate();
+  const statusLabel = {
+    template:   '🔁 From template',
+    overridden: '⚡ Overridden this week',
+    cancelled:  '❌ Cancelled this week',
+    adhoc:      '➕ One-off',
+  }[cls._status] || '';
 
-  const monthName = now.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
-
-  // Day names header (Sun-first grid)
-  const dayHeaders = ['S','M','T','W','T','F','S'].map(d =>
-    `<span class="mc-hdr">${d}</span>`).join('');
-
-  // First day of month (0=Sun)
-  const firstDow = new Date(year, month, 1).getDay();
-  // Total days in month
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  // Build day cells
-  let cells = '';
-  // Leading empty cells
-  for (let i = 0; i < firstDow; i++) cells += `<span class="mc-cell mc-empty"></span>`;
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dow = new Date(year, month, d).toLocaleDateString('en-US', { weekday: 'long' });
-    const hasClass = classDays.has(dow);
-    const isToday = d === todayDate;
-    const cls = ['mc-cell', isToday ? 'mc-today' : '', hasClass ? 'mc-has-class' : ''].filter(Boolean).join(' ');
-    cells += `<span class="${cls}">${d}${hasClass ? '<span class="mc-dot"></span>' : ''}</span>`;
+  let actionBtn = '';
+  if (cls._status === 'template') {
+    actionBtn = `<button class="btn-class-action btn-override" data-id="${esc(cls.id)}">Override</button>`;
+  } else if (cls._status === 'overridden') {
+    actionBtn = `<button class="btn-class-action btn-restore btn-restore--remove" data-id="${esc(cls.id)}">Remove override</button>`;
+  } else if (cls._status === 'cancelled') {
+    actionBtn = `<button class="btn-class-action btn-restore" data-id="${esc(cls.id)}">Restore</button>`;
+  } else if (cls._status === 'adhoc') {
+    actionBtn = `<button class="btn-class-action btn-delete-adhoc" data-id="${esc(cls.id)}">Delete</button>`;
   }
 
-  wrap.innerHTML = `
-    <div class="mini-calendar">
-      <div class="mc-header">
-        <span class="mc-month">${monthName}</span>
+  const nameStyle = cls._status === 'cancelled' ? ' style="text-decoration:line-through;color:var(--muted)"' : '';
+
+  return `
+    <div class="class-row${statusClass}${isEvent ? ' class-row--event' : ''}">
+      <span class="class-dot dot--${esc(cls.type)}"></span>
+      <div class="class-info">
+        <div class="class-name"${nameStyle}>${esc(cls.name)}</div>
+        <div class="class-meta">${esc(cls.time)} · ${esc(cls.venue)} · <span class="class-status-label">${statusLabel}</span></div>
       </div>
-      <div class="mc-grid">
-        ${dayHeaders}
-        ${cells}
-      </div>
+      ${actionBtn}
     </div>`;
 }
 
