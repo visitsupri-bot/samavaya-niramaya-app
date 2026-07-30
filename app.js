@@ -469,6 +469,141 @@ function deleteClass(id) {
   if (state.data) renderSchedule();
 }
 
+// ── Override Modal ────────────────────────────────────────
+function openOverrideModal(classId, weekKey) {
+  const classes = getWeekClasses(weekKey);
+  const cls = classes.find(c => c.id === classId);
+  if (!cls) return;
+  const form = document.getElementById('form-override');
+  form.elements['classId'].value = classId;
+  form.elements['weekKey'].value = weekKey;
+  form.elements['name'].value    = cls.name;
+  form.elements['time'].value    = cls.time;
+  form.elements['venue'].value   = cls.venue || '';
+  form.elements['cancel_this_week'].checked = false;
+  document.getElementById('modal-override').classList.remove('hidden');
+}
+
+// ── Template Editor Modal ─────────────────────────────────
+function openTemplateEditor() {
+  renderTemplateEditor();
+  document.getElementById('modal-template-editor').classList.remove('hidden');
+}
+
+function renderTemplateEditor() {
+  const template = lsGet(LS.TEMPLATE_CLASSES, []);
+  const list = document.getElementById('template-editor-list');
+
+  if (!template.length) {
+    list.innerHTML = `<p class="empty-state">No recurring classes yet. Add one below.</p>`;
+    return;
+  }
+
+  const grouped = {};
+  DAYS_ORDER.forEach(d => { grouped[d] = []; });
+  template.forEach(cls => { if (grouped[cls.day]) grouped[cls.day].push(cls); });
+
+  let html = '';
+  DAYS_ORDER.forEach(day => {
+    if (!grouped[day].length) return;
+    html += `<div class="te-day-group"><div class="te-day-label">${day}</div>`;
+    grouped[day].forEach(cls => {
+      html += `
+        <div class="te-class-row" data-id="${esc(cls.id)}">
+          <div class="te-class-info">
+            <div class="te-class-name">${esc(cls.name)}</div>
+            <div class="te-class-meta">${esc(cls.time)} · ${esc(cls.venue)}</div>
+          </div>
+          <div class="te-actions">
+            <button class="btn-te-edit" data-id="${esc(cls.id)}">Edit</button>
+            <button class="btn-te-remove" data-id="${esc(cls.id)}">Remove</button>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  });
+  list.innerHTML = html;
+
+  list.querySelectorAll('.btn-te-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!confirm('Remove this class from the recurring template?')) return;
+      const tpl = lsGet(LS.TEMPLATE_CLASSES, []);
+      lsSet(LS.TEMPLATE_CLASSES, tpl.filter(c => c.id !== btn.dataset.id));
+      state.templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
+      renderTemplateEditor();
+      renderSchedule();
+    });
+  });
+
+  list.querySelectorAll('.btn-te-edit').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tpl = lsGet(LS.TEMPLATE_CLASSES, []);
+      const cls = tpl.find(c => c.id === btn.dataset.id);
+      if (!cls) return;
+      state._editingTemplateClassId = cls.id;
+      const form = document.getElementById('form-edit-class');
+      form.elements['id'].value       = cls.id;
+      form.elements['name'].value     = cls.name;
+      form.elements['day'].value      = cls.day;
+      form.elements['time'].value     = cls.time;
+      form.elements['venue'].value    = cls.venue || '';
+      form.elements['type'].value     = cls.type;
+      form.elements['rate'].value     = cls.rate || '';
+      form.elements['capacity'].value = cls.capacity || '';
+      document.getElementById('modal-edit-class').classList.remove('hidden');
+    });
+  });
+}
+
+// ── Week Picker Modal ─────────────────────────────────────
+let _wpMonth = null;
+
+function openWeekPicker() {
+  _wpMonth = new Date(currentViewWeekMonday());
+  _wpMonth.setDate(1);
+  renderWeekPicker();
+  document.getElementById('modal-week-picker').classList.remove('hidden');
+}
+
+function renderWeekPicker() {
+  const year  = _wpMonth.getFullYear();
+  const month = _wpMonth.getMonth();
+  document.getElementById('wp-month-label').textContent =
+    _wpMonth.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+
+  const selectedKey = isoWeekKey(currentViewWeekMonday());
+  const todayKey    = isoWeekKey(new Date());
+
+  const firstDow    = new Date(year, month, 1).getDay();
+  const startOffset = (firstDow === 0) ? 6 : firstDow - 1;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = '';
+  for (let i = 0; i < startOffset; i++) html += `<span class="wp-cell wp-cell--empty"></span>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date    = new Date(year, month, d);
+    const wKey    = isoWeekKey(date);
+    const isToday = wKey === todayKey;
+    const isSel   = wKey === selectedKey;
+    let cls = 'wp-cell';
+    if (isSel)             cls += ' wp-cell--selected';
+    if (isToday && !isSel) cls += ' wp-cell--today';
+    html += `<span class="${cls}" data-date="${date.toLocaleDateString('en-CA')}">${d}</span>`;
+  }
+
+  const grid = document.getElementById('wp-grid');
+  grid.innerHTML = html;
+
+  grid.querySelectorAll('.wp-cell:not(.wp-cell--empty)').forEach(cell => {
+    cell.addEventListener('click', () => {
+      state.selectedWeek = weekMonday(new Date(cell.dataset.date));
+      document.getElementById('modal-week-picker').classList.add('hidden');
+      renderSchedule();
+    });
+  });
+}
+
 // ═══════════════════════════════════════════════════════════
 // TAB 2 — ATTENDANCE & INVOICING
 // ═══════════════════════════════════════════════════════════
@@ -1019,7 +1154,7 @@ function renderWisdom(wisdomData) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// MODALS — Add Class & Add Venue
+// MODALS
 // ═══════════════════════════════════════════════════════════
 function setupModals() {
   // Close buttons
@@ -1029,6 +1164,9 @@ function setupModals() {
     ['close-edit-class',       'modal-edit-class'],
     ['close-add-participant',  'modal-add-participant'],
     ['close-edit-participant', 'modal-edit-participant'],
+    ['close-override',         'modal-override'],
+    ['close-template-editor',  'modal-template-editor'],
+    ['close-week-picker',      'modal-week-picker'],
   ];
   closeIds.forEach(([btnId, modalId]) => {
     document.getElementById(btnId)?.addEventListener('click', () => {
@@ -1043,12 +1181,59 @@ function setupModals() {
     });
   });
 
-  // Add Class form
+  // Override form
+  document.getElementById('form-override')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const fd      = new FormData(e.target);
+    const classId = fd.get('classId');
+    const weekKey = fd.get('weekKey');
+    const cancel  = fd.get('cancel_this_week') === 'on';
+
+    if (cancel) {
+      saveOverride(weekKey, classId, { action: 'cancelled' });
+    } else {
+      saveOverride(weekKey, classId, {
+        action: 'override',
+        name:   fd.get('name'),
+        time:   fd.get('time'),
+        venue:  fd.get('venue') || 'TBD',
+      });
+    }
+    document.getElementById('modal-override').classList.add('hidden');
+    renderSchedule();
+  });
+
+  document.getElementById('cancel-override')?.addEventListener('click', () => {
+    document.getElementById('modal-override').classList.add('hidden');
+  });
+
+  // Template editor — add recurring class button
+  document.getElementById('btn-add-template-class')?.addEventListener('click', () => {
+    state._addingAdhocForWeek = null; // null = adding to template
+    document.getElementById('modal-add-class').classList.remove('hidden');
+  });
+
+  // Week picker navigation
+  document.getElementById('btn-wp-prev-month')?.addEventListener('click', () => {
+    _wpMonth.setMonth(_wpMonth.getMonth() - 1);
+    renderWeekPicker();
+  });
+  document.getElementById('btn-wp-next-month')?.addEventListener('click', () => {
+    _wpMonth.setMonth(_wpMonth.getMonth() + 1);
+    renderWeekPicker();
+  });
+  document.getElementById('btn-wp-today')?.addEventListener('click', () => {
+    state.selectedWeek = null;
+    document.getElementById('modal-week-picker').classList.add('hidden');
+    renderSchedule();
+  });
+
+  // Add Class form (supports both adhoc-for-week and adding to template)
   document.getElementById('form-add-class')?.addEventListener('submit', e => {
     e.preventDefault();
     const fd = new FormData(e.target);
     const newClass = {
-      id:       `cls_custom_${Date.now()}`,
+      id:       `cls_${Date.now()}`,
       name:     fd.get('name'),
       type:     fd.get('type'),
       day:      fd.get('day'),
@@ -1059,14 +1244,21 @@ function setupModals() {
       rate_type: fd.get('type') === 'dropin' ? 'dropin' : fd.get('type') === 'event' ? 'flat_event' : 'monthly',
       rate:     parseInt(fd.get('rate') || '0'),
     };
-    state.templateClasses.push(newClass);
-    lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
-    document.getElementById('modal-add-class').classList.add('hidden');
-    e.target.reset();
-    // Re-render schedule
-    if (state.data) {
-      renderSchedule();
+
+    if (state._addingAdhocForWeek) {
+      addAdhocClass(state._addingAdhocForWeek, newClass);
+      state._addingAdhocForWeek = null;
+    } else {
+      const tpl = lsGet(LS.TEMPLATE_CLASSES, []);
+      tpl.push(newClass);
+      lsSet(LS.TEMPLATE_CLASSES, tpl);
+      state.templateClasses = tpl;
     }
+
+    document.getElementById('modal-add-class').classList.add('hidden');
+    document.getElementById('modal-template-editor').classList.add('hidden');
+    e.target.reset();
+    renderSchedule();
   });
 
   // Add Venue form
@@ -1090,26 +1282,33 @@ function setupModals() {
     }
   });
 
-  // Edit Class form
+  // Edit Class form (works from both schedule view and template editor)
   document.getElementById('form-edit-class')?.addEventListener('submit', e => {
     e.preventDefault();
-    const fd = new FormData(e.target);
-    const id = fd.get('id');
-    const idx = state.templateClasses.findIndex(c => c.id === id);
-    if (idx === -1) return;
-    state.templateClasses[idx] = {
-      ...state.templateClasses[idx],
-      name:     fd.get('name'),
-      day:      fd.get('day'),
-      time:     fd.get('time'),
-      venue:    fd.get('venue') || 'TBD',
-      type:     fd.get('type'),
-      rate:     parseInt(fd.get('rate') || '0'),
-      capacity: parseInt(fd.get('capacity') || '10'),
-    };
-    lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
+    const fd  = new FormData(e.target);
+    const id  = fd.get('id');
+    const tpl = lsGet(LS.TEMPLATE_CLASSES, []);
+    const idx = tpl.findIndex(c => c.id === id);
+    if (idx !== -1) {
+      tpl[idx] = {
+        ...tpl[idx],
+        name:     fd.get('name'),
+        day:      fd.get('day'),
+        time:     fd.get('time'),
+        venue:    fd.get('venue') || 'TBD',
+        type:     fd.get('type'),
+        rate:     parseInt(fd.get('rate') || '0'),
+        capacity: parseInt(fd.get('capacity') || '10'),
+      };
+      lsSet(LS.TEMPLATE_CLASSES, tpl);
+      state.templateClasses = tpl;
+    }
+    state._editingTemplateClassId = null;
     document.getElementById('modal-edit-class').classList.add('hidden');
-    if (state.data) renderSchedule();
+    if (!document.getElementById('modal-template-editor').classList.contains('hidden')) {
+      renderTemplateEditor();
+    }
+    renderSchedule();
   });
 
   // Add Participant form
