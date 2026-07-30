@@ -146,9 +146,25 @@ async function init() {
 
 // ── localStorage Seeding ──────────────────────────────────
 function seedLocalStorage(sections) {
-  // Seed participants only on first load
-  if (!localStorage.getItem(LS.PARTICIPANTS) && sections.participants) {
-    lsSet(LS.PARTICIPANTS, sections.participants);
+  // Migrate participants: flat array → per-class map (one-time)
+  // Old format: sn_participants = [...]
+  // New format: sn_participants = { "cls_001": [...], ... }
+  const rawP = lsGet(LS.PARTICIPANTS, null);
+  if (Array.isArray(rawP)) {
+    // Old flat array — move it under the first class key so data isn't lost
+    const firstClass = sections.schedule?.classes?.[0];
+    const map = {};
+    if (firstClass) map[firstClass.id] = rawP;
+    lsSet(LS.PARTICIPANTS, map);
+  } else if (!rawP) {
+    // First ever load — seed per-class from JSON if provided
+    const map = {};
+    if (sections.participants && sections.schedule?.classes) {
+      sections.schedule.classes.forEach(cls => {
+        map[cls.id] = sections.participants;
+      });
+    }
+    lsSet(LS.PARTICIPANTS, map);
   }
 
   // Migrate sn_custom_classes → sn_template_classes (one-time)
@@ -172,6 +188,18 @@ function seedLocalStorage(sections) {
 }
 
 // ── Week Data Layer ───────────────────────────────────────
+
+// ── Per-class participant helpers ─────────────────────────
+function getClassParticipants(classId) {
+  const map = lsGet(LS.PARTICIPANTS, {});
+  return Array.isArray(map[classId]) ? map[classId] : [];
+}
+
+function setClassParticipants(classId, list) {
+  const map = lsGet(LS.PARTICIPANTS, {});
+  map[classId] = list;
+  lsSet(LS.PARTICIPANTS, map);
+}
 
 // Returns the resolved class list for a given ISO week key.
 // Each class has a `_status` field: 'template' | 'overridden' | 'cancelled' | 'adhoc'
@@ -600,18 +628,20 @@ function renderWeekPicker() {
 // ═══════════════════════════════════════════════════════════
 function renderAttendance(participantsData) {
   const panel = document.getElementById('panel-attend');
-  const participants = lsGet(LS.PARTICIPANTS, participantsData || []);
   const attendWeekKey = isoWeekKey(state.selectedWeek || new Date());
   const allClasses = getWeekClasses(attendWeekKey).filter(c => c._status !== 'cancelled');
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
+  const currentId = state.currentClassId || (allClasses[0]?.id ?? '');
+
+  // Load participants for the currently selected class only
+  const participants = getClassParticipants(currentId);
+
   // Class selector options
   const classOptions = allClasses.map(c =>
     `<option value="${esc(c.id)}">${esc(c.name)} — ${esc(c.day)} ${esc(c.time)}</option>`
   ).join('');
-
-  const currentId = state.currentClassId || (allClasses[0]?.id ?? '');
 
   // Build attendance table
   let attendRows = '';
@@ -640,8 +670,8 @@ function renderAttendance(participantsData) {
       </tr>`;
   });
 
-  // Invoice list — calculate amounts per plan type
-  const invoices = lsGet(LS.INVOICES, participants);
+  // Invoice list — scoped to selected class participants
+  const invoices = participants;
   let grandTotal = 0;
   let invoiceRows = invoices.map(p => {
     const amount = calcAmount(p);
@@ -745,16 +775,18 @@ function addParticipant() {
     sessions_attended: 0,
     invoice_status:   'pending',
   };
-  const participants = lsGet(LS.PARTICIPANTS, []);
+  const classId = state.currentClassId;
+  if (!classId) { alert('Please select a class first.'); return; }
+  const participants = getClassParticipants(classId);
   participants.push(newP);
-  lsSet(LS.PARTICIPANTS, participants);
+  setClassParticipants(classId, participants);
   document.getElementById('modal-add-participant').classList.add('hidden');
   form.reset();
   if (state.data) renderAttendance();
 }
 
 function openEditParticipant(id) {
-  const participants = lsGet(LS.PARTICIPANTS, []);
+  const participants = getClassParticipants(state.currentClassId);
   const p = participants.find(x => x.id === id);
   if (!p) return;
   const form = document.getElementById('form-edit-participant');
@@ -772,7 +804,8 @@ function saveEditParticipant() {
   const form = document.getElementById('form-edit-participant');
   const fd = new FormData(form);
   const id = fd.get('id');
-  const participants = lsGet(LS.PARTICIPANTS, []);
+  const classId = state.currentClassId;
+  const participants = getClassParticipants(classId);
   const idx = participants.findIndex(p => p.id === id);
   if (idx === -1) return;
   const sessTotal = fd.get('sessions_total') ? parseInt(fd.get('sessions_total')) : null;
@@ -785,15 +818,16 @@ function saveEditParticipant() {
     sessions_attended: parseInt(fd.get('sessions_attended') || '0'),
     invoice_status:    fd.get('invoice_status'),
   };
-  lsSet(LS.PARTICIPANTS, participants);
+  setClassParticipants(classId, participants);
   document.getElementById('modal-edit-participant').classList.add('hidden');
   if (state.data) renderAttendance();
 }
 
 function deleteParticipant(id) {
   if (!confirm('Remove this participant?')) return;
-  const participants = lsGet(LS.PARTICIPANTS, []);
-  lsSet(LS.PARTICIPANTS, participants.filter(p => p.id !== id));
+  const classId = state.currentClassId;
+  const participants = getClassParticipants(classId);
+  setClassParticipants(classId, participants.filter(p => p.id !== id));
   if (state.data) renderAttendance();
 }
 
