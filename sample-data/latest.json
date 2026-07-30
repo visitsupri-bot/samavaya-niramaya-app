@@ -1,0 +1,444 @@
+{
+  "date": "2026-07-30",
+  "sections": {
+    "schedule": {
+      "classes": [
+        {"id":"cls_001","name":"Morning Hatha","type":"fixed","day":"Monday","time":"07:00","venue":"Greenleaf Studio, Bandra","capacity":10,"enrolled":6,"rate_type":"monthly","rate":4800},
+        {"id":"cls_002","name":"Therapeutic Yoga","type":"fixed","day":"Monday","time":"10:00","venue":"The Wellness Hub, Pune","capacity":8,"enrolled":7,"rate_type":"monthly","rate":5500},
+        {"id":"cls_003","name":"Yin & Nada","type":"fixed","day":"Tuesday","time":"18:30","venue":"Sattva Centre, Mumbai","capacity":12,"enrolled":9,"rate_type":"monthly","rate":4200},
+        {"id":"cls_004","name":"Corporate Wellness","type":"dropin","day":"Wednesday","time":"08:00","venue":"TCS Campus, Pune","capacity":20,"enrolled":14,"rate_type":"dropin","rate":800},
+        {"id":"cls_005","name":"Sound Bath Evening","type":"event","day":"Saturday","time":"19:00","venue":"ITC Maratha, Mumbai","capacity":30,"enrolled":22,"rate_type":"flat_event","rate":1500},
+        {"id":"cls_006","name":"Vinyasa Flow","type":"fixed","day":"Thursday","time":"07:00","venue":"Greenleaf Studio, Bandra","capacity":10,"enrolled":8,"rate_type":"monthly","rate":4800},
+        {"id":"cls_007","name":"Nada Yoga Deep Dive","type":"event","day":"Sunday","time":"10:00","venue":"Ananda Retreat, Lonavala","capacity":15,"enrolled":11,"rate_type":"flat_event","rate":2500}
+      ]
+    },
+    "participants": [
+      {"id":"par_001","name":"Ananya S.","plan":"monthly","sessions_total":12,"sessions_attended":11,"rate":4800,"invoice_status":"paid"},
+      {"id":"par_002","name":"Rohan M.","plan":"monthly","sessions_total":8,"sessions_attended":7,"rate":4200,"invoice_status":"pending"},
+      {"id":"par_003","name":"Priya K.","plan":"dropin","sessions_total":null,"sessions_attended":3,"rate":800,"invoice_status":"paid"},
+      {"id":"par_004","name":"Vijay T.","plan":"monthly","sessions_total":12,"sessions_attended":10,"rate":4800,"invoice_status":"pending"},
+      {"id":"par_005","name":"Meera L.","plan":"event","sessions_total":1,"sessions_attended":0,"rate":1500,"invoice_status":"draft"},
+      {"id":"par_006","name":"Aditya R.","plan":"monthly","sessions_total":8,"sessions_attended":8,"rate":4200,"invoice_status":"paid"},
+      {"id":"par_007","name":"Sunita P.","plan":"dropin","sessions_total":null,"sessions_attended":1,"rate":800,"invoice_status":"pending"}
+    ],
+    "class_plan": {
+      "week_theme": "Ishvara Pranidhana — Surrender & Trust",
+      "week_ref": "Yoga Sutras 2.45",
+      "pranayama": "Bhramari + Nadi Shodhana",
+      "sound_frequency": "432 Hz",
+      "chakra": "Anahata (Heart)",
+      "instrument": "Crystal Singing Bowls + Tanpura",
+      "sound_duration": "20 min",
+      "days": [
+        {"day":"Monday","class":"Morning Hatha","focus":"Backbends & Heart Opening","duration":"60 min"},
+        {"day":"Tuesday","class":"Yin & Nada","focus":"Yin Holds + Sound Immersion","duration":"75 min"},
+        {"day":"Wednesday","class":"Corporate Wellness","focus":"Stress Relief & Breath Awareness","duration":"45 min"},
+        {"day":"Thursday","class":"Vinyasa Flow","focus":"Surya Namaskar Variations","duration":"60 min"},
+        {"day":"Friday","class":"—","focus":"Self-practice & Planning","duration":"—"},
+        {"day":"Saturday","class":"Sound Bath Evening","focus":"Deep Relaxation & Nada","duration":"90 min"},
+        {"day":"Sunday","class":"Nada Yoga Deep Dive","focus":"Mantra, Tanpura & Integration","duration":"180 min"}
+      ],
+      "today_sequence": {
+        "warmup": ["Cat-Cow (Marjaryasana-Bitilasana)","Seated Side Stretch","Child's Pose (Balasana)","Thread the Needle"],
+        "main": ["Bhujangasana (Cobra)","Setu Bandhasana (Bridge)","Ustrasana (Camel) — supported","Matsyasana (Fish)","Anahatasana (Heart Melting Pose)"],
+        "counter": ["Apanasana","Supta Matsyendrasana (Supine Twist)","Paschimottanasana"],
+        "pranayama": ["Bhramari (10 rounds)","Anulom Vilom (5 min)"],
+        "savasana_duration": "10 min"
+      }
+    },
+    "tip": {
+      "featured_condition": "lower_back_pain",
+      "conditions": {
+        "lower_back_pain": {
+          "label": "Lower Back Pain",
+          "yoga_rx": {
+            "asanas": ["Balasana (Child's Pose)","Apanasana (Knee-to-chest)","Setu Bandhasana (Bridge)","Supta Matsyendrasana (Supine Twist)","Viparita Karani (Legs up the wall)"],
+            "cautions": ["Avoid deep forward folds in acute phase","No Bhujangasana with herniated disc"],
+            "duration": "35 min",
+            "frequency": "Daily"
+          },
+          "ayurveda_rx": {
+            "therapy": "Kati Basti (warm oil pool on lower back)",
+            "herb": "Shallaki (Boswellia) + Ashwagandha churna",
+            "oil": "Mahanarayan Taila for local application",
+            "timing": "Morning — warm oil application, evening — herb with warm milk"
+          },
+          "sattvic_diet": {
+            "favour": ["Warm sesame soup","Ghee with turmeric","Ginger-lemon water","Papaya","Fenugreek seeds"],
+            "avoid": ["Cold beverages","Raw salads","Nightshades (tomato, potato, brinjal)","Excess legumes"],
+            "recipe": "Warm Sesame & Ginger Kitchari: Mung dal + basmati + sesame seeds + ginger + ghee + turmeric — deeply nourishing for Vata-type back pain"
+          }
+        },
+        "anxiety": {
+          "label": "Anxiety & Stress",
+          "yoga_rx": {
+            "asanas": ["Shavasana with Yoga Nidra","Uttanasana (forward fold)","Janu Sirsasana","Sarvangasana (Shoulderstand)","Viparita Karani"],
+            "cautions": ["Avoid fast-paced Vinyasa in acute anxiety","No breath retention (Kumbhaka) initially"],
+            "duration": "40 min",
+            "frequency": "Daily, morning preferred"
+          },
+          "ayurveda_rx": {
+            "therapy": "Shirodhara (warm oil poured on forehead)",
+            "herb": "Brahmi + Ashwagandha + Shankhpushpi blend",
+            "oil": "Brahmi Taila scalp massage",
+            "timing": "Scalp massage 20 min before bed; herbs with warm milk at bedtime"
+          },
+          "sattvic_diet": {
+            "favour": ["Warm milk with nutmeg & cardamom","Almonds (soaked)","Saffron","Bananas","Sweet potatoes"],
+            "avoid": ["Caffeine","Fermented foods","Onion & garlic in excess","Processed sugar","Alcohol"],
+            "recipe": "Golden Milk Night Tonic: Warm cow's milk + 1/4 tsp turmeric + pinch nutmeg + cardamom + raw honey — calms Vata, promotes deep sleep"
+          }
+        },
+        "insomnia": {
+          "label": "Insomnia",
+          "yoga_rx": {
+            "asanas": ["Yoga Nidra (30 min)","Viparita Karani","Supta Baddha Konasana","Seated forward folds","Legs up the wall"],
+            "cautions": ["No vigorous practice after 6pm","Avoid inversions close to bedtime"],
+            "duration": "45 min before bed",
+            "frequency": "Nightly"
+          },
+          "ayurveda_rx": {
+            "therapy": "Pada Abhyanga (foot massage with warm Sesame oil)",
+            "herb": "Tagara (Indian Valerian) + Jatamansi capsules",
+            "oil": "Warm sesame oil on soles of feet",
+            "timing": "Foot massage 30 min before bed; herbs 1 hour before sleep"
+          },
+          "sattvic_diet": {
+            "favour": ["Warm cow's milk","Nutmeg (in milk)","Cherries","Chamomile tea","Almonds"],
+            "avoid": ["Caffeine after noon","Heavy evening meals","Spicy food","Screen time"],
+            "recipe": "Ashwagandha Moon Milk: Warm almond milk + Ashwagandha powder + honey + saffron + cardamom — promotes deep sleep and muscle recovery"
+          }
+        },
+        "digestive_issues": {
+          "label": "Digestive Issues",
+          "yoga_rx": {
+            "asanas": ["Pavanamuktasana (Wind-relieving)","Ardha Matsyendrasana (Spinal twist)","Trikonasana","Navasana (Boat pose)","Kapalabhati (gentle)"],
+            "cautions": ["Avoid practice immediately after meals","Hernias: avoid Navasana"],
+            "duration": "30 min",
+            "frequency": "Daily, 2-3 hours after meals"
+          },
+          "ayurveda_rx": {
+            "therapy": "Udvartana (dry herbal powder massage to stimulate digestion)",
+            "herb": "Triphala at bedtime + Trikatu before meals",
+            "oil": "Self-massage (Abhyanga) with warm castor oil on abdomen",
+            "timing": "Herbs: Triphala at bedtime, Trikatu 15 min before meals with warm water"
+          },
+          "sattvic_diet": {
+            "favour": ["Cooked vegetables","Moong dal","Cumin-coriander-fennel tea","Ginger","Ghee in moderation"],
+            "avoid": ["Raw salads","Dairy in excess","Cold drinks with meals","Fried foods","Refined sugar"],
+            "recipe": "CCF Tea: Equal parts Cumin + Coriander + Fennel seeds, boiled in water for 5 min — the ultimate digestive tonic in Ayurveda"
+          }
+        },
+        "migraine": {
+          "label": "Migraine",
+          "yoga_rx": {
+            "asanas": ["Shavasana in darkened room","Gentle neck rolls","Viparita Karani","Seated meditation","Chandra Bhedana (Moon-piercing breath)"],
+            "cautions": ["Avoid inversions during attack","No Surya Namaskar during migraine","Avoid bright lights"],
+            "duration": "20-30 min (preventive)",
+            "frequency": "Daily preventive practice"
+          },
+          "ayurveda_rx": {
+            "therapy": "Nasya (nasal drops of warm Anu Taila)",
+            "herb": "Brahmi + Shatavari for hormonal migraines; Ginger + Pippali for Vata type",
+            "oil": "Mahanarayana Taila gentle temple massage",
+            "timing": "Nasya every morning before 10am on empty stomach"
+          },
+          "sattvic_diet": {
+            "favour": ["Coriander water","Pomegranate juice","Coconut water","Dark chocolate (small amount)","Buttermilk"],
+            "avoid": ["Cheese & aged dairy","Red wine","Processed meats","MSG","Citrus in excess"],
+            "recipe": "Coriander Cooling Drink: Fresh coriander leaves blended with coconut water and a pinch of cardamom — cools Pitta, prevents heat-triggered migraines"
+          }
+        },
+        "hypertension": {
+          "label": "Hypertension",
+          "yoga_rx": {
+            "asanas": ["Shavasana","Sukhasana with deep breathing","Paschimottanasana","Viparita Karani","Setu Bandhasana (gentle)"],
+            "cautions": ["No Sirsasana (headstand)","No strong inversions","Avoid Kapalabhati and Bhastrika"],
+            "duration": "30 min",
+            "frequency": "Daily morning"
+          },
+          "ayurveda_rx": {
+            "therapy": "Shirodhara (warm medicated oil on forehead)",
+            "herb": "Sarpagandha + Arjuna bark decoction",
+            "oil": "Light coconut oil scalp massage",
+            "timing": "Arjuna decoction twice daily on empty stomach"
+          },
+          "sattvic_diet": {
+            "favour": ["Watermelon","Pomegranate","Celery","Garlic (raw)","Flaxseeds"],
+            "avoid": ["Table salt in excess","Red meat","Pickles","Alcohol","Fried foods"],
+            "recipe": "Arjuna Bark Tea: Boil Arjuna bark in milk for 10 min, strain, add honey — the classical Ayurvedic heart tonic"
+          }
+        },
+        "fatigue": {
+          "label": "Chronic Fatigue",
+          "yoga_rx": {
+            "asanas": ["Yoga Nidra","Viparita Karani","Supta Baddha Konasana","Restorative Setu Bandhasana","Sarvangasana (supported)"],
+            "cautions": ["No vigorous dynamic practice when fatigued","Build energy gently over weeks"],
+            "duration": "45 min restorative",
+            "frequency": "Daily"
+          },
+          "ayurveda_rx": {
+            "therapy": "Abhyanga (full body warm oil massage) with Bala Taila",
+            "herb": "Ashwagandha + Shatavari + Amalaki powder blend",
+            "oil": "Sesame or Bala Taila for daily self-massage",
+            "timing": "Herbs in warm milk morning and evening; Abhyanga 3x per week"
+          },
+          "sattvic_diet": {
+            "favour": ["Dates & figs","Ghee","Almonds & walnuts","Warm rice porridge","Pomegranate"],
+            "avoid": ["Caffeine dependency","Skipping meals","Cold raw foods","Excess sugar","Nightshades"],
+            "recipe": "Ashwagandha Date Balls: Soaked dates + Ashwagandha powder + ghee + cardamom + almonds — the ultimate energy-replenishing Ayurvedic sweet"
+          }
+        },
+        "knee_pain": {
+          "label": "Knee Pain",
+          "yoga_rx": {
+            "asanas": ["Virasana (with blanket support)","Supta Padangusthasana","Utkatasana (gentle)","Viparita Karani","Pavanmuktasana"],
+            "cautions": ["No deep squats in acute phase","Avoid Padmasana with acute knee injury","Never force the knee"],
+            "duration": "30 min",
+            "frequency": "Daily gentle"
+          },
+          "ayurveda_rx": {
+            "therapy": "Janu Basti (warm oil pool held over the knee)",
+            "herb": "Shallaki (Boswellia) + Guggul for inflammation",
+            "oil": "Mahanarayan Taila warm application twice daily",
+            "timing": "Herbal application morning after bathing; Janu Basti weekly"
+          },
+          "sattvic_diet": {
+            "favour": ["Turmeric milk","Ginger tea","Omega-rich walnuts","Sesame seeds","Green leafy vegetables"],
+            "avoid": ["Nightshades (potatoes, tomatoes)","Cold foods","Processed foods","Excess sour foods"],
+            "recipe": "Anti-Inflammatory Golden Soup: Turmeric + ginger + black pepper + coconut milk + seasonal vegetables — reduces Vata-Pitta joint inflammation"
+          }
+        },
+        "hormonal_balance": {
+          "label": "Hormonal Balance",
+          "yoga_rx": {
+            "asanas": ["Supta Baddha Konasana","Setu Bandhasana","Viparita Karani","Malasana (garland)","Bhujangasana"],
+            "cautions": ["During menstruation: avoid inversions and strong core work","Listen to the body's energy cycles"],
+            "duration": "40 min",
+            "frequency": "Daily, adapt to cycle phase"
+          },
+          "ayurveda_rx": {
+            "therapy": "Yoni Dhupana (herbal fumigation therapy) for gynaecological balance",
+            "herb": "Shatavari (primary) + Ashoka + Lodhra for female hormonal health",
+            "oil": "Kumkumadi Taila for skin; castor oil pack on lower abdomen",
+            "timing": "Shatavari with warm milk morning and evening"
+          },
+          "sattvic_diet": {
+            "favour": ["Sesame seeds","Flaxseeds","Shatavari powder in milk","Pomegranate","Fennel seeds"],
+            "avoid": ["Processed soy","Refined carbohydrates","Excess dairy","Alcohol","Artificial additives"],
+            "recipe": "Shatavari Laddoo: Shatavari powder + ghee + jaggery + cardamom + sesame seeds — the classical rasayana for women's health"
+          }
+        },
+        "grief_loss": {
+          "label": "Grief & Loss",
+          "yoga_rx": {
+            "asanas": ["Supported Matsyasana (heart opener)","Child's Pose (extended)","Yoga Nidra","Anjaneyasana (heart-opening lunge)","Gentle Ustrasana (Camel)"],
+            "cautions": ["Move slowly and with full permission to feel","No rushing through practice","Allow tears"],
+            "duration": "45-60 min",
+            "frequency": "Daily, morning"
+          },
+          "ayurveda_rx": {
+            "therapy": "Shirodhara + Hridya Basti (warm oil over the heart)",
+            "herb": "Brahmi + Ashwagandha + Rose petal powder for emotional grief",
+            "oil": "Rose-infused Sesame oil for heart centre massage",
+            "timing": "Rose water on forehead before sleep; Brahmi in warm milk at bedtime"
+          },
+          "sattvic_diet": {
+            "favour": ["Rose water","Warm sweet milk","Saffron","Dates","Honey"],
+            "avoid": ["Spicy stimulants","Bitter foods in excess","Alcohol","Caffeine","Heavy meat"],
+            "recipe": "Rose & Saffron Ojas Milk: Warm full-fat milk + saffron (4-5 strands) + rose petal jam + cardamom + honey — builds ojas, soothes grief from the heart centre"
+          }
+        },
+        "sinusitis": {
+          "label": "Sinusitis",
+          "yoga_rx": {
+            "asanas": ["Uttanasana (forward fold, head down)","Adho Mukha Svanasana (Downward dog)","Jala Neti (nasal wash — not asana but essential)","Kapalabhati (clearing)","Bhujangasana"],
+            "cautions": ["During acute infection: very gentle only","No Kumbhaka with blocked sinuses"],
+            "duration": "20 min + Jala Neti",
+            "frequency": "Daily morning"
+          },
+          "ayurveda_rx": {
+            "therapy": "Nasya (medicated nasal drops) — Anu Taila or Shadbindu Taila",
+            "herb": "Sitopaladi churna + Trikatu for congestion",
+            "oil": "Steam inhalation with Eucalyptus + Tulsi",
+            "timing": "Nasya before 10am; steam twice daily during acute phase"
+          },
+          "sattvic_diet": {
+            "favour": ["Ginger-tulsi-honey tea","Turmeric milk","Warm soups","Garlic","Horseradish"],
+            "avoid": ["Dairy (mucus-forming)","Cold foods and drinks","Bananas","Sugar","Fried foods"],
+            "recipe": "Sitopaladi & Honey Paste: Mix Sitopaladi churna with raw honey — the classical Ayurvedic remedy for respiratory congestion and sinusitis"
+          }
+        },
+        "eye_strain": {
+          "label": "Eye Strain",
+          "yoga_rx": {
+            "asanas": ["Palming (trataka preparation)","Bhramari Pranayama","Shavasana","Nadi Shodhana","Gentle neck and shoulder release"],
+            "cautions": ["No strong inversions with retinal issues","Avoid Trataka with dry eye conditions"],
+            "duration": "20 min + eye exercises",
+            "frequency": "Daily, especially after screen use"
+          },
+          "ayurveda_rx": {
+            "therapy": "Netra Tarpana (warm medicated ghee bath for eyes)",
+            "herb": "Triphala eye wash + Saptamrita Lauha internally",
+            "oil": "Castor oil (single drop) in each eye at bedtime",
+            "timing": "Triphala eye wash morning; Netra Tarpana weekly"
+          },
+          "sattvic_diet": {
+            "favour": ["Carrots","Amla (Indian gooseberry)","Cow's ghee","Fennel seeds","Bilberry"],
+            "avoid": ["Excess screen time","Alcohol","Processed foods","Eye-straining in dim light"],
+            "recipe": "Amla & Carrot Vision Juice: Fresh amla + carrot + fennel + a pinch of rock salt — Vitamin C and beta-carotene powerhouse for eye health"
+          }
+        },
+        "frozen_shoulder": {
+          "label": "Frozen Shoulder",
+          "yoga_rx": {
+            "asanas": ["Gomukhasana arms (gentle)","Garudasana arms","Thread the Needle","Wall-assisted shoulder stretch","Supported Bhujangasana"],
+            "cautions": ["No forced range of motion","Work within pain-free range only","Progress is measured in weeks, not days"],
+            "duration": "25 min",
+            "frequency": "Daily, twice if possible"
+          },
+          "ayurveda_rx": {
+            "therapy": "Patra Pinda Sweda (warm herbal leaf bolus massage)",
+            "herb": "Shallaki + Dashamoola for inflammation and stiffness",
+            "oil": "Mahanarayan Taila warm oil application + fomentation",
+            "timing": "Morning: warm oil massage; Evening: fomentation (warm towel)"
+          },
+          "sattvic_diet": {
+            "favour": ["Turmeric + ginger tea","Warm sesame soup","Anti-inflammatory spices","Omega-3 rich seeds","Ghee"],
+            "avoid": ["Cold foods","Nightshades","Excess sour foods","Processed foods"],
+            "recipe": "Dashamoola Decoction: Boil Dashamoola (10-root) powder in water, reduce to half, strain — the classic Ayurvedic anti-Vata decoction for joints and muscles"
+          }
+        },
+        "diabetes_management": {
+          "label": "Diabetes Management",
+          "yoga_rx": {
+            "asanas": ["Ardha Matsyendrasana (pancreas stimulation)","Dhanurasana (Bow)","Sarvangasana","Paschimottanasana","Surya Namaskar (10-12 rounds)"],
+            "cautions": ["Monitor blood sugar before and after practice","Carry fast glucose if on medication","Avoid fasting before vigorous practice"],
+            "duration": "45-60 min",
+            "frequency": "Daily"
+          },
+          "ayurveda_rx": {
+            "therapy": "Udwartana (dry herbal powder massage for metabolism stimulation)",
+            "herb": "Karela (bitter melon) + Jamun seed + Gurmar leaf combination",
+            "oil": "Light sesame oil Abhyanga (Kapha-reducing)",
+            "timing": "Karela juice 20ml on empty stomach daily; Gurmar before meals"
+          },
+          "sattvic_diet": {
+            "favour": ["Bitter gourd","Fenugreek seeds","Jamun (Java plum)","Turmeric","Low-GI whole grains"],
+            "avoid": ["Refined carbohydrates","Sugar","White rice in excess","Potatoes","Fruit juices"],
+            "recipe": "Fenugreek & Jamun Seed Powder: Dry roast and grind equal parts fenugreek seeds + jamun seeds, take 1 tsp in warm water twice daily — clinically validated blood sugar management"
+          }
+        }
+      }
+    },
+    "opportunity": {
+      "market_headline": "Sound healing & Nada Yoga searches up 340% in India — mainstream media driving demand beyond metros",
+      "trend_data": [20, 28, 35, 45, 58, 72, 90, 120, 145, 180, 220, 280],
+      "trends": [
+        {
+          "platform": "Instagram India",
+          "headline": "#SoundBath content reaching 2.4M weekly impressions",
+          "hashtags": ["#soundbath","#nadayoga","#crystalbowls","#soundhealing","#432hz"],
+          "opportunity": "Gap identified: virtually no practitioner in Pune offering weekly public Sound Baths"
+        },
+        {
+          "platform": "Google Trends India",
+          "headline": "\"Yoga for anxiety\" searches +180% YoY — therapeutic demand exploding",
+          "hashtags": ["yoga for anxiety","therapeutic yoga","yoga therapy India"],
+          "opportunity": "Condition-specific yoga is underserved in Tier-1 cities — massive pricing power vs. generic yoga"
+        },
+        {
+          "platform": "YouTube Global",
+          "headline": "Dosha-based yoga content averaging 85K views per video globally",
+          "hashtags": ["#doshabodytype","#ayurvedicyoga","#vatapitta","#ayurveda"],
+          "opportunity": "No major Indian teacher has claimed this content niche on YouTube — first-mover advantage available"
+        }
+      ],
+      "venues": [
+        {"icon":"🏨","name":"ITC Maratha","city":"Mumbai","badge":"High Value","note":"5-star property, hosts corporate wellness — in-residence teacher opportunity Q4"},
+        {"icon":"🏨","name":"The Leela Palace","city":"Bangalore","badge":"High Value","note":"Wellness Director actively seeking sound healing facilitators for weekend retreats"},
+        {"icon":"🏢","name":"TCS Innovation Campus","city":"Pune","badge":"Corporate","note":"HR team receptive to Yoga + Stress Management series — 200+ employee batch possible"},
+        {"icon":"🏢","name":"Infosys Mysore Campus","city":"Mysore","badge":"Corporate","note":"Large campus wellness budget, Ayush-aligned programs preferred by leadership"},
+        {"icon":"🏛️","name":"Ministry of AYUSH","city":"New Delhi","badge":"Govt","note":"National wellness missions seeking certified Yoga + Ayurveda practitioners for outreach"},
+        {"icon":"🏛️","name":"Indian Navy Wellness","city":"Mumbai","badge":"Govt","note":"Defence wellness programs — Yoga certification + therapeutic specialisation preferred"},
+        {"icon":"🌴","name":"Ananda in the Himalayas","city":"Uttarakhand","badge":"High Value","note":"Premium retreat centre, 3-7 day Sound & Yoga immersions — ₹40K+ per retreat block"},
+        {"icon":"🏡","name":"Shreyas Retreat","city":"Bangalore","badge":"High Value","note":"Boutique luxury retreat, seeking resident facilitators for 2027 calendar"},
+        {"icon":"🏨","name":"Address Beach Resort","city":"Dubai","badge":"High Value","note":"UAE expat wellness — South Asian diaspora market, strong demand for Nada Yoga"},
+        {"icon":"🏢","name":"DIFC Wellness Hub","city":"Dubai","badge":"Corporate","note":"Corporate wellness contracts for Indian diaspora companies in Dubai financial district"},
+        {"icon":"🏛️","name":"Sattva London","city":"London","badge":"High Value","note":"South Asian yoga community, monthly sound bath series, visiting teacher program"},
+        {"icon":"🌴","name":"Fivelements Bali","city":"Bali","badge":"High Value","note":"Premium retreat venue, Ayurveda + sound healing — visiting teacher residency model"}
+      ],
+      "differentiation": [
+        {"insight":"Nada Yoga + Ayurvedic dosha sequencing — no other teacher in India has systematised this combination","tag":"Unique System"},
+        {"insight":"Therapeutic/condition-specific yoga commands ₹3,000–8,000/session in UK & USA vs ₹800–1,500 in India — massive arbitrage opportunity via online programmes","tag":"Pricing Power"},
+        {"insight":"Government Ayush programs actively seeking certified teachers with both Yoga + Ayurveda credentials — low competition, high institutional credibility and long-term contracts","tag":"Govt Opportunity"},
+        {"insight":"Sound healing + Yoga combined is the fastest-growing wellness category in UAE & Singapore expat markets — opportunity to lead retreats at 5-10x India rate","tag":"Global Reach"}
+      ]
+    },
+    "wisdom": {
+      "yoga_sutras": [
+        {
+          "ref": "2.45",
+          "devanagari": "समाधिसिद्धिरीश्वरप्रणिधानात्",
+          "transliteration": "samādhi-siddhi-r-īśvara-praṇidhānāt",
+          "translation": "Perfection in samadhi results from devotion to Ishvara — the Supreme Being.",
+          "commentary": [
+            {"teacher":"Swami Vivekananda","text":"By surrender to God — not the mere repetition of His name, but true surrender — the mind becomes steady and meditation deepens naturally into samadhi."},
+            {"teacher":"B.K.S. Iyengar","text":"Ishvara Pranidhana is the crown of niyama. When the ego submits to the divine will, the practitioner transcends personal limitation and touches the infinite."},
+            {"teacher":"Sadhguru","text":"Surrender is not weakness — it is the ultimate intelligence. When you stop insisting that existence goes your way, it starts working for you in ways you could not have planned."}
+          ]
+        },
+        {
+          "ref": "1.2",
+          "devanagari": "योगश्चित्तवृत्तिनिरोधः",
+          "transliteration": "yogaś-citta-vṛtti-nirodhaḥ",
+          "translation": "Yoga is the cessation of the fluctuations of the mind.",
+          "commentary": [
+            {"teacher":"Patanjali (Vyasa commentary)","text":"The mind, like a lake, reflects the Self when its surface is calm. Yoga is the stilling of the waves — not their suppression, but their natural settling."},
+            {"teacher":"Osho","text":"The moment you stop the inner noise — the constant commentary, judgment, desire — what remains is not emptiness but presence. That presence is yoga."},
+            {"teacher":"Mooji","text":"You don't need to stop thoughts. Simply stop identifying with them. The identification is the chitta vritti. Recognise the one who watches — that is already stillness."}
+          ]
+        }
+      ],
+      "bhagavad_gita": [
+        {
+          "ref": "6.20-23",
+          "devanagari": "यत्रोपरमते चित्तं निरुद्धं योगसेवया",
+          "transliteration": "yatroparamate cittaṃ niruddhaṃ yoga-sevayā",
+          "translation": "That state where the mind finds its rest through the practice of yoga — where one sees the Self through the Self — and remains in infinite bliss.",
+          "commentary": [
+            {"teacher":"Sri Aurobindo","text":"This is the experiential peak of the Gita's yoga: not a doctrine but a state — the mind resting in itself, freed from its restless outward seeking, knowing its own deepest nature as ananda."},
+            {"teacher":"Sadhguru","text":"Krishna is not describing a religious experience — he is describing a psychological transformation. When the mind finds its natural stillness, even ordinary life becomes extraordinary."},
+            {"teacher":"Thich Nhat Hanh","text":"This resting of the mind is not separation from life — it is full presence within it. The yogi does not withdraw from the world but meets it with unshakeable peace."}
+          ]
+        }
+      ],
+      "upanishads": [
+        {
+          "ref": "Mandukya Upanishad · 7",
+          "devanagari": "नान्तःप्रज्ञं न बहिःप्रज्ञं न उभयतःप्रज्ञम्",
+          "transliteration": "nāntaḥ-prajñaṃ na bahiḥ-prajñaṃ nobhayataḥ-prajñam",
+          "translation": "Not inward-knowing, not outward-knowing, not both — the fourth (Turiya) is pure consciousness itself.",
+          "commentary": [
+            {"teacher":"Swami Vivekananda","text":"Turiya is not a state you enter — it is what you always are. The three states (waking, dream, sleep) are superimpositions upon this fourth, which is ever-present consciousness."},
+            {"teacher":"Mooji","text":"You have always been the Turiya. You do not need to achieve it — you need only stop pretending to be limited. That pretending is the ego, and its end is liberation."},
+            {"teacher":"Sri Aurobindo","text":"The Mandukya points not to a withdrawal from life but to its fullest living — action arising from the ground of pure awareness, undisturbed by the ripples of circumstance."}
+          ]
+        }
+      ],
+      "hatha_yoga_pradipika": [
+        {
+          "ref": "4.29",
+          "devanagari": "नादानुसन्धानसमाधिमेकं मन्यामहे राजयोगस्य साधनम्",
+          "transliteration": "nādānusandhāna-samādhim-ekaṃ manyāmahe rājayogasya sādhanam",
+          "translation": "We consider meditation on Nada (inner sound) to be the single most important practice of Raja Yoga.",
+          "commentary": [
+            {"teacher":"Swami Muktibodhananda","text":"The Hatha Yoga Pradipika dedicates its fourth chapter entirely to Nada — the vibration that underlies all creation. To hear the inner sound is to hear the universe speaking through you."},
+            {"teacher":"B.K.S. Iyengar","text":"Sound is the subtlest of all sense objects. When external hearing is withdrawn and the yogi listens to the inner Nada, the fluctuations of the mind are absorbed into the vibration itself."},
+            {"teacher":"Sadhguru","text":"Every sound in the universe has a corresponding inner frequency. Nada yoga is not about hearing music — it is about recognising that you yourself are a living instrument of the cosmos."}
+          ]
+        }
+      ]
+    }
+  }
+}

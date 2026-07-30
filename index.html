@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1e4d2b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Samavaya">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Samavaya Niramaya</title>
+</head>
+<body>
+
+  <!-- ── Top Header ─────────────────────────────────────── -->
+  <header class="app-header">
+    <span class="app-logo">🪷 Samavaya Niramaya</span>
+    <span class="app-date" id="app-date"></span>
+  </header>
+
+  <!-- ── Main Content ───────────────────────────────────── -->
+  <main class="app-main" id="app-main">
+
+    <!-- Skeleton (shown while loading) -->
+    <div class="skeleton-screen" id="skeleton">
+      <div class="skeleton-card">
+        <div class="skeleton-line wide"></div>
+        <div class="skeleton-line medium"></div>
+        <div class="skeleton-line narrow"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-line wide"></div>
+        <div class="skeleton-line medium"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-line wide"></div>
+        <div class="skeleton-line medium"></div>
+        <div class="skeleton-line narrow"></div>
+      </div>
+    </div>
+
+    <!-- Tab 1 — Schedule -->
+    <div class="section-panel hidden" id="panel-schedule"></div>
+
+    <!-- Tab 2 — Attendance & Invoicing -->
+    <div class="section-panel hidden" id="panel-attend"></div>
+
+    <!-- Tab 3 — Class Plan -->
+    <div class="section-panel hidden" id="panel-plan"></div>
+
+    <!-- Tab 4 — Tip of the Day -->
+    <div class="section-panel hidden" id="panel-tip"></div>
+
+    <!-- Tab 5 — Opportunity -->
+    <div class="section-panel hidden" id="panel-opp"></div>
+
+    <!-- Tab 6 — Wisdom -->
+    <div class="section-panel hidden" id="panel-wisdom"></div>
+
+    <!-- Offline message -->
+    <div class="offline-screen hidden" id="offline-screen">
+      <div class="offline-emoji">🪷</div>
+      <h2>You're offline</h2>
+      <p>Please reconnect to load today's wisdom, schedule &amp; market insights.</p>
+    </div>
+
+  </main>
+
+  <!-- ── Bottom Tab Bar ─────────────────────────────────── -->
+  <nav class="bottom-nav">
+    <button class="nav-tab active" data-tab="schedule">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">Schedule</span>
+    </button>
+    <button class="nav-tab" data-tab="attend">
+      <span class="nav-icon">✅</span>
+      <span class="nav-label">Attendance</span>
+    </button>
+    <button class="nav-tab" data-tab="plan">
+      <span class="nav-icon">🧘</span>
+      <span class="nav-label">Class Plan</span>
+    </button>
+    <button class="nav-tab" data-tab="tip">
+      <span class="nav-icon">🌿</span>
+      <span class="nav-label">Tip</span>
+    </button>
+    <button class="nav-tab" data-tab="opp">
+      <span class="nav-icon">📡</span>
+      <span class="nav-label">Opportunity</span>
+    </button>
+    <button class="nav-tab" data-tab="wisdom">
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">Wisdom</span>
+    </button>
+  </nav>
+
+  <!-- ── Add Class Modal ────────────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-add-class">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add New Class</h3>
+        <button class="modal-close" id="close-add-class">✕</button>
+      </div>
+      <form id="form-add-class">
+        <label>Class Name
+          <input type="text" name="name" required placeholder="e.g. Morning Hatha">
+        </label>
+        <label>Day
+          <select name="day">
+            <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+            <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+          </select>
+        </label>
+        <label>Time
+          <input type="time" name="time" required>
+        </label>
+        <label>Venue
+          <input type="text" name="venue" placeholder="Studio name, City">
+        </label>
+        <label>Type
+          <select name="type">
+            <option value="fixed">Fixed (Monthly)</option>
+            <option value="dropin">Drop-in</option>
+            <option value="event">Event / Workshop</option>
+          </select>
+        </label>
+        <label>Rate (₹)
+          <input type="number" name="rate" placeholder="e.g. 4800">
+        </label>
+        <label>Capacity
+          <input type="number" name="capacity" placeholder="e.g. 10">
+        </label>
+        <button type="submit" class="btn-primary">Add Class</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Add Venue Modal ────────────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-add-venue">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Venue Prospect</h3>
+        <button class="modal-close" id="close-add-venue">✕</button>
+      </div>
+      <form id="form-add-venue">
+        <label>Venue Name
+          <input type="text" name="name" required placeholder="Hotel / Studio / Campus">
+        </label>
+        <label>City
+          <input type="text" name="city" required placeholder="Mumbai, Dubai, London…">
+        </label>
+        <label>Category
+          <select name="badge">
+            <option value="High Value">High Value</option>
+            <option value="Corporate">Corporate</option>
+            <option value="Govt">Government</option>
+            <option value="Studio">Studio</option>
+            <option value="Growing">Growing</option>
+          </select>
+        </label>
+        <label>Opportunity Note
+          <textarea name="note" rows="3" placeholder="What's the opportunity here?"></textarea>
+        </label>
+        <label>Pipeline Status
+          <select name="status">
+            <option value="To Approach">To Approach</option>
+            <option value="Pitched">Pitched</option>
+            <option value="In Discussion">In Discussion</option>
+            <option value="Converted">Converted</option>
+          </select>
+        </label>
+        <button type="submit" class="btn-primary">Add Venue</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Edit Class Modal ───────────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-edit-class">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Class</h3>
+        <button class="modal-close" id="close-edit-class">✕</button>
+      </div>
+      <form id="form-edit-class">
+        <input type="hidden" name="id">
+        <label>Class Name
+          <input type="text" name="name" required placeholder="e.g. Morning Hatha">
+        </label>
+        <label>Day
+          <select name="day">
+            <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+            <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+          </select>
+        </label>
+        <label>Time
+          <input type="time" name="time" required>
+        </label>
+        <label>Venue
+          <input type="text" name="venue" placeholder="Studio name, City">
+        </label>
+        <label>Type
+          <select name="type">
+            <option value="fixed">Fixed (Monthly)</option>
+            <option value="dropin">Drop-in</option>
+            <option value="event">Event / Workshop</option>
+          </select>
+        </label>
+        <label>Rate (₹)
+          <input type="number" name="rate" placeholder="e.g. 4800">
+        </label>
+        <label>Capacity
+          <input type="number" name="capacity" placeholder="e.g. 10">
+        </label>
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Add Participant Modal ───────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-add-participant">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Participant</h3>
+        <button class="modal-close" id="close-add-participant">✕</button>
+      </div>
+      <form id="form-add-participant">
+        <label>Name
+          <input type="text" name="name" required placeholder="Full name">
+        </label>
+        <label>Plan
+          <select name="plan">
+            <option value="monthly">Monthly</option>
+            <option value="dropin">Drop-in</option>
+            <option value="trial">Trial</option>
+          </select>
+        </label>
+        <label>Rate (₹)
+          <input type="number" name="rate" placeholder="e.g. 4800">
+        </label>
+        <label>Total Sessions (leave blank for unlimited)
+          <input type="number" name="sessions_total" placeholder="e.g. 12">
+        </label>
+        <button type="submit" class="btn-primary">Add Participant</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Edit Participant Modal ──────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-edit-participant">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Participant</h3>
+        <button class="modal-close" id="close-edit-participant">✕</button>
+      </div>
+      <form id="form-edit-participant">
+        <input type="hidden" name="id">
+        <label>Name
+          <input type="text" name="name" required placeholder="Full name">
+        </label>
+        <label>Plan
+          <select name="plan">
+            <option value="monthly">Monthly</option>
+            <option value="dropin">Drop-in</option>
+            <option value="trial">Trial</option>
+          </select>
+        </label>
+        <label>Rate (₹)
+          <input type="number" name="rate" placeholder="e.g. 4800">
+        </label>
+        <label>Total Sessions (leave blank for unlimited)
+          <input type="number" name="sessions_total" placeholder="e.g. 12">
+        </label>
+        <label>Sessions Attended
+          <input type="number" name="sessions_attended" placeholder="e.g. 0">
+        </label>
+        <label>Invoice Status
+          <select name="invoice_status">
+            <option value="pending">Pending</option>
+            <option value="draft">Draft</option>
+            <option value="paid">Paid</option>
+          </select>
+        </label>
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Invoice Print Area (hidden, shown on print) ────── -->
+  <div class="invoice-print-area hidden" id="invoice-print-area"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
