@@ -275,8 +275,8 @@ async function fetchData() {
 function renderAll() {
   if (!state.data) return;
   const s = state.data.sections;
-  renderSchedule(s.schedule, s.participants);
-  renderAttendance(s.schedule, s.participants);
+  renderSchedule();
+  renderAttendance(s.participants);
   renderClassPlan(s.class_plan);
   renderTip(s.tip);
   renderOpportunity(s.opportunity);
@@ -306,7 +306,7 @@ function switchTab(tabName) {
 // ═══════════════════════════════════════════════════════════
 // TAB 1 — SCHEDULE
 // ═══════════════════════════════════════════════════════════
-function renderSchedule(schedData) {
+function renderSchedule() {
   const panel = document.getElementById('panel-schedule');
   const todayDay = todayName();
   // All classes come from templateClasses (seeded from JSON on first load, managed as CRUD source)
@@ -448,16 +448,17 @@ function deleteClass(id) {
   if (!confirm('Delete this class?')) return;
   state.templateClasses = state.templateClasses.filter(c => c.id !== id);
   lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
-  if (state.data) renderSchedule(state.data.sections.schedule);
+  if (state.data) renderSchedule();
 }
 
 // ═══════════════════════════════════════════════════════════
 // TAB 2 — ATTENDANCE & INVOICING
 // ═══════════════════════════════════════════════════════════
-function renderAttendance(schedData, participantsData) {
+function renderAttendance(participantsData) {
   const panel = document.getElementById('panel-attend');
   const participants = lsGet(LS.PARTICIPANTS, participantsData || []);
-  const allClasses = state.templateClasses;
+  const attendWeekKey = isoWeekKey(state.selectedWeek || new Date());
+  const allClasses = getWeekClasses(attendWeekKey).filter(c => c._status !== 'cancelled');
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
@@ -539,7 +540,7 @@ function renderAttendance(schedData, participantsData) {
   // Listeners
   document.getElementById('class-select')?.addEventListener('change', e => {
     state.currentClassId = e.target.value;
-    renderAttendance(schedData, participantsData);
+    renderAttendance();
   });
 
   document.querySelectorAll('.attend-toggle').forEach(btn => {
@@ -547,7 +548,7 @@ function renderAttendance(schedData, participantsData) {
       const pid = btn.dataset.pid;
       const cid = btn.dataset.cid;
       toggleAttendance(pid, cid, todayStr);
-      renderAttendance(schedData, participantsData);
+      renderAttendance();
     });
   });
 
@@ -564,11 +565,11 @@ function renderAttendance(schedData, participantsData) {
     btn.addEventListener('click', () => openEditParticipant(btn.dataset.id));
   });
   panel.querySelectorAll('.btn-delete-participant').forEach(btn => {
-    btn.addEventListener('click', () => deleteParticipant(btn.dataset.id, schedData, participantsData));
+    btn.addEventListener('click', () => deleteParticipant(btn.dataset.id));
   });
 }
 
-function addParticipant(schedData, participantsData) {
+function addParticipant() {
   const form = document.getElementById('form-add-participant');
   const fd = new FormData(form);
   const sessTotal = fd.get('sessions_total') ? parseInt(fd.get('sessions_total')) : null;
@@ -581,12 +582,12 @@ function addParticipant(schedData, participantsData) {
     sessions_attended: 0,
     invoice_status:   'pending',
   };
-  const participants = lsGet(LS.PARTICIPANTS, participantsData || []);
+  const participants = lsGet(LS.PARTICIPANTS, []);
   participants.push(newP);
   lsSet(LS.PARTICIPANTS, participants);
   document.getElementById('modal-add-participant').classList.add('hidden');
   form.reset();
-  if (state.data) renderAttendance(schedData, participantsData);
+  if (state.data) renderAttendance();
 }
 
 function openEditParticipant(id) {
@@ -604,7 +605,7 @@ function openEditParticipant(id) {
   document.getElementById('modal-edit-participant').classList.remove('hidden');
 }
 
-function saveEditParticipant(schedData, participantsData) {
+function saveEditParticipant() {
   const form = document.getElementById('form-edit-participant');
   const fd = new FormData(form);
   const id = fd.get('id');
@@ -623,14 +624,14 @@ function saveEditParticipant(schedData, participantsData) {
   };
   lsSet(LS.PARTICIPANTS, participants);
   document.getElementById('modal-edit-participant').classList.add('hidden');
-  if (state.data) renderAttendance(schedData, participantsData);
+  if (state.data) renderAttendance();
 }
 
-function deleteParticipant(id, schedData, participantsData) {
+function deleteParticipant(id) {
   if (!confirm('Remove this participant?')) return;
   const participants = lsGet(LS.PARTICIPANTS, []);
   lsSet(LS.PARTICIPANTS, participants.filter(p => p.id !== id));
-  if (state.data) renderAttendance(schedData, participantsData);
+  if (state.data) renderAttendance();
 }
 
 function toggleAttendance(participantId, classId, dateStr) {
@@ -1046,7 +1047,7 @@ function setupModals() {
     e.target.reset();
     // Re-render schedule
     if (state.data) {
-      renderSchedule(state.data.sections.schedule);
+      renderSchedule();
     }
   });
 
@@ -1090,21 +1091,19 @@ function setupModals() {
     };
     lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
     document.getElementById('modal-edit-class').classList.add('hidden');
-    if (state.data) renderSchedule(state.data.sections.schedule);
+    if (state.data) renderSchedule();
   });
 
   // Add Participant form
   document.getElementById('form-add-participant')?.addEventListener('submit', e => {
     e.preventDefault();
-    const s = state.data?.sections;
-    addParticipant(s?.schedule, s?.participants);
+    addParticipant();
   });
 
   // Edit Participant form
   document.getElementById('form-edit-participant')?.addEventListener('submit', e => {
     e.preventDefault();
-    const s = state.data?.sections;
-    saveEditParticipant(s?.schedule, s?.participants);
+    saveEditParticipant();
   });
 }
 
