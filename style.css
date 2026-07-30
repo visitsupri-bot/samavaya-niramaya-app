@@ -1048,6 +1048,83 @@ form textarea { resize: vertical; min-height: 72px; }
 .mb-12 { margin-bottom: 12px; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; }
 
+/* ── Mini Calendar ───────────────────────────────────────── */
+.mini-calendar {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 12px 14px 10px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.mc-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.mc-month {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--bark);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.mc-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px 0;
+  text-align: center;
+}
+
+.mc-hdr {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 2px 0 6px;
+}
+
+.mc-cell {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  color: #2d1f0e;
+  height: 30px;
+  border-radius: 50%;
+  cursor: default;
+  transition: background 0.15s;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.mc-empty { visibility: hidden; }
+
+.mc-today {
+  background: var(--forest);
+  color: var(--white) !important;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.mc-has-class { font-weight: 600; color: var(--bark); }
+.mc-today.mc-has-class { color: var(--white) !important; }
+
+.mc-dot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--saffron);
+  margin-top: 1px;
+}
+.mc-today .mc-dot { background: var(--cream); }
+
 /* ── Print Styles ────────────────────────────────────────── */
 @media print {
   .app-header, .bottom-nav, .app-main > *:not(.invoice-print-area) { display: none !important; }

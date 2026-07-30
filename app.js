@@ -110,9 +110,12 @@ function seedLocalStorage(sections) {
   if (!localStorage.getItem(LS.PARTICIPANTS) && sections.participants) {
     lsSet(LS.PARTICIPANTS, sections.participants);
   }
-  // Seed custom classes only if no custom classes saved yet
-  if (!localStorage.getItem(LS.CUSTOM_CLASSES)) {
-    lsSet(LS.CUSTOM_CLASSES, []);
+  // Seed schedule classes into customClasses on first load so they are editable.
+  // Re-seed if the stored list is empty (upgrade from previous version that seeded []).
+  const stored = lsGet(LS.CUSTOM_CLASSES, null);
+  if (!stored || stored.length === 0) {
+    const jsonClasses = sections.schedule?.classes || [];
+    lsSet(LS.CUSTOM_CLASSES, jsonClasses);
   }
 }
 
@@ -149,9 +152,10 @@ async function fetchData() {
     return;
   }
 
-  // Seed localStorage on first run
+  // Seed localStorage on first run, then reload into state
   if (state.data?.sections) {
     seedLocalStorage(state.data.sections);
+    state.customClasses = lsGet(LS.CUSTOM_CLASSES, []);
   }
 
   skeleton.classList.add('hidden');
@@ -197,7 +201,8 @@ function switchTab(tabName) {
 function renderSchedule(schedData) {
   const panel = document.getElementById('panel-schedule');
   const todayDay = todayName();
-  const allClasses = [...(schedData?.classes || []), ...state.customClasses];
+  // All classes come from customClasses (JSON classes seeded in on first load)
+  const allClasses = state.customClasses;
 
   // Group by day
   const grouped = {};
@@ -206,11 +211,15 @@ function renderSchedule(schedData) {
     if (grouped[cls.day]) grouped[cls.day].push(cls);
   });
 
+  // Days that have classes (for calendar dots)
+  const classDays = new Set(allClasses.map(c => c.day));
+
   let html = `
     <div class="section-header">
       <h2>Weekly Schedule</h2>
       <button class="btn-add" id="btn-open-add-class">＋ Add Class</button>
     </div>
+    <div id="mini-calendar-wrap"></div>
     <div class="legend">
       <span class="legend-item"><span class="class-dot dot--fixed"></span> Fixed</span>
       <span class="legend-item"><span class="class-dot dot--dropin"></span> Drop-in</span>
@@ -227,10 +236,6 @@ function renderSchedule(schedData) {
 
     classes.forEach(cls => {
       const isEvent = cls.type === 'event';
-      const isCustom = String(cls.id).startsWith('cls_custom_');
-      const editBtns = isCustom ? `
-        <button class="btn-icon btn-edit-class" data-id="${esc(cls.id)}" title="Edit">✏️</button>
-        <button class="btn-icon btn-icon--danger btn-delete-class" data-id="${esc(cls.id)}" title="Delete">🗑️</button>` : '';
       html += `
         <div class="class-row${isEvent ? ' class-row--event' : ''}">
           <span class="class-dot dot--${esc(cls.type)}"></span>
@@ -239,7 +244,8 @@ function renderSchedule(schedData) {
             <div class="class-meta">${esc(cls.time)} · ${esc(cls.venue)}</div>
           </div>
           <span class="class-enrolled">${esc(cls.enrolled)}/${esc(cls.capacity)}</span>
-          ${editBtns}
+          <button class="btn-icon btn-edit-class" data-id="${esc(cls.id)}" title="Edit">✏️</button>
+          <button class="btn-icon btn-icon--danger btn-delete-class" data-id="${esc(cls.id)}" title="Delete">🗑️</button>
         </div>`;
     });
     html += `</div>`;
@@ -254,6 +260,9 @@ function renderSchedule(schedData) {
 
   panel.innerHTML = html;
 
+  // Render mini calendar after HTML is injected
+  renderMiniCalendar(classDays);
+
   document.getElementById('btn-open-add-class')?.addEventListener('click', () => {
     document.getElementById('modal-add-class').classList.remove('hidden');
   });
@@ -264,6 +273,52 @@ function renderSchedule(schedData) {
   panel.querySelectorAll('.btn-delete-class').forEach(btn => {
     btn.addEventListener('click', () => deleteClass(btn.dataset.id));
   });
+}
+
+// ── Mini Calendar ─────────────────────────────────────────
+function renderMiniCalendar(classDays) {
+  const wrap = document.getElementById('mini-calendar-wrap');
+  if (!wrap) return;
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const todayDate = now.getDate();
+
+  const monthName = now.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+
+  // Day names header (Sun-first grid)
+  const dayHeaders = ['S','M','T','W','T','F','S'].map(d =>
+    `<span class="mc-hdr">${d}</span>`).join('');
+
+  // First day of month (0=Sun)
+  const firstDow = new Date(year, month, 1).getDay();
+  // Total days in month
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Build day cells
+  let cells = '';
+  // Leading empty cells
+  for (let i = 0; i < firstDow; i++) cells += `<span class="mc-cell mc-empty"></span>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dow = new Date(year, month, d).toLocaleDateString('en-US', { weekday: 'long' });
+    const hasClass = classDays.has(dow);
+    const isToday = d === todayDate;
+    const cls = ['mc-cell', isToday ? 'mc-today' : '', hasClass ? 'mc-has-class' : ''].filter(Boolean).join(' ');
+    cells += `<span class="${cls}">${d}${hasClass ? '<span class="mc-dot"></span>' : ''}</span>`;
+  }
+
+  wrap.innerHTML = `
+    <div class="mini-calendar">
+      <div class="mc-header">
+        <span class="mc-month">${monthName}</span>
+      </div>
+      <div class="mc-grid">
+        ${dayHeaders}
+        ${cells}
+      </div>
+    </div>`;
 }
 
 function openEditClass(id) {
