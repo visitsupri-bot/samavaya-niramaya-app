@@ -357,7 +357,7 @@ function renderSchedule() {
       <div class="day-label${isToday ? ' day-label--today' : ''}">${isToday ? '📍 Today — ' : ''}${day} · ${dayLabel}</div>`;
 
     dayCls.forEach(cls => {
-      html += renderClassCard(cls, weekKey);
+      html += renderClassCard(cls);
     });
 
     html += `</div>`;
@@ -407,7 +407,7 @@ function renderSchedule() {
   });
 }
 
-function renderClassCard(cls, weekKey) {
+function renderClassCard(cls) {
   const isEvent = cls.type === 'event';
   const statusClass = {
     template:   '',
@@ -460,13 +460,6 @@ function openEditClass(id) {
   form.elements['rate'].value  = cls.rate || '';
   form.elements['capacity'].value = cls.capacity || '';
   document.getElementById('modal-edit-class').classList.remove('hidden');
-}
-
-function deleteClass(id) {
-  if (!confirm('Delete this class?')) return;
-  state.templateClasses = state.templateClasses.filter(c => c.id !== id);
-  lsSet(LS.TEMPLATE_CLASSES, state.templateClasses);
-  if (state.data) renderSchedule();
 }
 
 // ── Override Modal ────────────────────────────────────────
@@ -1159,7 +1152,6 @@ function renderWisdom(wisdomData) {
 function setupModals() {
   // Close buttons
   const closeIds = [
-    ['close-add-class',        'modal-add-class'],
     ['close-add-venue',        'modal-add-venue'],
     ['close-edit-class',       'modal-edit-class'],
     ['close-add-participant',  'modal-add-participant'],
@@ -1174,10 +1166,19 @@ function setupModals() {
     });
   });
 
+  // Dedicated close handler for add-class modal — must also clear the adhoc flag
+  document.getElementById('close-add-class')?.addEventListener('click', () => {
+    state._addingAdhocForWeek = null;
+    document.getElementById('modal-add-class')?.classList.add('hidden');
+  });
+
   // Close on backdrop click
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.classList.add('hidden');
+      if (e.target === overlay) {
+        if (overlay.id === 'modal-add-class') state._addingAdhocForWeek = null;
+        overlay.classList.add('hidden');
+      }
     });
   });
 
@@ -1188,6 +1189,9 @@ function setupModals() {
     const classId = fd.get('classId');
     const weekKey = fd.get('weekKey');
     const cancel  = fd.get('cancel_this_week') === 'on';
+
+    // Only validate name/time when not cancelling (required attrs removed from HTML)
+    if (!cancel && !fd.get('name')?.trim()) return;
 
     if (cancel) {
       saveOverride(weekKey, classId, { action: 'cancelled' });
@@ -1215,10 +1219,12 @@ function setupModals() {
 
   // Week picker navigation
   document.getElementById('btn-wp-prev-month')?.addEventListener('click', () => {
+    if (!_wpMonth) return;
     _wpMonth.setMonth(_wpMonth.getMonth() - 1);
     renderWeekPicker();
   });
   document.getElementById('btn-wp-next-month')?.addEventListener('click', () => {
+    if (!_wpMonth) return;
     _wpMonth.setMonth(_wpMonth.getMonth() + 1);
     renderWeekPicker();
   });
