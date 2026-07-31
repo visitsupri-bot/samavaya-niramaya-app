@@ -1476,3 +1476,112 @@ form textarea { resize: vertical; min-height: 72px; }
   flex-shrink: 0;
   cursor: pointer;
 }
+
+/* ── Opportunity: Content Playbook ──────────────────────── */
+.playbook-toggle {
+  background: none;
+  border: 1px solid var(--leaf);
+  color: var(--leaf);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.playbook-toggle:hover, .playbook-toggle.open {
+  background: var(--leaf);
+  color: #fff;
+}
+.playbook-panel {
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.playbook-row {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.playbook-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.playbook-row-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.playbook-row-text {
+  font-size: 0.82rem;
+  color: var(--bark);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+.playbook-hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.playbook-timing {
+  font-size: 0.82rem;
+  color: var(--bark);
+}
+.btn-copy {
+  background: none;
+  border: 1px solid var(--muted);
+  border-radius: 12px;
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-copy:hover { border-color: var(--leaf); color: var(--leaf); }
+.btn-copy.copied { border-color: var(--leaf); color: var(--leaf); background: #e8f5e9; }
+
+/* ── Opportunity: Venue Pipeline ────────────────────────── */
+.venue-pipeline-badge {
+  border: none;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+.venue-pipeline-badge:hover { opacity: 0.8; }
+.pipeline--spotted      { background: #e0e0e0; color: #555; }
+.pipeline--reached_out  { background: #d0e8f8; color: #1a6fa8; }
+.pipeline--talking      { background: #fef3cd; color: #a0720a; }
+.pipeline--won          { background: #d4edda; color: #1a6e36; }
+.pipeline--not_now      { background: #fce8e6; color: #a93226; }
+
+.venue-deep-links {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.btn-deep-link {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--bark);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-deep-link:hover { background: var(--border); }
