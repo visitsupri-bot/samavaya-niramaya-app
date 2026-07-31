@@ -17,6 +17,7 @@ const LS = {
   CUSTOM_CLASSES:  'sn_custom_classes',   // deprecated — kept for migration
   TEMPLATE_CLASSES:'sn_template_classes',
   WEEK_OVERRIDES:  'sn_week_overrides',
+  VENUE_PIPELINE:  'sn_venue_pipeline',
 };
 
 const DAYS_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
@@ -46,6 +47,7 @@ const state = {
   activeCondition: null,
   selectedWeek:    null, // Date object for the Monday of the viewed week; null = current week
   billingMonth:    null, // "YYYY-MM" string; null = current month
+  expandedPlaybooks: new Set(), // indices of currently expanded trend playbooks
 };
 
 // ── Helpers ───────────────────────────────────────────────
