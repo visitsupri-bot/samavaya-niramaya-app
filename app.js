@@ -719,20 +719,52 @@ function renderAttendance(participantsData) {
       </tr>`;
   });
 
-  // Invoice list — scoped to selected class participants
-  const invoices = participants;
+  // Invoice list — all participants across ALL classes, deduplicated by participant ID
+  const allParticipantsMap = lsGet(LS.PARTICIPANTS, {});
+  const seenIds = new Set();
+  const invoices = [];
+  Object.entries(allParticipantsMap).forEach(([classId, pList]) => {
+    (pList || []).forEach(p => {
+      if (!seenIds.has(p.id)) {
+        seenIds.add(p.id);
+        // Attach all enrolled class IDs so we can sum across them
+        p._enrolledClassIds = Object.entries(allParticipantsMap)
+          .filter(([, list]) => list.some(x => x.id === p.id))
+          .map(([cid]) => cid);
+        invoices.push(p);
+      }
+    });
+  });
+
   let grandTotal = 0;
   let invoiceRows = invoices.map(p => {
-    const amount = calcAmount(p, currentId, currentBilling);
+    // Sum attended and expected sessions across all enrolled classes
+    const enrolledIds = p._enrolledClassIds || [currentId];
+    let totalAttended = 0;
+    let totalExpected = 0;
+    enrolledIds.forEach(cid => {
+      totalAttended += countAttendedSessions(p.id, cid, currentBilling);
+      if (p.plan === 'monthly') totalExpected += countExpectedSessions(cid, currentBilling);
+    });
+
+    let amount;
+    if (p.plan === 'dropin') {
+      amount = (p.rate || 0) * totalAttended;
+    } else if (p.plan === 'monthly') {
+      amount = totalExpected > 0
+        ? Math.round(((p.rate || 0) * totalAttended) / totalExpected)
+        : (p.rate || 0);
+    } else {
+      amount = p.rate || 0;
+    }
+
     grandTotal += p.invoice_status !== 'paid' ? amount : 0;
+
     let subLabel;
     if (p.plan === 'dropin') {
-      const attended = countAttendedSessions(p.id, currentId, currentBilling);
-      subLabel = `Drop-in · ${attended} session${attended !== 1 ? 's' : ''} this month · ₹${(p.rate || 0).toLocaleString('en-IN')}/session`;
+      subLabel = `Drop-in · ${totalAttended} session${totalAttended !== 1 ? 's' : ''} this month · ₹${(p.rate || 0).toLocaleString('en-IN')}/session`;
     } else if (p.plan === 'monthly') {
-      const attended = countAttendedSessions(p.id, currentId, currentBilling);
-      const expected = countExpectedSessions(currentId, currentBilling);
-      subLabel = `Monthly · ${attended}/${expected} sessions · pro-rated`;
+      subLabel = `Monthly · ${totalAttended}/${totalExpected} sessions · pro-rated`;
     } else {
       subLabel = `${esc(p.plan)} · flat rate`;
     }
@@ -1039,22 +1071,27 @@ function generateInvoices(participants, classId, billingYYYYMM) {
   const monthLabel = new Date(yr, mo - 1, 1).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
 
   pending.forEach((p, i) => {
-    const amount = calcAmount(p, classId, billing);
-    const attended = (p.plan === 'dropin' || p.plan === 'monthly')
-      ? countAttendedSessions(p.id, classId, billing)
-      : p.sessions_attended;
-    const expected = (p.plan === 'monthly') ? countExpectedSessions(classId, billing) : null;
-    const invId = `inv_${classId}_${billing}_${p.id}`;
+    const enrolledIds = p._enrolledClassIds || [classId];
+    let attended = 0, expected = 0;
+    enrolledIds.forEach(cid => {
+      attended += countAttendedSessions(p.id, cid, billing);
+      if (p.plan === 'monthly') expected += countExpectedSessions(cid, billing);
+    });
+    let amount;
+    if (p.plan === 'dropin') amount = (p.rate || 0) * attended;
+    else if (p.plan === 'monthly') amount = expected > 0 ? Math.round(((p.rate || 0) * attended) / expected) : (p.rate || 0);
+    else amount = p.rate || 0;
+    const invId = `inv_${billing}_${p.id}`;
     savedInvoices[invId] = {
       id: invId,
       invoiceNumber: `SN-${String(Object.keys(savedInvoices).length + 1).padStart(3, '0')}`,
       participantId: p.id,
       participantName: p.name,
-      classId,
+      enrolledClassIds: enrolledIds,
       billingMonth: billing,
       amount,
       sessionsAttended: attended,
-      sessionsExpected: expected,
+      sessionsExpected: p.plan === 'monthly' ? expected : null,
       plan: p.plan,
       rate: p.rate,
       status: p.invoice_status,
@@ -1064,11 +1101,16 @@ function generateInvoices(participants, classId, billingYYYYMM) {
   lsSet(LS.INVOICES, savedInvoices);
 
   printArea.innerHTML = pending.map((p, i) => {
-    const amount = calcAmount(p, classId, billing);
-    const attended = (p.plan === 'dropin' || p.plan === 'monthly')
-      ? countAttendedSessions(p.id, classId, billing)
-      : p.sessions_attended;
-    const expected = p.plan === 'monthly' ? countExpectedSessions(classId, billing) : null;
+    const enrolledIds = p._enrolledClassIds || [classId];
+    let attended = 0, expected = 0;
+    enrolledIds.forEach(cid => {
+      attended += countAttendedSessions(p.id, cid, billing);
+      if (p.plan === 'monthly') expected += countExpectedSessions(cid, billing);
+    });
+    let amount;
+    if (p.plan === 'dropin') amount = (p.rate || 0) * attended;
+    else if (p.plan === 'monthly') amount = expected > 0 ? Math.round(((p.rate || 0) * attended) / expected) : (p.rate || 0);
+    else amount = p.rate || 0;
     const rateDetail = p.plan === 'dropin'
       ? `Drop-in · ₹${(p.rate || 0).toLocaleString('en-IN')} per session`
       : p.plan === 'monthly'
