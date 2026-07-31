@@ -677,9 +677,11 @@ function renderAttendance(participantsData) {
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
-  // Resolve billing month (state.billingMonth or current month)
+  // Resolve billing month — default to NEXT calendar month so invoices are forward-looking
   const now = new Date();
-  const currentBilling = state.billingMonth || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const defaultBilling = `${nextMonth.getFullYear()}-${String(nextMonth.getMonth() + 1).padStart(2, '0')}`;
+  const currentBilling = state.billingMonth || defaultBilling;
   const [billingYear, billingMonthNum] = currentBilling.split('-').map(Number);
 
   const currentId = state.currentClassId || (allClasses[0]?.id ?? '');
@@ -785,11 +787,12 @@ function renderAttendance(participantsData) {
       <strong>₹${grandTotal.toLocaleString('en-IN')}</strong>
     </div>` : '';
 
-  // Build billing month dropdown options (last 12 months)
+  // Build billing month dropdown: 2 months ahead → 11 months back (14 options total)
   const monthOptions = (() => {
     const opts = [];
     const d = new Date();
-    for (let i = 0; i < 12; i++) {
+    d.setMonth(d.getMonth() + 2); // start 2 months in the future
+    for (let i = 0; i < 14; i++) {
       const val = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
       const lbl = d.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
       opts.push(`<option value="${val}" ${val === currentBilling ? 'selected' : ''}>${lbl}</option>`);
