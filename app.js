@@ -1348,8 +1348,55 @@ function renderOpportunity(oppData) {
       </div>
     </div>`;
 
-  // Trending
-  const trendsHtml = (oppData.trends || []).map(t => `
+  // Trending — with expandable playbook
+  const trendsHtml = (oppData.trends || []).map((t, idx) => {
+    const pb = t.playbook || null;
+    const isOpen = state.expandedPlaybooks.has(idx);
+
+    const playbookPanel = pb && isOpen ? `
+      <div class="playbook-panel">
+        <div class="playbook-row">
+          <div class="playbook-row-header">
+            <span class="playbook-row-label">📸 Instagram Caption</span>
+            <button class="btn-copy" data-copy="${esc(pb.instagram_caption)}" data-copyid="ig-${idx}">📋 Copy</button>
+          </div>
+          <div class="playbook-row-text">${esc(pb.instagram_caption)}</div>
+        </div>
+        <div class="playbook-row">
+          <div class="playbook-row-header">
+            <span class="playbook-row-label">💼 LinkedIn Caption</span>
+            <button class="btn-copy" data-copy="${esc(pb.linkedin_caption)}" data-copyid="li-${idx}">📋 Copy</button>
+          </div>
+          <div class="playbook-row-text">${esc(pb.linkedin_caption)}</div>
+        </div>
+        <div class="playbook-row">
+          <div class="playbook-row-header">
+            <span class="playbook-row-label">#️⃣ Hashtags — Wide</span>
+            <button class="btn-copy" data-copy="${esc((pb.hashtag_wide || []).join(' '))}" data-copyid="hw-${idx}">📋 Copy</button>
+          </div>
+          <div class="playbook-hashtags">${(pb.hashtag_wide || []).map(h => `<span class="hashtag">${esc(h)}</span>`).join('')}</div>
+        </div>
+        <div class="playbook-row">
+          <div class="playbook-row-header">
+            <span class="playbook-row-label">#️⃣ Hashtags — Niche</span>
+            <button class="btn-copy" data-copy="${esc((pb.hashtag_niche || []).join(' '))}" data-copyid="hn-${idx}">📋 Copy</button>
+          </div>
+          <div class="playbook-hashtags">${(pb.hashtag_niche || []).map(h => `<span class="hashtag">${esc(h)}</span>`).join('')}</div>
+        </div>
+        <div class="playbook-row">
+          <div class="playbook-row-header">
+            <span class="playbook-row-label">📩 DM / Outreach Script</span>
+            <button class="btn-copy" data-copy="${esc(pb.dm_script)}" data-copyid="dm-${idx}">📋 Copy</button>
+          </div>
+          <div class="playbook-row-text">${esc(pb.dm_script)}</div>
+        </div>
+        <div class="playbook-row">
+          <span class="playbook-row-label">📅 Best Time to Post</span>
+          <div class="playbook-timing">${esc(pb.post_timing)}</div>
+        </div>
+      </div>` : '';
+
+    return `
     <div class="trend-card">
       <div class="trend-platform">${esc(t.platform)}</div>
       <div class="trend-headline">${esc(t.headline)}</div>
@@ -1357,7 +1404,10 @@ function renderOpportunity(oppData) {
         ${(t.hashtags || []).map(h => `<span class="hashtag">${esc(h)}</span>`).join('')}
       </div>
       <div class="trend-opportunity">💡 ${esc(t.opportunity)}</div>
-    </div>`).join('');
+      ${pb ? `<button class="playbook-toggle${isOpen ? ' open' : ''}" data-pbidx="${idx}">📋 ${isOpen ? 'Hide' : 'Playbook'}</button>` : ''}
+      ${playbookPanel}
+    </div>`;
+  }).join('');
 
   // Venues (JSON + custom)
   const allVenues = [...(oppData.venues || []), ...state.customVenues];
@@ -1392,6 +1442,34 @@ function renderOpportunity(oppData) {
     ${diffHtml}`;
 
   drawSparkline(oppData.trend_data || [], 'sparkline-bars');
+
+  // Playbook toggle buttons
+  panel.querySelectorAll('.playbook-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.pbidx, 10);
+      if (state.expandedPlaybooks.has(idx)) {
+        state.expandedPlaybooks.delete(idx);
+      } else {
+        state.expandedPlaybooks.add(idx);
+      }
+      renderOpportunity(oppData);
+    });
+  });
+
+  // Copy buttons
+  panel.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const text = btn.dataset.copy;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✅ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋 Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
 
   document.getElementById('btn-open-add-venue')?.addEventListener('click', () => {
     document.getElementById('modal-add-venue').classList.remove('hidden');
