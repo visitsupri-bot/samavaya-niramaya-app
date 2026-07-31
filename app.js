@@ -354,6 +354,7 @@ function renderAll() {
   renderAttendance(s.participants);
   renderClassPlan(s.class_plan);
   renderTip(s.tip);
+  state.expandedPlaybooks.clear();
   renderOpportunity(s.opportunity);
   renderWisdom(s.wisdom);
 }
@@ -1437,7 +1438,8 @@ function renderOpportunity(oppData) {
   const allVenues = [...(oppData.venues || []), ...state.customVenues];
   const venuePipeline = getVenuePipeline();
   const venuesHtml = allVenues.map(v => {
-    const stage = venuePipeline[v.name] || 'spotted';
+    const rawStage = venuePipeline[v.name];
+    const stage = PIPELINE_STAGES.includes(rawStage) ? rawStage : 'spotted';
     const stageLabel = PIPELINE_LABELS[stage] || stage;
     const liQuery = encodeURIComponent(`${v.name} wellness`);
     return `
@@ -1504,6 +1506,9 @@ function renderOpportunity(oppData) {
           btn.textContent = '📋 Copy';
           btn.classList.remove('copied');
         }, 2000);
+      }).catch(() => {
+        btn.textContent = '❌ Failed';
+        setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
       });
     });
   });
