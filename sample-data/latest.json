@@ -339,19 +339,43 @@
           "platform": "Instagram India",
           "headline": "#SoundBath content reaching 2.4M weekly impressions",
           "hashtags": ["#soundbath","#nadayoga","#crystalbowls","#soundhealing","#432hz"],
-          "opportunity": "Gap identified: virtually no practitioner in Pune offering weekly public Sound Baths"
+          "opportunity": "Gap identified: virtually no practitioner in Pune offering weekly public Sound Baths",
+          "playbook": {
+            "instagram_caption": "Close your eyes. Let the crystal bowls find you. 🪷\n\nA 60-minute Sound Bath is not just music — it's a full-body reset at 432Hz. Stress dissolves. The nervous system exhales.\n\nNext session: Saturday 7pm, Mumbai. Spots are limited.\n\nDM to reserve yours 🙏\n\n#soundbath #nadayoga #432hz #crystalbowls #mumbai",
+            "linkedin_caption": "Sound healing has crossed from alternative to mainstream — and the data backs it. #SoundBath content is generating 2.4M weekly impressions on Instagram India alone.\n\nAs a Nada Yoga specialist, I've been integrating sound frequencies into therapeutic yoga for years. The results — reduced cortisol, improved sleep, measurable reduction in anxiety — are consistent.\n\nIf your organisation is exploring employee wellness beyond the gym membership, I'd welcome a conversation about a corporate sound bath series.\n\nWhat's your team's biggest wellness challenge right now?",
+            "hashtag_wide": ["#soundbath", "#soundhealing", "#nadayoga", "#crystalbowls", "#432hz", "#wellness", "#yoga", "#meditation", "#holistichealth", "#india"],
+            "hashtag_niche": ["#soundbathmumbai", "#nadayogaindia", "#soundhealingpune", "#crystalbowlindia", "#soundtherapyindia"],
+            "dm_script": "Hi [Name] 🙏 I came across [Venue/Page] and love the wellness community you're building. I'm a Nada Yoga and Sound Bath facilitator based in Mumbai — specialising in 432Hz crystal bowl immersions. I'd love to explore if a monthly Sound Bath session would be a good fit for your space. Would you be open to a quick call this week?",
+            "post_timing": "Instagram Reels & Stories: Tuesday & Thursday 7–9pm IST · LinkedIn: Tuesday & Wednesday 8–10am IST"
+          }
         },
         {
           "platform": "Google Trends India",
           "headline": "\"Yoga for anxiety\" searches +180% YoY — therapeutic demand exploding",
           "hashtags": ["yoga for anxiety","therapeutic yoga","yoga therapy India"],
-          "opportunity": "Condition-specific yoga is underserved in Tier-1 cities — massive pricing power vs. generic yoga"
+          "opportunity": "Condition-specific yoga is underserved in Tier-1 cities — massive pricing power vs. generic yoga",
+          "playbook": {
+            "instagram_caption": "\"Yoga for anxiety\" is being searched 180% more than last year.\n\nBut not all yoga is therapeutic. Jumping into fast Vinyasa when your nervous system is already overwhelmed can make anxiety worse.\n\nTherapeutic yoga meets you where you are — slow, breath-led, condition-specific.\n\nI work with anxiety, insomnia, burnout, and chronic stress — with sequences designed specifically for each.\n\nSlide 2 → the 4 poses that calm the vagus nerve in under 10 minutes.\n\nSave this 🙏",
+            "linkedin_caption": "\"Yoga for anxiety\" searches in India are up 180% year-on-year. But the supply of genuinely therapeutic yoga — condition-specific, clinically informed, not just stretching — remains very thin.\n\nI've been developing condition-specific yoga protocols for anxiety, insomnia, lower back pain, and hormonal imbalance. Each protocol pairs asana with Ayurvedic dietary guidance and pranayama — a truly integrated approach.\n\nFor HR leaders: this is not a generic wellness session. These are targeted interventions that employees actually use. Happy to share outcomes data from current corporate clients.\n\nWhat does your organisation currently offer for stress and anxiety?",
+            "hashtag_wide": ["#therapeuticyoga", "#yogaforanxiety", "#mentalhealth", "#wellness", "#yoga", "#breathwork", "#stressrelief", "#mindfulness", "#holistichealth", "#india"],
+            "hashtag_niche": ["#therapeuticyogaindia", "#yogatherapyindia", "#yogaforanxietyrelief", "#conditionspecificyoga", "#ayurvedicyoga"],
+            "dm_script": "Hi [Name] 🙏 I'm a therapeutic yoga specialist working with anxiety, stress, and burnout — and I noticed [Venue/Company] is focused on employee wellbeing. I offer condition-specific yoga programmes (not generic classes) with measurable outcomes. I'd love to share more if you're open to a brief conversation — would a 15-minute call work?",
+            "post_timing": "Instagram Carousel: Monday & Wednesday 8–10am IST · LinkedIn Article/Post: Tuesday & Thursday 8–9am IST"
+          }
         },
         {
           "platform": "YouTube Global",
           "headline": "Dosha-based yoga content averaging 85K views per video globally",
           "hashtags": ["#doshabodytype","#ayurvedicyoga","#vatapitta","#ayurveda"],
-          "opportunity": "No major Indian teacher has claimed this content niche on YouTube — first-mover advantage available"
+          "opportunity": "No major Indian teacher has claimed this content niche on YouTube — first-mover advantage available",
+          "playbook": {
+            "instagram_caption": "Are you Vata, Pitta, or Kapha? 🌿\n\nYour Ayurvedic dosha determines which yoga is right for your body — not just what's trending.\n\nVata types need grounding, slow flows, and warmth.\nPitta types need cooling, surrender, and less striving.\nKapha types need energising, heat, and movement.\n\nI've built yoga sequences for each dosha — and the transformation in students who finally practice aligned with their nature is remarkable.\n\nComment your dosha below 👇 (or DM me if you're not sure!)",
+            "linkedin_caption": "Dosha-based yoga is averaging 85K views per video globally on YouTube — yet no major Indian teacher has systematically claimed this space.\n\nI've spent years developing Ayurvedic dosha-sequenced yoga protocols: each sequence is designed for a specific constitutional type, pairing asana, pranayama, and Nada Yoga in a single practice.\n\nI'm exploring YouTube as a platform for this content — if you work in wellness media, health content partnerships, or corporate wellness and see a fit, I'd love to connect.",
+            "hashtag_wide": ["#ayurvedicyoga", "#doshatype", "#vatapitta", "#kapha", "#ayurveda", "#yoga", "#holistichealth", "#wellness", "#yogalifestyle", "#india"],
+            "hashtag_niche": ["#doshabasedyoga", "#ayurvedicwellness", "#vatayoga", "#pittayoga", "#kaphayoga"],
+            "dm_script": "Hi [Name] 🙏 I'm developing a dosha-based yoga series — Ayurvedic constitution-specific sequences combining asana, pranayama, and Nada Yoga. I noticed [Channel/Page] covers holistic wellness and thought there might be an interesting collaboration or content partnership opportunity. Would you be open to a conversation?",
+            "post_timing": "Instagram Reels: Monday & Friday 7–9pm IST · YouTube: Saturday 9–11am IST · LinkedIn: Wednesday 8–10am IST"
+          }
         }
       ],
       "venues": [
