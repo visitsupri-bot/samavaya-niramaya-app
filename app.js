@@ -45,6 +45,7 @@ const state = {
   customVenues:    [],
   activeCondition: null,
   selectedWeek:    null, // Date object for the Monday of the viewed week; null = current week
+  billingMonth:    null, // "YYYY-MM" string; null = current month
 };
 
 // ── Helpers ───────────────────────────────────────────────
@@ -220,6 +221,49 @@ function getWeekClasses(weekKey) {
 
   adhoc.forEach(cls => resolved.push({ ...cls, _status: 'adhoc' }));
   return resolved;
+}
+
+// Returns the number of expected class occurrences for a given class in a billing month.
+// Counts calendar weekdays matching the class's `day` field, minus any cancelled weeks.
+function countExpectedSessions(classId, billingYYYYMM) {
+  const templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
+  const cls = templateClasses.find(c => c.id === classId);
+  if (!cls || !cls.day) return 0;
+
+  const [year, month] = billingYYYYMM.split('-').map(Number);
+  const allOverrides = lsGet(LS.WEEK_OVERRIDES, {});
+  let count = 0;
+
+  // Iterate every day in the billing month
+  const daysInMonth = new Date(year, month, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(year, month - 1, d);
+    const dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+    if (dayName !== cls.day) continue;
+
+    // Check if this week has a cancellation override for this class
+    const weekKey = isoWeekKey(date);
+    const weekOv = allOverrides[weekKey] || {};
+    const ov = weekOv[classId];
+    if (ov && ov.action === 'cancelled') continue;
+
+    count++;
+  }
+  return count;
+}
+
+// Returns the number of sessions a participant actually attended in a billing month for a class.
+function countAttendedSessions(participantId, classId, billingYYYYMM) {
+  const rec = lsGet(LS.ATTENDANCE, {});
+  return Object.entries(rec).filter(([key, present]) => {
+    if (!present) return false;
+    // key: classId_YYYY-MM-DD_participantId
+    const parts = key.split('_');
+    if (parts.length < 3) return false;
+    const pid = parts[parts.length - 1];
+    const dateStr = parts[parts.length - 2];
+    return pid === participantId && dateStr.startsWith(billingYYYYMM);
+  }).length;
 }
 
 function saveOverride(weekKey, classId, overrideData) {
@@ -633,6 +677,11 @@ function renderAttendance(participantsData) {
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
+  // Resolve billing month (state.billingMonth or current month)
+  const now = new Date();
+  const currentBilling = state.billingMonth || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const [billingYear, billingMonthNum] = currentBilling.split('-').map(Number);
+
   const currentId = state.currentClassId || (allClasses[0]?.id ?? '');
 
   // Load participants for the currently selected class only
@@ -674,11 +723,19 @@ function renderAttendance(participantsData) {
   const invoices = participants;
   let grandTotal = 0;
   let invoiceRows = invoices.map(p => {
-    const amount = calcAmount(p);
+    const amount = calcAmount(p, currentId, currentBilling);
     grandTotal += p.invoice_status !== 'paid' ? amount : 0;
-    const subLabel = p.plan === 'dropin'
-      ? `Drop-in · ₹${(p.rate || 0).toLocaleString('en-IN')}/session this month`
-      : `${esc(p.plan)} · flat rate`;
+    let subLabel;
+    if (p.plan === 'dropin') {
+      const attended = countAttendedSessions(p.id, currentId, currentBilling);
+      subLabel = `Drop-in · ${attended} session${attended !== 1 ? 's' : ''} this month · ₹${(p.rate || 0).toLocaleString('en-IN')}/session`;
+    } else if (p.plan === 'monthly') {
+      const attended = countAttendedSessions(p.id, currentId, currentBilling);
+      const expected = countExpectedSessions(currentId, currentBilling);
+      subLabel = `Monthly · ${attended}/${expected} sessions · pro-rated`;
+    } else {
+      subLabel = `${esc(p.plan)} · flat rate`;
+    }
     return `
     <div class="invoice-row">
       <div>
@@ -695,6 +752,19 @@ function renderAttendance(participantsData) {
       <span>Total Outstanding</span>
       <strong>₹${grandTotal.toLocaleString('en-IN')}</strong>
     </div>` : '';
+
+  // Build billing month dropdown options (last 12 months)
+  const monthOptions = (() => {
+    const opts = [];
+    const d = new Date();
+    for (let i = 0; i < 12; i++) {
+      const val = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      const lbl = d.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+      opts.push(`<option value="${val}" ${val === currentBilling ? 'selected' : ''}>${lbl}</option>`);
+      d.setMonth(d.getMonth() - 1);
+    }
+    return opts.join('');
+  })();
 
   panel.innerHTML = `
     <h2 style="color:var(--bark);margin-bottom:12px">Attendance & Invoicing</h2>
@@ -720,7 +790,13 @@ function renderAttendance(participantsData) {
       </div>
     </div>
 
-    <div class="section-label">💳 Invoices</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;margin-bottom:8px">
+      <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted)">💳 Invoices</span>
+      <div style="display:flex;gap:6px;align-items:center">
+        <label style="font-size:0.75rem;color:var(--muted)">Billing Month</label>
+        <select id="billing-month-select" style="font-size:0.8rem;padding:3px 6px;border-radius:6px;border:1px solid var(--muted)">${monthOptions}</select>
+      </div>
+    </div>
     <div id="invoice-list">${invoiceRows}</div>
     ${totalRow}
     <button class="btn-generate" id="btn-generate-invoices">📄 Generate All Pending Invoices</button>
@@ -745,8 +821,13 @@ function renderAttendance(participantsData) {
     });
   });
 
+  document.getElementById('billing-month-select')?.addEventListener('change', e => {
+    state.billingMonth = e.target.value;
+    renderAttendance();
+  });
+
   document.getElementById('btn-generate-invoices')?.addEventListener('click', () => {
-    generateInvoices(invoices);
+    generateInvoices(invoices, currentId, currentBilling);
   });
 
   document.getElementById('btn-open-add-participant')?.addEventListener('click', () => {
@@ -910,32 +991,40 @@ function toggleAttendance(participantId, classId, dateStr) {
   lsSet(LS.ATTENDANCE, rec);
 }
 
-// Calculates the amount due for a participant based on their plan type.
-// monthly / event → flat rate as entered
-// dropin          → rate × sessions attended in the current calendar month
-function calcAmount(participant) {
+// Calculates the amount due for a participant based on their plan type and billing month.
+// dropin   → rate × sessions actually attended in billing month
+// monthly  → pro-rated: (attended / expected) × flat rate (min ₹0)
+// event/trial → flat rate always
+function calcAmount(participant, classId, billingYYYYMM) {
   const plan = participant.plan || '';
-  if (plan === 'dropin') {
-    const rec = lsGet(LS.ATTENDANCE, {});
+  const billing = billingYYYYMM || (() => {
     const now = new Date();
-    const monthPrefix = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-    // Count keys matching *_YYYY-MM-*_participantId that are true
-    const sessionsThisMonth = Object.entries(rec).filter(([key, present]) => {
-      if (!present) return false;
-      // key format: classId_YYYY-MM-DD_participantId
-      const parts = key.split('_');
-      if (parts.length < 3) return false;
-      const dateStr = parts[parts.length - 2]; // second-to-last segment
-      const pid     = parts[parts.length - 1]; // last segment
-      return pid === participant.id && dateStr.startsWith(monthPrefix);
-    }).length;
-    return (participant.rate || 0) * sessionsThisMonth;
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  })();
+
+  if (plan === 'dropin') {
+    const attended = countAttendedSessions(participant.id, classId, billing);
+    return (participant.rate || 0) * attended;
   }
-  // monthly or event: flat rate
+
+  if (plan === 'monthly') {
+    const attended = countAttendedSessions(participant.id, classId, billing);
+    const expected = countExpectedSessions(classId, billing);
+    if (!expected) return participant.rate || 0; // avoid divide-by-zero; return full rate
+    const proRated = Math.round(((participant.rate || 0) * attended) / expected);
+    return proRated;
+  }
+
+  // event, trial: flat rate
   return participant.rate || 0;
 }
 
-function generateInvoices(participants) {
+function generateInvoices(participants, classId, billingYYYYMM) {
+  const billing = billingYYYYMM || (() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  })();
+
   const printArea = document.getElementById('invoice-print-area');
   const pending = participants.filter(p => p.invoice_status !== 'paid');
 
@@ -944,12 +1033,47 @@ function generateInvoices(participants) {
     return;
   }
 
-  const monthLabel = new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+  // Persist invoices to localStorage
+  const savedInvoices = lsGet(LS.INVOICES, {});
+  const [yr, mo] = billing.split('-').map(Number);
+  const monthLabel = new Date(yr, mo - 1, 1).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+
+  pending.forEach((p, i) => {
+    const amount = calcAmount(p, classId, billing);
+    const attended = (p.plan === 'dropin' || p.plan === 'monthly')
+      ? countAttendedSessions(p.id, classId, billing)
+      : p.sessions_attended;
+    const expected = (p.plan === 'monthly') ? countExpectedSessions(classId, billing) : null;
+    const invId = `inv_${classId}_${billing}_${p.id}`;
+    savedInvoices[invId] = {
+      id: invId,
+      invoiceNumber: `SN-${String(Object.keys(savedInvoices).length + 1).padStart(3, '0')}`,
+      participantId: p.id,
+      participantName: p.name,
+      classId,
+      billingMonth: billing,
+      amount,
+      sessionsAttended: attended,
+      sessionsExpected: expected,
+      plan: p.plan,
+      rate: p.rate,
+      status: p.invoice_status,
+      generatedAt: new Date().toISOString(),
+    };
+  });
+  lsSet(LS.INVOICES, savedInvoices);
+
   printArea.innerHTML = pending.map((p, i) => {
-    const amount = calcAmount(p);
+    const amount = calcAmount(p, classId, billing);
+    const attended = (p.plan === 'dropin' || p.plan === 'monthly')
+      ? countAttendedSessions(p.id, classId, billing)
+      : p.sessions_attended;
+    const expected = p.plan === 'monthly' ? countExpectedSessions(classId, billing) : null;
     const rateDetail = p.plan === 'dropin'
       ? `Drop-in · ₹${(p.rate || 0).toLocaleString('en-IN')} per session`
-      : `${esc(p.plan)} · flat rate`;
+      : p.plan === 'monthly'
+        ? `Monthly · ₹${(p.rate || 0).toLocaleString('en-IN')} (pro-rated ${attended}/${expected} sessions)`
+        : `${esc(p.plan)} · flat rate`;
     return `
     <div class="invoice-card-print">
       <div class="invoice-print-header">
@@ -966,7 +1090,8 @@ function generateInvoices(participants) {
       <div class="invoice-row-print"><span>Participant</span><strong>${esc(p.name)}</strong></div>
       <div class="invoice-row-print"><span>Plan</span><span>${rateDetail}</span></div>
       <div class="invoice-row-print"><span>Billing Period</span><span>${monthLabel}</span></div>
-      <div class="invoice-row-print"><span>Sessions Attended</span><span>${p.sessions_attended}</span></div>
+      <div class="invoice-row-print"><span>Sessions Attended</span><span>${attended}</span></div>
+      ${expected !== null ? `<div class="invoice-row-print"><span>Sessions Expected</span><span>${expected}</span></div>` : ''}
       ${p.sessions_total ? `<div class="invoice-row-print"><span>Total Sessions (Package)</span><span>${p.sessions_total}</span></div>` : ''}
       <div class="invoice-row-print invoice-total-row"><span>Amount Due</span><strong>₹${amount.toLocaleString('en-IN')}</strong></div>
       <div class="upi-placeholder">
