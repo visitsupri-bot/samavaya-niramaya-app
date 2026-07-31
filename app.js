@@ -1333,6 +1333,30 @@ function renderConditionCards(conditions, key) {
 // ═══════════════════════════════════════════════════════════
 // TAB 5 — OPPORTUNITY
 // ═══════════════════════════════════════════════════════════
+const PIPELINE_STAGES = ['spotted', 'reached_out', 'talking', 'won', 'not_now'];
+const PIPELINE_LABELS = {
+  spotted:     '🔍 Spotted',
+  reached_out: '📤 Reached Out',
+  talking:     '💬 Talking',
+  won:         '🏆 Won',
+  not_now:     '⏸ Not Now',
+};
+
+function getVenuePipeline() {
+  return lsGet(LS.VENUE_PIPELINE, {});
+}
+
+function setVenueStage(venueName, stage) {
+  const pipeline = getVenuePipeline();
+  pipeline[venueName] = stage;
+  lsSet(LS.VENUE_PIPELINE, pipeline);
+}
+
+function nextPipelineStage(current) {
+  const idx = PIPELINE_STAGES.indexOf(current);
+  return PIPELINE_STAGES[(idx + 1) % PIPELINE_STAGES.length];
+}
+
 function renderOpportunity(oppData) {
   const panel = document.getElementById('panel-opp');
   if (!oppData) { panel.innerHTML = '<p>No opportunity data available.</p>'; return; }
@@ -1409,18 +1433,31 @@ function renderOpportunity(oppData) {
     </div>`;
   }).join('');
 
-  // Venues (JSON + custom)
+  // Venues (JSON + custom) with pipeline status + deep links
   const allVenues = [...(oppData.venues || []), ...state.customVenues];
-  const venuesHtml = allVenues.map(v => `
+  const venuePipeline = getVenuePipeline();
+  const venuesHtml = allVenues.map(v => {
+    const stage = venuePipeline[v.name] || 'spotted';
+    const stageLabel = PIPELINE_LABELS[stage] || stage;
+    const liQuery = encodeURIComponent(`${v.name} wellness`);
+    return `
     <div class="venue-row">
       <div class="venue-icon">${v.icon || '🏢'}</div>
       <div class="venue-info">
-        <div class="venue-name">${esc(v.name)}</div>
+        <div class="venue-name">
+          ${esc(v.name)}
+          <span class="badge ${venueBadgeClass(v.badge)}" style="font-size:0.6rem;margin-left:4px">${esc(v.badge)}</span>
+        </div>
         <div class="venue-city">${esc(v.city)}${v.status ? ` · <em>${esc(v.status)}</em>` : ''}</div>
         <div class="venue-note">${esc(v.note)}</div>
+        <div class="venue-deep-links">
+          <a class="btn-deep-link" href="https://www.linkedin.com/search/results/all/?keywords=${liQuery}" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+          <a class="btn-deep-link" href="https://www.instagram.com/explore/tags/${encodeURIComponent(v.name.replace(/\s+/g,'').toLowerCase())}" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+        </div>
       </div>
-      <span class="badge ${venueBadgeClass(v.badge)}">${esc(v.badge)}</span>
-    </div>`).join('');
+      <button class="venue-pipeline-badge pipeline--${stage}" data-venue="${esc(v.name)}">${stageLabel}</button>
+    </div>`;
+  }).join('');
 
   // Differentiation
   const diffHtml = (oppData.differentiation || []).map(d => `
@@ -1473,6 +1510,16 @@ function renderOpportunity(oppData) {
 
   document.getElementById('btn-open-add-venue')?.addEventListener('click', () => {
     document.getElementById('modal-add-venue').classList.remove('hidden');
+  });
+
+  // Venue pipeline badge — tap to cycle stage
+  panel.querySelectorAll('.venue-pipeline-badge').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const venueName = btn.dataset.venue;
+      const current = getVenuePipeline()[venueName] || 'spotted';
+      setVenueStage(venueName, nextPipelineStage(current));
+      renderOpportunity(oppData);
+    });
   });
 }
 
