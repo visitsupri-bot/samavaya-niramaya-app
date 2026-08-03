@@ -308,18 +308,21 @@ async function fetchData() {
   const skeleton = document.getElementById('skeleton');
   const offline  = document.getElementById('offline-screen');
 
+  // Cache-bust GCS URLs once per day so stale browser cache is bypassed
+  const bust = dateStr;
+
   // 4-URL fallback chain
   const urls = [
-    `${GCS_BASE}/${dateStr}.json`,          // 1. GCS dated
-    `${GCS_BASE}/latest.json`,              // 2. GCS latest
-    `./sample-data/${dateStr}.json`,        // 3. Local dated
-    `./sample-data/latest.json`,            // 4. Local latest
+    `${GCS_BASE}/${dateStr}.json?v=${bust}`,   // 1. GCS dated
+    `${GCS_BASE}/latest.json?v=${bust}`,       // 2. GCS latest
+    `./sample-data/${dateStr}.json`,           // 3. Local dated
+    `./sample-data/latest.json`,               // 4. Local latest
   ];
 
   let loaded = false;
   for (const url of urls) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) continue;
       state.data = await res.json();
       loaded = true;
