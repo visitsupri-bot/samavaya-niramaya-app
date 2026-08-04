@@ -1617,6 +1617,19 @@ function renderOpportunity(oppData) {
   const panel = document.getElementById('panel-opp');
   if (!oppData) { panel.innerHTML = '<p>No opportunity data available.</p>'; return; }
 
+  // Format "last updated" label from generated_at timestamp
+  const generatedAt = state.data?.generated_at;
+  let lastUpdatedLabel = '';
+  if (generatedAt) {
+    const diffMs = Date.now() - new Date(generatedAt).getTime();
+    const diffMins  = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays  = Math.floor(diffMs / 86400000);
+    if (diffMins < 60)       lastUpdatedLabel = `Updated ${diffMins}m ago`;
+    else if (diffHours < 24) lastUpdatedLabel = `Updated ${diffHours}h ago`;
+    else                     lastUpdatedLabel = `Updated ${diffDays}d ago`;
+  }
+
   // Hero with sparkline
   const heroHtml = `
     <div class="hero-card hero-card--dark">
@@ -1625,6 +1638,7 @@ function renderOpportunity(oppData) {
         <button id="btn-refresh-opp" style="font-size:0.75rem;padding:3px 10px;border-radius:14px;border:1px solid rgba(255,255,255,0.4);background:transparent;color:#fff;cursor:pointer" title="Fetch latest trends">🔄 Refresh</button>
       </div>
       <h2>${esc(oppData.market_headline)}</h2>
+      ${lastUpdatedLabel ? `<div style="font-size:0.72rem;opacity:0.6;margin-top:4px;margin-bottom:2px">🕐 ${esc(lastUpdatedLabel)}</div>` : ''}
       <div class="sparkline-wrap">
         <div class="sparkline-bars" id="sparkline-bars"></div>
         <div class="sparkline-label">Interest over 12 months ↑</div>
@@ -1801,6 +1815,7 @@ function renderOpportunity(oppData) {
       }
       if (fresh?.sections?.opportunity) {
         state.data.sections.opportunity = fresh.sections.opportunity;
+        if (fresh.generated_at) state.data.generated_at = fresh.generated_at;
         state.expandedPlaybooks.clear();
         renderOpportunity(fresh.sections.opportunity);
       } else {
