@@ -108,9 +108,13 @@ function serialiseToJson() {
   s.week_overrides    = lsGet(LS.WEEK_OVERRIDES,   {});
   s.venue_pipeline    = lsGet(LS.VENUE_PIPELINE,   []);
   s.wisdom_favourites = lsGet(LS.WISDOM_FAVS,      []);
+  // Note: ACTIVE_TAB and WISDOM_SOURCE are intentionally omitted — UI preferences,
+  // not user data, and should not be synced across devices.
 
   return payload;
 }
+
+let _saveResetTimer = null;
 
 /**
  * Updates the Save button visual state.
@@ -125,8 +129,8 @@ function showSaveStatus(status, label) {
   const labels = { idle: '☁ Save', saving: '⏳ Saving…', saved: '✅ Saved', error: '❌ Error' };
   btn.textContent = label || labels[status] || '☁ Save';
   if (status === 'saving') { btn.classList.add('saving'); btn.disabled = true; }
-  if (status === 'saved')  { btn.classList.add('saved');  setTimeout(() => showSaveStatus('idle'), 3000); }
-  if (status === 'error')  { btn.classList.add('error'); }
+  if (status === 'saved')  { btn.classList.add('saved');  clearTimeout(_saveResetTimer); _saveResetTimer = setTimeout(() => showSaveStatus('idle'), 3000); }
+  if (status === 'error')  { clearTimeout(_saveResetTimer); btn.classList.add('error'); }
 }
 
 /**
@@ -161,6 +165,7 @@ async function commitToGitHub(pat) {
     if (!shaRes.ok) throw new Error(`GitHub GET failed: ${shaRes.status} ${shaRes.statusText}`);
     const shaData = await shaRes.json();
     const currentSha = shaData.sha;
+    if (!currentSha) throw new Error('GitHub response missing sha — check GH_PATH constant');
 
     // 2. Serialise current state to JSON
     const payload = serialiseToJson();
