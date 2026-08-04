@@ -1588,7 +1588,6 @@ form textarea { resize: vertical; min-height: 72px; }
 
 /* ── Save Button ──────────────────────────────────────────── */
 .save-btn {
-  margin-left: auto;
   padding: 5px 12px;
   font-size: 0.78rem;
   font-weight: 600;
@@ -1605,6 +1604,8 @@ form textarea { resize: vertical; min-height: 72px; }
 .save-btn.saving { opacity: 0.7; }
 .save-btn.saved { border-color: #3a9e6e; color: #3a9e6e; }
 .save-btn.error { border-color: #c0392b; color: #c0392b; }
+.save-btn.saved:hover  { background: #3a9e6e; color: #fff; }
+.save-btn.error:hover  { background: #c0392b; color: #fff; }
 
 /* ── PAT Modal ───────────────────────────────────────────── */
 /* Override bottom-sheet positioning for the PAT modal only */
@@ -1613,22 +1614,22 @@ form textarea { resize: vertical; min-height: 72px; }
   justify-content: center;
   z-index: 1000;
 }
-.modal-card {
+#pat-modal .modal-card {
   background: var(--bg-card, #fff);
   border-radius: 14px;
   padding: 28px 24px 20px;
-  max-width: 480px;
+  max-width: 440px;
   width: calc(100% - 32px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
-.modal-card h2 { margin: 0 0 12px; font-size: 1.1rem; }
-.modal-card p  { font-size: 0.88rem; line-height: 1.5; margin: 0 0 12px; }
-.modal-card ol { font-size: 0.85rem; line-height: 1.6; margin: 0 0 16px; padding-left: 18px; }
-.modal-card a  { color: var(--saffron); }
+#pat-modal .modal-card h2 { margin: 0 0 12px; font-size: 1.1rem; }
+#pat-modal .modal-card p  { font-size: 0.88rem; line-height: 1.5; margin: 0 0 12px; }
+#pat-modal .modal-card ol { font-size: 0.85rem; line-height: 1.6; margin: 0 0 16px; padding-left: 18px; }
+#pat-modal .modal-card a  { color: var(--saffron); }
 #pat-input {
   width: 100%; box-sizing: border-box;
   padding: 9px 11px; border-radius: 8px;
-  border: 1px solid #ccc; font-size: 0.85rem;
+  border: 1px solid var(--border); font-size: 0.85rem;
   margin-bottom: 14px;
 }
 .modal-actions {
