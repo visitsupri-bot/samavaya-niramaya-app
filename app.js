@@ -1805,7 +1805,9 @@ function renderOpportunity(oppData) {
     if (btn) { btn.textContent = '⏳ Fetching…'; btn.disabled = true; }
     try {
       const bust = Date.now();
-      const urls = [`${GH_RAW}?v=${bust}`, `${GCS_BASE}/latest.json?v=${bust}`];
+      // Refresh always hits GCS first — GCS has live pipeline data (YouTube trends etc.)
+      // GitHub raw is for user-saved data only and won't have fresh opportunity content
+      const urls = [`${GCS_BASE}/latest.json?v=${bust}`, `${GH_RAW}?v=${bust}`];
       let fresh = null;
       for (const url of urls) {
         try {
