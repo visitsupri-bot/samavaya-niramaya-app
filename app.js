@@ -373,6 +373,27 @@ function seedLocalStorage(sections) {
   if (!localStorage.getItem(LS.WEEK_OVERRIDES)) {
     lsSet(LS.WEEK_OVERRIDES, {});
   }
+
+  // Restore user-data keys that were saved back to JSON via GitHubSync.
+  // Only seed if localStorage is empty for that key (don't overwrite live edits).
+  if (sections.attendance && !localStorage.getItem(LS.ATTENDANCE)) {
+    lsSet(LS.ATTENDANCE, sections.attendance);
+  }
+  if (sections.invoices && !localStorage.getItem(LS.INVOICES)) {
+    lsSet(LS.INVOICES, sections.invoices);
+  }
+  if (sections.venues && sections.venues.length > 0 && !localStorage.getItem(LS.VENUES)) {
+    lsSet(LS.VENUES, sections.venues);
+  }
+  if (sections.week_overrides && !localStorage.getItem(LS.WEEK_OVERRIDES)) {
+    lsSet(LS.WEEK_OVERRIDES, sections.week_overrides);
+  }
+  if (sections.venue_pipeline && sections.venue_pipeline.length > 0 && !localStorage.getItem(LS.VENUE_PIPELINE)) {
+    lsSet(LS.VENUE_PIPELINE, sections.venue_pipeline);
+  }
+  if (sections.wisdom_favourites && sections.wisdom_favourites.length > 0 && !localStorage.getItem(LS.WISDOM_FAVS)) {
+    lsSet(LS.WISDOM_FAVS, sections.wisdom_favourites);
+  }
 }
 
 // ── Week Data Layer ───────────────────────────────────────
@@ -496,12 +517,13 @@ async function fetchData() {
   // Cache-bust GCS URLs once per day so stale browser cache is bypassed
   const bust = dateStr;
 
-  // 4-URL fallback chain
+  // 5-URL fallback chain
   const urls = [
     `${GCS_BASE}/${dateStr}.json?v=${bust}`,   // 1. GCS dated
     `${GCS_BASE}/latest.json?v=${bust}`,       // 2. GCS latest
-    `./sample-data/${dateStr}.json`,           // 3. Local dated
-    `./sample-data/latest.json`,               // 4. Local latest
+    `${GH_RAW}?v=${bust}`,                     // 3. GitHub raw (saved user data)
+    `./sample-data/${dateStr}.json`,           // 4. Local dated
+    `./sample-data/latest.json`,               // 5. Local latest
   ];
 
   let loaded = false;
