@@ -117,15 +117,6 @@
     },
     "participants": [
       {
-        "id": "par_001",
-        "name": "Ananya S.",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 11,
-        "rate": 4800,
-        "invoice_status": "paid"
-      },
-      {
         "id": "par_002",
         "name": "Rohan M.",
         "plan": "monthly",
@@ -178,6 +169,105 @@
         "sessions_attended": 1,
         "rate": 800,
         "invoice_status": "pending"
+      },
+      {
+        "id": "ac5693b5-ec0a-4e59-97e6-61a6da6ea49d",
+        "name": "Miraya",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "55350263-4aae-477d-852f-820bab8f3c96",
+        "name": "Aarohi",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "88414330-ef33-427a-8359-93c6d3859c5e",
+        "name": "Reina",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "62cbddc1-898c-4e01-b3b1-d5405f101c89",
+        "name": "Sahana",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "09d48f4a-8454-425c-800d-e08ad72a1fb2",
+        "name": "Laya",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "f33e252f-6e78-42c1-be1c-bba2a05575ab",
+        "name": "Mihika",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "a278e507-cfed-4425-8b98-4debf46b2b70",
+        "name": "Varnika",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "96f45491-3160-423a-a18c-4e5f0a74aa9e",
+        "name": "Dravid",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "b538fdaf-9359-4f8c-8467-7e419fcf3aec",
+        "name": "Prisha",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "b38ddfeb-72f3-45df-b35e-f8e8cc7e2024",
+        "name": "Diya",
+        "plan": "monthly",
+        "rate": 1000,
+        "sessions_total": 4,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "par_001",
+        "name": "Ananya S.",
+        "plan": "monthly",
+        "sessions_total": 12,
+        "sessions_attended": 11,
+        "rate": 4800,
+        "invoice_status": "paid"
       }
     ],
     "class_plan": {
