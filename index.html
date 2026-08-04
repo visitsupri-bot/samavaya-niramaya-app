@@ -19,7 +19,28 @@
   <header class="app-header">
     <span class="app-logo">🪷 Samavaya Niramaya</span>
     <span class="app-date" id="app-date"></span>
+    <button class="save-btn" id="save-btn" title="Save all data to cloud">☁ Save</button>
   </header>
+
+  <!-- ── GitHub PAT Setup Modal ──────────────────────────── -->
+  <div class="modal-overlay hidden" id="pat-modal">
+    <div class="modal-card">
+      <h2>☁ Cloud Save Setup</h2>
+      <p>To save your data permanently, the app needs a GitHub Personal Access Token with <strong>read &amp; write access to Contents</strong> on this repository.</p>
+      <ol>
+        <li>Go to <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens</a></li>
+        <li>Set <strong>Repository access</strong> → <em>Only select repositories</em> → <strong>samavaya-niramaya-app</strong></li>
+        <li>Under <strong>Permissions → Contents</strong> → <em>Read and write</em></li>
+        <li>Copy the generated token and paste it below</li>
+      </ol>
+      <input type="password" id="pat-input" placeholder="github_pat_…" autocomplete="off" />
+      <div class="modal-actions">
+        <button class="btn-secondary" id="pat-forget-btn">Forget saved token</button>
+        <button class="btn-secondary" id="pat-cancel-btn">Cancel</button>
+        <button class="btn-primary" id="pat-save-btn">Save token &amp; continue</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── Main Content ───────────────────────────────────── -->
   <main class="app-main" id="app-main">
