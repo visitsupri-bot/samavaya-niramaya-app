@@ -6,42 +6,42 @@
         {
           "id": "cls_001",
           "name": "Morning Hatha",
-          "day": "Monday",
-          "time": "07:00",
-          "venue": "Ananda Studio, Pune",
+          "day": "Tuesday",
+          "time": "07:40",
+          "venue": "Sobha Palladian",
           "type": "fixed",
           "capacity": 10,
           "enrolled": 8,
-          "rate": 4800
+          "rate": 2500
         },
         {
           "id": "cls_002",
-          "name": "Evening Vinyasa",
-          "day": "Monday",
-          "time": "18:30",
-          "venue": "Skyflow Wellness, Pune",
+          "name": "Evening Yoga",
+          "day": "Wednesday",
+          "time": "18:00",
+          "venue": "Online/Sobha Palladian",
           "type": "fixed",
-          "capacity": 12,
+          "capacity": 20,
           "enrolled": 9,
-          "rate": 5200
+          "rate": 2500
         },
         {
           "id": "cls_003",
-          "name": "Yin Yoga",
-          "day": "Wednesday",
-          "time": "19:00",
-          "venue": "Ananda Studio, Pune",
-          "type": "dropin",
-          "capacity": 8,
+          "name": "Kids Yoga",
+          "day": "Monday",
+          "time": "18:00",
+          "venue": "Sobha Palladian",
+          "type": "fixed",
+          "capacity": 15,
           "enrolled": 5,
-          "rate": 800
+          "rate": 1000
         },
         {
           "id": "cls_004",
-          "name": "Pranayama & Meditation",
+          "name": "Morning Yoga",
           "day": "Thursday",
-          "time": "06:30",
-          "venue": "Online (Zoom)",
+          "time": "07:40",
+          "venue": "Sobha Palladian",
           "type": "fixed",
           "capacity": 20,
           "enrolled": 14,
@@ -49,25 +49,62 @@
         },
         {
           "id": "cls_005",
-          "name": "Weekend Warriors Flow",
-          "day": "Saturday",
-          "time": "08:00",
-          "venue": "Terrace Garden, Koregaon Park",
-          "type": "dropin",
+          "name": "Evening Yoga",
+          "day": "Thursday",
+          "time": "18:00",
+          "venue": "Online/Sobha Palladian",
+          "type": "fixed",
           "capacity": 15,
           "enrolled": 11,
-          "rate": 600
+          "rate": 2500
         },
         {
-          "id": "cls_006",
-          "name": "Sound Bath + Yoga Nidra",
-          "day": "Sunday",
-          "time": "10:00",
-          "venue": "Ananda Studio, Pune",
-          "type": "event",
-          "capacity": 20,
-          "enrolled": 18,
-          "rate": 1200
+          "id": "1c36c875-3e99-4cd8-b398-80dc7d385b0f",
+          "name": "Evening Yoga",
+          "type": "fixed",
+          "day": "Friday",
+          "time": "18:00",
+          "venue": "Online/Sobha Palladian",
+          "capacity": 15,
+          "enrolled": 0,
+          "rate_type": "monthly",
+          "rate": 2500
+        },
+        {
+          "id": "3f96cb3e-1119-4aa1-8d6a-20b13cebfacb",
+          "name": "Personal Yoga",
+          "type": "fixed",
+          "day": "Monday",
+          "time": "07:40",
+          "venue": "Kaggadaspura",
+          "capacity": 10,
+          "enrolled": 0,
+          "rate_type": "monthly",
+          "rate": 10000
+        },
+        {
+          "id": "c0a6e4e5-a3ff-45cd-beea-235633927f83",
+          "name": "Personal Yoga",
+          "type": "fixed",
+          "day": "Wednesday",
+          "time": "07:40",
+          "venue": "Kaggadaspur",
+          "capacity": 10,
+          "enrolled": 0,
+          "rate_type": "monthly",
+          "rate": 10000
+        },
+        {
+          "id": "71097387-f3bb-47d3-8e28-e16fb628950b",
+          "name": "Personal Yoga",
+          "type": "fixed",
+          "day": "Friday",
+          "time": "07:40",
+          "venue": "Kaggadaspura",
+          "capacity": 10,
+          "enrolled": 0,
+          "rate_type": "monthly",
+          "rate": 10000
         }
       ],
       "week_theme": "Sthira Sukham Asanam — Stability & Ease",
@@ -1071,7 +1108,22 @@
     "attendance": {},
     "invoices": {},
     "venues": [],
-    "week_overrides": {},
+    "week_overrides": {
+      "2026-W31-adhoc": [
+        {
+          "id": "fe1c2ca8-c891-46ab-b237-330c62ba2035",
+          "name": "TPT Dongle & Co Sound Meditation",
+          "type": "dropin",
+          "day": "Sunday",
+          "time": "09:00",
+          "venue": "TPT Dongle & Co",
+          "capacity": 1,
+          "enrolled": 0,
+          "rate_type": "dropin",
+          "rate": 750
+        }
+      ]
+    },
     "venue_pipeline": [],
     "wisdom_favourites": []
   },
