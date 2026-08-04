@@ -336,20 +336,18 @@ function seedLocalStorage(sections) {
     if (firstClass) map[firstClass.id] = rawP;
     lsSet(LS.PARTICIPANTS, map);
   } else {
-    // On every load: merge participants from JSON into the per-class map so
-    // that new participants added to the source data appear in the app without
-    // requiring a localStorage wipe. Locally-added participants are preserved.
+    // On every load: only seed participants from JSON into classes that have
+    // NO participants yet (brand-new class). Never touch a class that already
+    // has participants — deleted participants must stay deleted.
     const map = rawP || {};
     if (sections.participants && sections.schedule?.classes) {
       sections.schedule.classes.forEach(cls => {
         const existing = Array.isArray(map[cls.id]) ? map[cls.id] : [];
-        const existingIds = new Set(existing.map(p => p.id));
-        const newFromJson = sections.participants.filter(p => !existingIds.has(p.id));
-        if (newFromJson.length > 0) {
-          map[cls.id] = [...existing, ...newFromJson];
-        } else if (!map[cls.id]) {
+        if (existing.length === 0) {
+          // Truly empty class — seed from JSON as a starting point
           map[cls.id] = [...sections.participants];
         }
+        // If the class already has participants (even one), leave it untouched.
       });
     }
     lsSet(LS.PARTICIPANTS, map);
