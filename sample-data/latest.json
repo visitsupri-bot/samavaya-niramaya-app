@@ -117,6 +117,42 @@
     },
     "participants": [
       {
+        "id": "3510051c-05b0-4acd-a0a7-8883557a3e92",
+        "name": "Nikitha",
+        "plan": "monthly",
+        "rate": 2000,
+        "sessions_total": 8,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "917b3991-644a-458a-bcfc-a9afbebdaedb",
+        "name": "Bhuvana",
+        "plan": "monthly",
+        "rate": 2000,
+        "sessions_total": 8,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "99ebd45e-04de-453e-be7b-84f2dee0d5ca",
+        "name": "Ayantika",
+        "plan": "monthly",
+        "rate": 2000,
+        "sessions_total": 8,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "cceb9ced-d440-436d-96e4-ff509c694cf8",
+        "name": "Aditi G",
+        "plan": "monthly",
+        "rate": 2000,
+        "sessions_total": 8,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
         "id": "par_002",
         "name": "Rohan M.",
         "plan": "monthly",
