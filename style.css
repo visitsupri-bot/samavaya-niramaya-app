@@ -1592,15 +1592,15 @@ form textarea { resize: vertical; min-height: 72px; }
   padding: 5px 12px;
   font-size: 0.78rem;
   font-weight: 600;
-  border: 1.5px solid var(--color-accent, #7c6f9f);
+  border: 1.5px solid var(--saffron);
   border-radius: 20px;
   background: transparent;
-  color: var(--color-accent, #7c6f9f);
+  color: var(--saffron);
   cursor: pointer;
   transition: background 0.2s, color 0.2s, opacity 0.2s;
   white-space: nowrap;
 }
-.save-btn:hover { background: var(--color-accent, #7c6f9f); color: #fff; }
+.save-btn:hover { background: var(--saffron); color: #fff; }
 .save-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .save-btn.saving { opacity: 0.7; }
 .save-btn.saved { border-color: #3a9e6e; color: #3a9e6e; }
