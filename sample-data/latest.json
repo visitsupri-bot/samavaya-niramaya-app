@@ -1242,7 +1242,351 @@
       ]
     },
     "venue_pipeline": [],
-    "wisdom_favourites": []
+    "wisdom_favourites": [],
+    "participants_by_class": {
+      "cls_001": [
+        {
+          "id": "rp_01",
+          "name": "Nikitha",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_02",
+          "name": "Bhuvana",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_03",
+          "name": "Ayantika",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_04",
+          "name": "Aditi G",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "cls_002": [
+        {
+          "id": "rp_05",
+          "name": "Priya N",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_07",
+          "name": "Sreedevi P",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_06",
+          "name": "Janani",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_08",
+          "name": "Sunanda",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "cls_003": [
+        {
+          "id": "rp_09",
+          "name": "Miraya",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_10",
+          "name": "Aarohi",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_11",
+          "name": "Reina",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_12",
+          "name": "Sahana",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_13",
+          "name": "Laya",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_14",
+          "name": "Mihika",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_15",
+          "name": "Varnika",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_16",
+          "name": "Dravid",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_17",
+          "name": "Prisha",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_18",
+          "name": "Diya",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "cls_004": [
+        {
+          "id": "rp_01",
+          "name": "Nikitha",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_02",
+          "name": "Bhuvana",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_03",
+          "name": "Ayantika",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_04",
+          "name": "Aditi G",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "cls_005": [
+        {
+          "id": "rp_05",
+          "name": "Priya N",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_07",
+          "name": "Sreedevi P",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_06",
+          "name": "Janani",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_08",
+          "name": "Sunanda",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "1c36c875-3e99-4cd8-b398-80dc7d385b0f": [
+        {
+          "id": "rp_05",
+          "name": "Priya N",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_07",
+          "name": "Sreedevi P",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_06",
+          "name": "Janani",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_08",
+          "name": "Sunanda",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "3f96cb3e-1119-4aa1-8d6a-20b13cebfacb": [
+        {
+          "id": "rp_19",
+          "name": "Shirin",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_20",
+          "name": "Kunal",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "c0a6e4e5-a3ff-45cd-beea-235633927f83": [
+        {
+          "id": "rp_19",
+          "name": "Shirin",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_20",
+          "name": "Kunal",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ],
+      "71097387-f3bb-47d3-8e28-e16fb628950b": [
+        {
+          "id": "rp_19",
+          "name": "Shirin",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "rp_20",
+          "name": "Kunal",
+          "plan": "monthly",
+          "sessions_total": null,
+          "sessions_attended": 0,
+          "rate": 0,
+          "invoice_status": "pending"
+        }
+      ]
+    }
   },
   "generated_at": "2026-08-04T00:00:21.285251+00:00"
 }
