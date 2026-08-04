@@ -1593,8 +1593,8 @@ form textarea { resize: vertical; min-height: 72px; }
   font-weight: 600;
   border: 1.5px solid var(--saffron);
   border-radius: 20px;
-  background: transparent;
-  color: var(--saffron);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--cream);
   cursor: pointer;
   transition: background 0.2s, color 0.2s, opacity 0.2s;
   white-space: nowrap;
