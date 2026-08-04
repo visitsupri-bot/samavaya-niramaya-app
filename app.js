@@ -20,6 +20,15 @@ const LS = {
   VENUE_PIPELINE:  'sn_venue_pipeline',
 };
 
+// ── GitHub Sync Config ────────────────────────────────────
+const GH_REPO   = 'visitsupri-bot/samavaya-niramaya-app';
+const GH_BRANCH = 'main';
+const GH_PATH   = 'sample-data/latest.json';
+const GH_RAW    = `https://raw.githubusercontent.com/${GH_REPO}/${GH_BRANCH}/${GH_PATH}`;
+
+// PAT stored in localStorage only — never in source code, never committed
+const LS_PAT = 'sn_github_pat';
+
 const DAYS_ORDER = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
 const CONDITION_KEYS = [
@@ -60,6 +69,165 @@ function lsGet(key, fallback = null) {
 
 function lsSet(key, value) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+}
+
+// ── GitHub Sync ───────────────────────────────────────────
+
+/**
+ * Builds the full latest.json payload by merging the current state.data
+ * (content sections: tip, wisdom, opportunity, class_plan) with all
+ * user-edited localStorage keys.
+ */
+function serialiseToJson() {
+  // Deep-clone current state.data as the base (preserves content sections)
+  const payload = JSON.parse(JSON.stringify(state.data || { date: today(), sections: {} }));
+  payload.date = today();
+  const s = payload.sections;
+
+  // Participants: flatten per-class map → unique list keyed by id
+  const perClassMap = lsGet(LS.PARTICIPANTS, {});
+  const seen = new Set();
+  const flatParticipants = [];
+  Object.values(perClassMap).forEach(arr => {
+    if (!Array.isArray(arr)) return;
+    arr.forEach(p => {
+      if (!seen.has(p.id)) { seen.add(p.id); flatParticipants.push(p); }
+    });
+  });
+  s.participants = flatParticipants;
+
+  // Schedule classes (template)
+  const templateClasses = lsGet(LS.TEMPLATE_CLASSES, []);
+  if (!s.schedule) s.schedule = {};
+  s.schedule.classes = templateClasses;
+
+  // All other user-data keys stored as new top-level section keys
+  s.attendance        = lsGet(LS.ATTENDANCE,      {});
+  s.invoices          = lsGet(LS.INVOICES,         {});
+  s.venues            = lsGet(LS.VENUES,           []);
+  s.week_overrides    = lsGet(LS.WEEK_OVERRIDES,   {});
+  s.venue_pipeline    = lsGet(LS.VENUE_PIPELINE,   []);
+  s.wisdom_favourites = lsGet(LS.WISDOM_FAVS,      []);
+
+  return payload;
+}
+
+/**
+ * Updates the Save button visual state.
+ * @param {'idle'|'saving'|'saved'|'error'} status
+ * @param {string} [label] optional override label
+ */
+function showSaveStatus(status, label) {
+  const btn = document.getElementById('save-btn');
+  if (!btn) return;
+  btn.classList.remove('saving', 'saved', 'error');
+  btn.disabled = false;
+  const labels = { idle: '☁ Save', saving: '⏳ Saving…', saved: '✅ Saved', error: '❌ Error' };
+  btn.textContent = label || labels[status] || '☁ Save';
+  if (status === 'saving') { btn.classList.add('saving'); btn.disabled = true; }
+  if (status === 'saved')  { btn.classList.add('saved');  setTimeout(() => showSaveStatus('idle'), 3000); }
+  if (status === 'error')  { btn.classList.add('error'); }
+}
+
+/**
+ * Main entry point: called when the Save button is clicked.
+ * Opens PAT modal if no token is stored, otherwise commits to GitHub.
+ */
+async function githubSyncSave() {
+  const pat = localStorage.getItem(LS_PAT);
+  if (!pat) {
+    openPatModal(/* afterSave */ true);
+    return;
+  }
+  await commitToGitHub(pat);
+}
+
+/**
+ * Commits the serialised JSON to GitHub via the Contents API.
+ * @param {string} pat GitHub Personal Access Token
+ */
+async function commitToGitHub(pat) {
+  showSaveStatus('saving');
+  try {
+    const apiUrl = `https://api.github.com/repos/${GH_REPO}/contents/${GH_PATH}`;
+    const headers = {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    };
+
+    // 1. Get current file SHA (required for updates)
+    const shaRes = await fetch(apiUrl, { headers });
+    if (!shaRes.ok) throw new Error(`GitHub GET failed: ${shaRes.status} ${shaRes.statusText}`);
+    const shaData = await shaRes.json();
+    const currentSha = shaData.sha;
+
+    // 2. Serialise current state to JSON
+    const payload = serialiseToJson();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+
+    // 3. PUT updated file
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `data: save app state ${today()}`,
+        content,
+        sha: currentSha,
+        branch: GH_BRANCH,
+      }),
+    });
+    if (!putRes.ok) {
+      const err = await putRes.json().catch(() => ({}));
+      throw new Error(`GitHub PUT failed: ${putRes.status} — ${err.message || putRes.statusText}`);
+    }
+
+    showSaveStatus('saved');
+    console.info('[GitHubSync] ✅ Saved to GitHub successfully');
+  } catch (err) {
+    showSaveStatus('error', '❌ Error (see console)');
+    console.error('[GitHubSync] Save failed:', err);
+  }
+}
+
+/**
+ * Opens the PAT setup modal.
+ * @param {boolean} afterSave — if true, triggers a save after the token is stored
+ */
+function openPatModal(afterSave = false) {
+  const modal    = document.getElementById('pat-modal');
+  const input    = document.getElementById('pat-input');
+  const saveBtn  = document.getElementById('pat-save-btn');
+  const cancelBtn = document.getElementById('pat-cancel-btn');
+  const forgetBtn = document.getElementById('pat-forget-btn');
+  if (!modal) return;
+
+  // Pre-fill if a token already exists (for editing/replacing)
+  input.value = localStorage.getItem(LS_PAT) || '';
+  modal.classList.remove('hidden');
+  input.focus();
+
+  saveBtn.onclick = () => {
+    const val = input.value.trim();
+    if (!val) { input.style.borderColor = 'var(--danger, #c0392b)'; return; }
+    input.style.borderColor = '';
+    localStorage.setItem(LS_PAT, val);
+    closePatModal();
+    if (afterSave) commitToGitHub(val);
+  };
+
+  cancelBtn.onclick = closePatModal;
+
+  forgetBtn.onclick = () => {
+    localStorage.removeItem(LS_PAT);
+    input.value = '';
+    input.placeholder = 'Token removed';
+  };
+}
+
+function closePatModal() {
+  const modal = document.getElementById('pat-modal');
+  if (modal) modal.classList.add('hidden');
 }
 
 function today() {
@@ -142,6 +310,9 @@ async function init() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').catch(() => {});
   }
+
+  // Wire Save button
+  document.getElementById('save-btn')?.addEventListener('click', githubSyncSave);
 
   // Fetch data
   await fetchData();
