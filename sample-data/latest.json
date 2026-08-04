@@ -1364,7 +1364,12 @@
       ],
       "_featured_source": "yoga_sutras"
     },
-    "attendance": {},
+    "attendance": {
+      "cls_001_2026-08-04_rp_01": true,
+      "cls_001_2026-08-04_rp_02": true,
+      "cls_001_2026-08-04_rp_03": true,
+      "cls_001_2026-08-04_rp_04": true
+    },
     "invoices": {},
     "venues": [],
     "week_overrides": {
