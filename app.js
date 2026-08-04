@@ -84,8 +84,10 @@ function serialiseToJson() {
   payload.date = today();
   const s = payload.sections;
 
-  // Participants: flatten per-class map → unique list keyed by id
+  // Participants: save full per-class map so assignments survive reload
   const perClassMap = lsGet(LS.PARTICIPANTS, {});
+  s.participants_by_class = perClassMap;
+  // Also maintain flat deduplicated list for pipeline/content compat
   const seen = new Set();
   const flatParticipants = [];
   Object.values(perClassMap).forEach(arr => {
@@ -336,21 +338,23 @@ function seedLocalStorage(sections) {
     if (firstClass) map[firstClass.id] = rawP;
     lsSet(LS.PARTICIPANTS, map);
   } else {
-    // On every load: only seed participants from JSON into classes that have
-    // NO participants yet (brand-new class). Never touch a class that already
-    // has participants — deleted participants must stay deleted.
-    const map = rawP || {};
-    if (sections.participants && sections.schedule?.classes) {
-      sections.schedule.classes.forEach(cls => {
-        const existing = Array.isArray(map[cls.id]) ? map[cls.id] : [];
-        if (existing.length === 0) {
-          // Truly empty class — seed from JSON as a starting point
-          map[cls.id] = [...sections.participants];
-        }
-        // If the class already has participants (even one), leave it untouched.
-      });
+    // Restore from saved per-class map if available (saved by GitHubSync)
+    if (sections.participants_by_class && Object.keys(sections.participants_by_class).length > 0) {
+      // Full per-class map was saved — restore it directly, overwriting stale localStorage
+      lsSet(LS.PARTICIPANTS, sections.participants_by_class);
+    } else {
+      // No per-class map — only seed classes that are truly empty (never touch existing)
+      const map = rawP || {};
+      if (sections.participants?.length > 0 && sections.schedule?.classes) {
+        sections.schedule.classes.forEach(cls => {
+          const existing = Array.isArray(map[cls.id]) ? map[cls.id] : [];
+          if (existing.length === 0) {
+            map[cls.id] = [...sections.participants];
+          }
+        });
+      }
+      lsSet(LS.PARTICIPANTS, map);
     }
-    lsSet(LS.PARTICIPANTS, map);
   }
 
   // Migrate sn_custom_classes → sn_template_classes (one-time)
