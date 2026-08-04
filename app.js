@@ -922,6 +922,7 @@ function renderAttendance(participantsData) {
 
     attendRows += `
       <tr>
+        <td><input type="checkbox" class="participant-select" data-id="${esc(p.id)}"></td>
         <td>${esc(p.name)}</td>
         <td><span class="badge badge--${esc(p.plan)}">${esc(p.plan)}</span></td>
         <td>
@@ -1022,7 +1023,10 @@ function renderAttendance(participantsData) {
     <div class="card card--green">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <div class="card-title card-title--green" style="margin:0">✅ Mark Attendance</div>
-        <button class="btn-add" id="btn-open-add-participant" style="font-size:0.78rem;padding:4px 10px">＋ Participant</button>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button class="btn-add hidden" id="btn-bulk-delete" style="font-size:0.78rem;padding:4px 10px;background:var(--danger,#c0392b);color:#fff;border:none;border-radius:8px;cursor:pointer">🗑️ Delete Selected</button>
+          <button class="btn-add" id="btn-open-add-participant" style="font-size:0.78rem;padding:4px 10px">＋ Participant</button>
+        </div>
       </div>
       <div class="class-selector">
         <label>Select Class / Session</label>
@@ -1032,6 +1036,7 @@ function renderAttendance(participantsData) {
         <table class="attend-table">
           <thead>
             <tr>
+              <th><input type="checkbox" id="chk-select-all" title="Select all"></th>
               <th>Participant</th><th>Plan</th><th>Present</th><th>Sessions Left</th><th></th>
             </tr>
           </thead>
@@ -1091,6 +1096,35 @@ function renderAttendance(participantsData) {
   });
   panel.querySelectorAll('.btn-delete-participant').forEach(btn => {
     btn.addEventListener('click', () => deleteParticipant(btn.dataset.id));
+  });
+
+  // Bulk delete wiring
+  const chkAll = document.getElementById('chk-select-all');
+  const bulkBtn = document.getElementById('btn-bulk-delete');
+
+  function updateBulkBtn() {
+    const anyChecked = panel.querySelectorAll('.participant-select:checked').length > 0;
+    bulkBtn?.classList.toggle('hidden', !anyChecked);
+  }
+
+  chkAll?.addEventListener('change', () => {
+    panel.querySelectorAll('.participant-select').forEach(chk => { chk.checked = chkAll.checked; });
+    updateBulkBtn();
+  });
+
+  panel.querySelectorAll('.participant-select').forEach(chk => {
+    chk.addEventListener('change', () => {
+      const all = panel.querySelectorAll('.participant-select');
+      chkAll.checked = [...all].every(c => c.checked);
+      updateBulkBtn();
+    });
+  });
+
+  bulkBtn?.addEventListener('click', () => {
+    const ids = [...panel.querySelectorAll('.participant-select:checked')].map(c => c.dataset.id);
+    if (!ids.length) return;
+    if (!confirm(`Remove ${ids.length} participant${ids.length > 1 ? 's' : ''} from this class?`)) return;
+    bulkDeleteParticipants(ids);
   });
 }
 
@@ -1231,6 +1265,14 @@ function deleteParticipant(id) {
   const classId = state.currentClassId;
   const participants = getClassParticipants(classId);
   setClassParticipants(classId, participants.filter(p => p.id !== id));
+  if (state.data) renderAttendance();
+}
+
+function bulkDeleteParticipants(ids) {
+  const idSet = new Set(ids);
+  const classId = state.currentClassId;
+  const participants = getClassParticipants(classId);
+  setClassParticipants(classId, participants.filter(p => !idSet.has(p.id)));
   if (state.data) renderAttendance();
 }
 
@@ -1402,8 +1444,9 @@ function renderClassPlan(planData) {
       </div>`;
   }).join('');
 
-  // Today's sequence
-  const seq = planData.today_sequence || {};
+  // Today's sequence — prefer per-day sequence from days[], fall back to shared today_sequence
+  const todayEntry = (planData.days || []).find(d => d.day === todayDay);
+  const seq = todayEntry?.sequence || planData.today_sequence || {};
   const warmupChips  = (seq.warmup || []).map(p => `<span class="sequence-chip sequence-chip--warm">${esc(p)}</span>`).join('');
   const mainChips    = (seq.main   || []).map(p => `<span class="sequence-chip">${esc(p)}</span>`).join('');
   const counterChips = (seq.counter|| []).map(p => `<span class="sequence-chip">${esc(p)}</span>`).join('');
@@ -1577,7 +1620,10 @@ function renderOpportunity(oppData) {
   // Hero with sparkline
   const heroHtml = `
     <div class="hero-card hero-card--dark">
-      <div class="hero-label">📡 Market Radar</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div class="hero-label">📡 Market Radar</div>
+        <button id="btn-refresh-opp" style="font-size:0.75rem;padding:3px 10px;border-radius:14px;border:1px solid rgba(255,255,255,0.4);background:transparent;color:#fff;cursor:pointer" title="Fetch latest trends">🔄 Refresh</button>
+      </div>
       <h2>${esc(oppData.market_headline)}</h2>
       <div class="sparkline-wrap">
         <div class="sparkline-bars" id="sparkline-bars"></div>
@@ -1737,6 +1783,32 @@ function renderOpportunity(oppData) {
       setVenueStage(venueName, nextPipelineStage(current));
       renderOpportunity(oppData);
     });
+  });
+
+  // Refresh button — re-fetches JSON and re-renders opportunity with latest pipeline data
+  document.getElementById('btn-refresh-opp')?.addEventListener('click', async () => {
+    const btn = document.getElementById('btn-refresh-opp');
+    if (btn) { btn.textContent = '⏳ Fetching…'; btn.disabled = true; }
+    try {
+      const bust = Date.now();
+      const urls = [`${GH_RAW}?v=${bust}`, `${GCS_BASE}/latest.json?v=${bust}`];
+      let fresh = null;
+      for (const url of urls) {
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (res.ok) { fresh = await res.json(); break; }
+        } catch {}
+      }
+      if (fresh?.sections?.opportunity) {
+        state.data.sections.opportunity = fresh.sections.opportunity;
+        state.expandedPlaybooks.clear();
+        renderOpportunity(fresh.sections.opportunity);
+      } else {
+        if (btn) { btn.textContent = '❌ No data'; setTimeout(() => { btn.textContent = '🔄 Refresh'; btn.disabled = false; }, 2000); }
+      }
+    } catch {
+      if (btn) { btn.textContent = '❌ Error'; setTimeout(() => { btn.textContent = '🔄 Refresh'; btn.disabled = false; }, 2000); }
+    }
   });
 }
 

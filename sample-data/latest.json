@@ -308,45 +308,187 @@
       "days": [
         {
           "day": "Monday",
-          "class": "Morning Hatha",
-          "focus": "Backbends & Heart Opening",
-          "duration": "60 min"
+          "class": "Personal Yoga",
+          "focus": "Pranayama & Grounding",
+          "duration": "60 min",
+          "sequence": {
+            "warmup": [
+              "Cat-Cow",
+              "Child Pose",
+              "Thread the Needle"
+            ],
+            "main": [
+              "Warrior I",
+              "Warrior II",
+              "Triangle Pose",
+              "Tree Pose"
+            ],
+            "counter": [
+              "Apanasana",
+              "Supine Twist"
+            ],
+            "pranayama": [
+              "Nadi Shodhana (10 rounds)"
+            ],
+            "savasana_duration": "10 min"
+          }
         },
         {
           "day": "Tuesday",
-          "class": "Yin & Nada",
-          "focus": "Yin Holds + Sound Immersion",
-          "duration": "75 min"
+          "class": "Morning Yoga",
+          "focus": "Strength & Core",
+          "duration": "60 min",
+          "sequence": {
+            "warmup": [
+              "Sun Salutation A x3",
+              "Standing Forward Fold"
+            ],
+            "main": [
+              "Plank",
+              "Chaturanga",
+              "Navasana",
+              "Side Plank"
+            ],
+            "counter": [
+              "Sphinx",
+              "Seated Forward Fold"
+            ],
+            "pranayama": [
+              "Kapalabhati (3 rounds)"
+            ],
+            "savasana_duration": "8 min"
+          }
         },
         {
           "day": "Wednesday",
-          "class": "Corporate Wellness",
-          "focus": "Stress Relief & Breath Awareness",
-          "duration": "45 min"
+          "class": "Personal Yoga + Evening Yoga",
+          "focus": "Hip Opening & Flow",
+          "duration": "60 min",
+          "sequence": {
+            "warmup": [
+              "Downward Dog",
+              "Lizard Pose",
+              "Hip Circles"
+            ],
+            "main": [
+              "Pigeon Pose",
+              "Warrior II",
+              "Extended Side Angle",
+              "Half Moon"
+            ],
+            "counter": [
+              "Happy Baby",
+              "Supine Bound Angle"
+            ],
+            "pranayama": [
+              "Bhramari (5 rounds)"
+            ],
+            "savasana_duration": "10 min"
+          }
         },
         {
           "day": "Thursday",
-          "class": "Vinyasa Flow",
-          "focus": "Surya Namaskar Variations",
-          "duration": "60 min"
+          "class": "Morning Yoga + Evening Yoga",
+          "focus": "Backbends & Heart Opening",
+          "duration": "60 min",
+          "sequence": {
+            "warmup": [
+              "Cat-Cow",
+              "Cobra prep",
+              "Sphinx"
+            ],
+            "main": [
+              "Bhujangasana",
+              "Ustrasana",
+              "Bow Pose",
+              "Bridge Pose"
+            ],
+            "counter": [
+              "Apanasana",
+              "Knees to Chest",
+              "Supine Twist"
+            ],
+            "pranayama": [
+              "Bhramari + Nadi Shodhana"
+            ],
+            "savasana_duration": "10 min"
+          }
         },
         {
           "day": "Friday",
-          "class": "—",
-          "focus": "Self-practice & Planning",
-          "duration": "—"
+          "class": "Personal Yoga + Evening Yoga",
+          "focus": "Balance & Inversions",
+          "duration": "60 min",
+          "sequence": {
+            "warmup": [
+              "Sun Salutation B x3",
+              "Standing Balance prep"
+            ],
+            "main": [
+              "Tree Pose",
+              "Eagle Pose",
+              "Warrior III",
+              "Supported Headstand prep"
+            ],
+            "counter": [
+              "Childs Pose",
+              "Seated Meditation"
+            ],
+            "pranayama": [
+              "Nadi Shodhana (5 rounds)"
+            ],
+            "savasana_duration": "12 min"
+          }
         },
         {
           "day": "Saturday",
-          "class": "Sound Bath Evening",
-          "focus": "Deep Relaxation & Nada",
-          "duration": "90 min"
+          "class": "—",
+          "focus": "Self-practice & Rest",
+          "duration": "—",
+          "sequence": {
+            "warmup": [
+              "Gentle Cat-Cow",
+              "Childs Pose"
+            ],
+            "main": [
+              "Restorative Supported Fish",
+              "Legs Up the Wall",
+              "Reclined Butterfly"
+            ],
+            "counter": [
+              "Savasana with bolster"
+            ],
+            "pranayama": [
+              "Yoga Nidra or guided relaxation"
+            ],
+            "savasana_duration": "15 min"
+          }
         },
         {
           "day": "Sunday",
-          "class": "Nada Yoga Deep Dive",
-          "focus": "Mantra, Tanpura & Integration",
-          "duration": "180 min"
+          "class": "Kids Yoga",
+          "focus": "Playful Poses & Breathing",
+          "duration": "45 min",
+          "sequence": {
+            "warmup": [
+              "Animal walks",
+              "Jumping jacks",
+              "Shaking out"
+            ],
+            "main": [
+              "Tree Pose",
+              "Downward Dog",
+              "Cobra",
+              "Butterfly"
+            ],
+            "counter": [
+              "Starfish relaxation"
+            ],
+            "pranayama": [
+              "Bumble Bee breath (3 rounds)"
+            ],
+            "savasana_duration": "5 min"
+          }
         }
       ],
       "today_sequence": {
