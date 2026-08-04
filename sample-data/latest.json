@@ -295,69 +295,6 @@
         "sessions_attended": 0,
         "rate": 0,
         "invoice_status": "pending"
-      },
-      {
-        "id": "par_001",
-        "name": "Ananya S.",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 11,
-        "rate": 4800,
-        "invoice_status": "paid"
-      },
-      {
-        "id": "par_002",
-        "name": "Rohan M.",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 7,
-        "rate": 4200,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_003",
-        "name": "Priya K.",
-        "plan": "dropin",
-        "sessions_total": null,
-        "sessions_attended": 3,
-        "rate": 800,
-        "invoice_status": "paid"
-      },
-      {
-        "id": "par_004",
-        "name": "Vijay T.",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 10,
-        "rate": 4800,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_005",
-        "name": "Meera L.",
-        "plan": "event",
-        "sessions_total": 1,
-        "sessions_attended": 0,
-        "rate": 1500,
-        "invoice_status": "draft"
-      },
-      {
-        "id": "par_006",
-        "name": "Aditya R.",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 8,
-        "rate": 4200,
-        "invoice_status": "paid"
-      },
-      {
-        "id": "par_007",
-        "name": "Sunita P.",
-        "plan": "dropin",
-        "sessions_total": null,
-        "sessions_attended": 1,
-        "rate": 800,
-        "invoice_status": "pending"
       }
     ],
     "class_plan": {
