@@ -515,11 +515,11 @@ async function fetchData() {
   // Cache-bust GCS URLs once per day so stale browser cache is bypassed
   const bust = dateStr;
 
-  // 5-URL fallback chain
+  // 5-URL fallback chain — GitHub raw first so user-saved data always wins
   const urls = [
-    `${GCS_BASE}/${dateStr}.json?v=${bust}`,   // 1. GCS dated
-    `${GCS_BASE}/latest.json?v=${bust}`,       // 2. GCS latest
-    `${GH_RAW}?v=${bust}`,                     // 3. GitHub raw (saved user data)
+    `${GH_RAW}?v=${bust}`,                     // 1. GitHub raw (saved user data — always wins)
+    `${GCS_BASE}/${dateStr}.json?v=${bust}`,   // 2. GCS dated (content fallback)
+    `${GCS_BASE}/latest.json?v=${bust}`,       // 3. GCS latest (content fallback)
     `./sample-data/${dateStr}.json`,           // 4. Local dated
     `./sample-data/latest.json`,               // 5. Local latest
   ];
