@@ -1638,7 +1638,8 @@ function renderOpportunity(oppData) {
         <button id="btn-refresh-opp" style="font-size:0.75rem;padding:3px 10px;border-radius:14px;border:1px solid rgba(255,255,255,0.4);background:transparent;color:#fff;cursor:pointer" title="Fetch latest trends">🔄 Refresh</button>
       </div>
       <h2>${esc(oppData.market_headline)}</h2>
-      ${lastUpdatedLabel ? `<div style="font-size:0.72rem;opacity:0.6;margin-top:4px;margin-bottom:2px">🕐 ${esc(lastUpdatedLabel)}</div>` : ''}
+      ${oppData.market_context ? `<p style="font-size:0.82rem;opacity:0.85;margin:6px 0 4px;line-height:1.5">${esc(oppData.market_context)}</p>` : ''}
+      ${lastUpdatedLabel ? `<div style="font-size:0.72rem;opacity:0.6;margin-top:2px;margin-bottom:2px">🕐 ${esc(lastUpdatedLabel)}</div>` : ''}
       <div class="sparkline-wrap">
         <div class="sparkline-bars" id="sparkline-bars"></div>
         <div class="sparkline-label">Interest over 12 months ↑</div>
