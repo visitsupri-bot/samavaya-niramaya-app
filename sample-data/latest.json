@@ -6,42 +6,42 @@
         {
           "id": "cls_001",
           "name": "Morning Hatha",
-          "day": "Tuesday",
-          "time": "07:40",
-          "venue": "Sobha Palladian",
+          "day": "Monday",
+          "time": "07:00",
+          "venue": "Ananda Studio, Pune",
           "type": "fixed",
           "capacity": 10,
           "enrolled": 8,
-          "rate": 2500
+          "rate": 4800
         },
         {
           "id": "cls_002",
-          "name": "Evening Yoga",
-          "day": "Wednesday",
-          "time": "18:00",
-          "venue": "Online/Sobha Palladian",
+          "name": "Evening Vinyasa",
+          "day": "Monday",
+          "time": "18:30",
+          "venue": "Skyflow Wellness, Pune",
           "type": "fixed",
-          "capacity": 20,
+          "capacity": 12,
           "enrolled": 9,
-          "rate": 2500
+          "rate": 5200
         },
         {
           "id": "cls_003",
-          "name": "Kids Yoga",
-          "day": "Monday",
-          "time": "18:00",
-          "venue": "Sobha Palladian",
-          "type": "fixed",
-          "capacity": 15,
+          "name": "Yin Yoga",
+          "day": "Wednesday",
+          "time": "19:00",
+          "venue": "Ananda Studio, Pune",
+          "type": "dropin",
+          "capacity": 8,
           "enrolled": 5,
-          "rate": 1000
+          "rate": 800
         },
         {
           "id": "cls_004",
-          "name": "Morning Yoga",
+          "name": "Pranayama & Meditation",
           "day": "Thursday",
-          "time": "07:40",
-          "venue": "Sobha Palladian",
+          "time": "06:30",
+          "venue": "Online (Zoom)",
           "type": "fixed",
           "capacity": 20,
           "enrolled": 14,
@@ -49,62 +49,25 @@
         },
         {
           "id": "cls_005",
-          "name": "Evening Yoga",
-          "day": "Thursday",
-          "time": "18:00",
-          "venue": "Online/Sobha Palladian",
-          "type": "fixed",
+          "name": "Weekend Warriors Flow",
+          "day": "Saturday",
+          "time": "08:00",
+          "venue": "Terrace Garden, Koregaon Park",
+          "type": "dropin",
           "capacity": 15,
           "enrolled": 11,
-          "rate": 2500
+          "rate": 600
         },
         {
-          "id": "1c36c875-3e99-4cd8-b398-80dc7d385b0f",
-          "name": "Evening Yoga",
-          "type": "fixed",
-          "day": "Friday",
-          "time": "18:00",
-          "venue": "Online/Sobha Palladian",
-          "capacity": 15,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 2500
-        },
-        {
-          "id": "3f96cb3e-1119-4aa1-8d6a-20b13cebfacb",
-          "name": "Personal Yoga",
-          "type": "fixed",
-          "day": "Monday",
-          "time": "07:40",
-          "venue": "Kaggadaspura",
-          "capacity": 10,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 10000
-        },
-        {
-          "id": "c0a6e4e5-a3ff-45cd-beea-235633927f83",
-          "name": "Personal Yoga",
-          "type": "fixed",
-          "day": "Wednesday",
-          "time": "07:40",
-          "venue": "Kaggadaspur",
-          "capacity": 10,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 10000
-        },
-        {
-          "id": "71097387-f3bb-47d3-8e28-e16fb628950b",
-          "name": "Personal Yoga",
-          "type": "fixed",
-          "day": "Friday",
-          "time": "07:40",
-          "venue": "Kaggadaspura",
-          "capacity": 10,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 10000
+          "id": "cls_006",
+          "name": "Sound Bath + Yoga Nidra",
+          "day": "Sunday",
+          "time": "10:00",
+          "venue": "Ananda Studio, Pune",
+          "type": "event",
+          "capacity": 20,
+          "enrolled": 18,
+          "rate": 1200
         }
       ],
       "week_theme": "Sthira Sukham Asanam — Stability & Ease",
@@ -117,201 +80,66 @@
     },
     "participants": [
       {
-        "id": "rp_01",
-        "name": "Nikitha",
+        "id": "par_001",
+        "name": "Ananya S.",
         "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
+        "sessions_total": 12,
+        "sessions_attended": 11,
+        "rate": 4800,
+        "invoice_status": "paid"
       },
       {
-        "id": "rp_02",
-        "name": "Bhuvana",
+        "id": "par_002",
+        "name": "Rohan M.",
         "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_03",
-        "name": "Ayantika",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_04",
-        "name": "Aditi G",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
-        "name": "Chaya P",
-        "plan": "monthly",
-        "rate": 2000,
         "sessions_total": 8,
-        "sessions_attended": 0,
+        "sessions_attended": 7,
+        "rate": 4200,
         "invoice_status": "pending"
       },
       {
-        "id": "545c665c-0645-40f1-8e5f-5653f81bf90b",
-        "name": "Shalini B",
+        "id": "par_003",
+        "name": "Priya K.",
+        "plan": "dropin",
+        "sessions_total": null,
+        "sessions_attended": 3,
+        "rate": 800,
+        "invoice_status": "paid"
+      },
+      {
+        "id": "par_004",
+        "name": "Vijay T.",
         "plan": "monthly",
-        "rate": 2000,
+        "sessions_total": 12,
+        "sessions_attended": 10,
+        "rate": 4800,
+        "invoice_status": "pending"
+      },
+      {
+        "id": "par_005",
+        "name": "Meera L.",
+        "plan": "event",
+        "sessions_total": 1,
+        "sessions_attended": 0,
+        "rate": 1500,
+        "invoice_status": "draft"
+      },
+      {
+        "id": "par_006",
+        "name": "Aditya R.",
+        "plan": "monthly",
         "sessions_total": 8,
-        "sessions_attended": 0,
-        "invoice_status": "pending"
+        "sessions_attended": 8,
+        "rate": 4200,
+        "invoice_status": "paid"
       },
       {
-        "id": "rp_05",
-        "name": "Priya N",
-        "plan": "monthly",
+        "id": "par_007",
+        "name": "Sunita P.",
+        "plan": "dropin",
         "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_07",
-        "name": "Sreedevi P",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_06",
-        "name": "Janani",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_08",
-        "name": "Sunanda",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_09",
-        "name": "Miraya",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_10",
-        "name": "Aarohi",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_11",
-        "name": "Reina",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_12",
-        "name": "Sahana",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_13",
-        "name": "Laya",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_14",
-        "name": "Mihika",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_15",
-        "name": "Varnika",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_16",
-        "name": "Dravid",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_17",
-        "name": "Prisha",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_18",
-        "name": "Diya",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_19",
-        "name": "Shirin",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "rp_20",
-        "name": "Kunal",
-        "plan": "monthly",
-        "sessions_total": null,
-        "sessions_attended": 0,
-        "rate": 0,
+        "sessions_attended": 1,
+        "rate": 800,
         "invoice_status": "pending"
       }
     ],
@@ -326,187 +154,45 @@
       "days": [
         {
           "day": "Monday",
-          "class": "Personal Yoga",
-          "focus": "Pranayama & Grounding",
-          "duration": "60 min",
-          "sequence": {
-            "warmup": [
-              "Cat-Cow",
-              "Child Pose",
-              "Thread the Needle"
-            ],
-            "main": [
-              "Warrior I",
-              "Warrior II",
-              "Triangle Pose",
-              "Tree Pose"
-            ],
-            "counter": [
-              "Apanasana",
-              "Supine Twist"
-            ],
-            "pranayama": [
-              "Nadi Shodhana (10 rounds)"
-            ],
-            "savasana_duration": "10 min"
-          }
+          "class": "Morning Hatha",
+          "focus": "Backbends & Heart Opening",
+          "duration": "60 min"
         },
         {
           "day": "Tuesday",
-          "class": "Morning Yoga",
-          "focus": "Strength & Core",
-          "duration": "60 min",
-          "sequence": {
-            "warmup": [
-              "Sun Salutation A x3",
-              "Standing Forward Fold"
-            ],
-            "main": [
-              "Plank",
-              "Chaturanga",
-              "Navasana",
-              "Side Plank"
-            ],
-            "counter": [
-              "Sphinx",
-              "Seated Forward Fold"
-            ],
-            "pranayama": [
-              "Kapalabhati (3 rounds)"
-            ],
-            "savasana_duration": "8 min"
-          }
+          "class": "Yin & Nada",
+          "focus": "Yin Holds + Sound Immersion",
+          "duration": "75 min"
         },
         {
           "day": "Wednesday",
-          "class": "Personal Yoga + Evening Yoga",
-          "focus": "Hip Opening & Flow",
-          "duration": "60 min",
-          "sequence": {
-            "warmup": [
-              "Downward Dog",
-              "Lizard Pose",
-              "Hip Circles"
-            ],
-            "main": [
-              "Pigeon Pose",
-              "Warrior II",
-              "Extended Side Angle",
-              "Half Moon"
-            ],
-            "counter": [
-              "Happy Baby",
-              "Supine Bound Angle"
-            ],
-            "pranayama": [
-              "Bhramari (5 rounds)"
-            ],
-            "savasana_duration": "10 min"
-          }
+          "class": "Corporate Wellness",
+          "focus": "Stress Relief & Breath Awareness",
+          "duration": "45 min"
         },
         {
           "day": "Thursday",
-          "class": "Morning Yoga + Evening Yoga",
-          "focus": "Backbends & Heart Opening",
-          "duration": "60 min",
-          "sequence": {
-            "warmup": [
-              "Cat-Cow",
-              "Cobra prep",
-              "Sphinx"
-            ],
-            "main": [
-              "Bhujangasana",
-              "Ustrasana",
-              "Bow Pose",
-              "Bridge Pose"
-            ],
-            "counter": [
-              "Apanasana",
-              "Knees to Chest",
-              "Supine Twist"
-            ],
-            "pranayama": [
-              "Bhramari + Nadi Shodhana"
-            ],
-            "savasana_duration": "10 min"
-          }
+          "class": "Vinyasa Flow",
+          "focus": "Surya Namaskar Variations",
+          "duration": "60 min"
         },
         {
           "day": "Friday",
-          "class": "Personal Yoga + Evening Yoga",
-          "focus": "Balance & Inversions",
-          "duration": "60 min",
-          "sequence": {
-            "warmup": [
-              "Sun Salutation B x3",
-              "Standing Balance prep"
-            ],
-            "main": [
-              "Tree Pose",
-              "Eagle Pose",
-              "Warrior III",
-              "Supported Headstand prep"
-            ],
-            "counter": [
-              "Childs Pose",
-              "Seated Meditation"
-            ],
-            "pranayama": [
-              "Nadi Shodhana (5 rounds)"
-            ],
-            "savasana_duration": "12 min"
-          }
+          "class": "—",
+          "focus": "Self-practice & Planning",
+          "duration": "—"
         },
         {
           "day": "Saturday",
-          "class": "—",
-          "focus": "Self-practice & Rest",
-          "duration": "—",
-          "sequence": {
-            "warmup": [
-              "Gentle Cat-Cow",
-              "Childs Pose"
-            ],
-            "main": [
-              "Restorative Supported Fish",
-              "Legs Up the Wall",
-              "Reclined Butterfly"
-            ],
-            "counter": [
-              "Savasana with bolster"
-            ],
-            "pranayama": [
-              "Yoga Nidra or guided relaxation"
-            ],
-            "savasana_duration": "15 min"
-          }
+          "class": "Sound Bath Evening",
+          "focus": "Deep Relaxation & Nada",
+          "duration": "90 min"
         },
         {
           "day": "Sunday",
-          "class": "Kids Yoga",
-          "focus": "Playful Poses & Breathing",
-          "duration": "45 min",
-          "sequence": {
-            "warmup": [
-              "Animal walks",
-              "Jumping jacks",
-              "Shaking out"
-            ],
-            "main": [
-              "Tree Pose",
-              "Downward Dog",
-              "Cobra",
-              "Butterfly"
-            ],
-            "counter": [
-              "Starfish relaxation"
-            ],
-            "pranayama": [
-              "Bumble Bee breath (3 rounds)"
-            ],
-            "savasana_duration": "5 min"
-          }
+          "class": "Nada Yoga Deep Dive",
+          "focus": "Mantra, Tanpura & Integration",
+          "duration": "180 min"
         }
       ],
       "today_sequence": {
@@ -536,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "fatigue",
+      "featured_condition": "hormonal_balance",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1116,140 +802,107 @@
       }
     },
     "opportunity": {
-      "market_headline": "Wellness tourism grows 15% YoY — yoga leads",
-      "trend_data": [
-        20,
-        28,
-        35,
-        45,
-        58,
-        72,
-        90,
-        120,
-        145,
-        180,
-        220,
-        280
-      ],
+      "market_headline": "Sound healing and yoga fusion trending in Europe — UK, Germany and Netherlands markets open",
+      "trend_data": {
+        "youtube_count": 26,
+        "trends_count": 3
+      },
       "trends": [
         {
-          "platform": "Instagram India",
-          "headline": "#SoundBath content reaching 2.4M weekly impressions",
+          "platform": "YouTube India",
+          "headline": "10 videos found for 'Sound Bath Meditation' — viewer demand is stable on YouTube India",
           "hashtags": [
-            "#soundbath",
-            "#nadayoga",
-            "#crystalbowls",
-            "#soundhealing",
-            "#432hz"
+            "#SoundBathMeditation",
+            "#TibetanSingingBowls"
           ],
-          "opportunity": "Gap identified: virtually no practitioner in Pune offering weekly public Sound Baths"
+          "opportunity": "European wellness centres are integrating Indian healing modalities at scale. Triyoga London, Yoga Vidya Germany and SHA Wellness Netherlands are actively seeking visiting Indian facilitators."
+        },
+        {
+          "platform": "YouTube — Nada Yoga Sound",
+          "headline": "10 videos found for 'Nada Yoga Sound' — stable demand on YouTube India",
+          "hashtags": [
+            "#NadaYogaSound",
+            "#CrystalBowlsSound"
+          ],
+          "opportunity": "Sound healing for children is an emerging niche on YouTube India — Nada Yoga Sound content has virtually no Indian competition while parent search demand is stable."
+        },
+        {
+          "platform": "Instagram India",
+          "headline": "Instagram India: 'Sound Bath Reels' Reels are stable — 6 videos confirm short-form demand",
+          "hashtags": [
+            "#Soundhealing",
+            "#Singingbowlstherapy",
+            "#Soundbathnearme"
+          ],
+          "opportunity": "Sound bath Reels on Sound Bath Reels are stable on Instagram India — short clips of crystal bowl sessions routinely reach 100K+ organic impressions with zero ad spend."
         },
         {
           "platform": "Google Trends India",
-          "headline": "\"Yoga for anxiety\" searches +180% YoY — therapeutic demand exploding",
+          "headline": "'Sound Healing' searches are stable in India — peak 100/100, avg 7/100 this week",
           "hashtags": [
-            "yoga for anxiety",
-            "therapeutic yoga",
-            "yoga therapy India"
+            "#Soundhealing",
+            "#Singingbowlstherapy",
+            "#Soundbathnearme"
           ],
-          "opportunity": "Condition-specific yoga is underserved in Tier-1 cities — massive pricing power vs. generic yoga"
-        },
-        {
-          "platform": "YouTube Global",
-          "headline": "Dosha-based yoga content averaging 85K views per video globally",
-          "hashtags": [
-            "#doshabodytype",
-            "#ayurvedicyoga",
-            "#vatapitta",
-            "#ayurveda"
-          ],
-          "opportunity": "No major Indian teacher has claimed this content niche on YouTube — first-mover advantage available"
+          "opportunity": "Search interest in Sound Healing is moving stable across India — virtually no practitioner in Tier-1 cities offering weekly public sound baths at accessible price points."
         }
       ],
       "venues": [
         {
           "icon": "🏨",
-          "name": "ITC Maratha",
-          "city": "Mumbai",
-          "badge": "High Value",
-          "note": "5-star property, hosts corporate wellness — in-residence teacher opportunity Q4"
-        },
-        {
-          "icon": "🏨",
           "name": "The Leela Palace",
           "city": "Bangalore",
           "badge": "High Value",
-          "note": "Wellness Director actively seeking sound healing facilitators for weekend retreats"
-        },
-        {
-          "icon": "🏢",
-          "name": "TCS Innovation Campus",
-          "city": "Pune",
-          "badge": "Corporate",
-          "note": "HR team receptive to Yoga + Stress Management series — 200+ employee batch possible"
-        },
-        {
-          "icon": "🏢",
-          "name": "Infosys Mysore Campus",
-          "city": "Mysore",
-          "badge": "Corporate",
-          "note": "Large campus wellness budget, Ayush-aligned programs preferred by leadership"
-        },
-        {
-          "icon": "🏛️",
-          "name": "Ministry of AYUSH",
-          "city": "New Delhi",
-          "badge": "Govt",
-          "note": "National wellness missions seeking certified Yoga + Ayurveda practitioners for outreach"
-        },
-        {
-          "icon": "🏛️",
-          "name": "Indian Navy Wellness",
-          "city": "Mumbai",
-          "badge": "Govt",
-          "note": "Defence wellness programs — Yoga certification + therapeutic specialisation preferred"
+          "note": "Wellness Director actively seeking sound healing facilitators for weekend retreats — curated guest programme, strong corporate base"
         },
         {
           "icon": "🌴",
-          "name": "Ananda in the Himalayas",
-          "city": "Uttarakhand",
+          "name": "Novotel Hyderabad Convention",
+          "city": "Hyderabad",
           "badge": "High Value",
-          "note": "Premium retreat centre, 3-7 day Sound & Yoga immersions — ₹40K+ per retreat block"
-        },
-        {
-          "icon": "🏡",
-          "name": "Shreyas Retreat",
-          "city": "Bangalore",
-          "badge": "High Value",
-          "note": "Boutique luxury retreat, seeking resident facilitators for 2027 calendar"
+          "note": "Convention hotel hosting corporate wellness summits — seeking visiting yoga + sound healing facilitators for pre-conference sessions"
         },
         {
           "icon": "🏨",
           "name": "Address Beach Resort",
           "city": "Dubai",
           "badge": "High Value",
-          "note": "UAE expat wellness — South Asian diaspora market, strong demand for Nada Yoga"
+          "note": "UAE expat wellness hotspot — South Asian diaspora market, strong demand for Nada Yoga + therapeutic sessions, premium rates"
         },
         {
-          "icon": "🏢",
-          "name": "DIFC Wellness Hub",
-          "city": "Dubai",
-          "badge": "Corporate",
-          "note": "Corporate wellness contracts for Indian diaspora companies in Dubai financial district"
+          "icon": "🏨",
+          "name": "ITC Maratha",
+          "city": "Mumbai",
+          "badge": "High Value",
+          "note": "5-star corporate wellness host — in-residence teacher opportunity Q4 2026, sound healing weekend retreat format, premium pricing"
+        },
+        {
+          "icon": "🏛️",
+          "name": "Ministry of AYUSH",
+          "city": "New Delhi",
+          "badge": "Govt",
+          "note": "National wellness missions seeking certified Yoga + Ayurveda practitioners — Fit India schools programme expanding nationwide"
         },
         {
           "icon": "🏛️",
           "name": "Sattva London",
           "city": "London",
           "badge": "High Value",
-          "note": "South Asian yoga community, monthly sound bath series, visiting teacher program"
+          "note": "South Asian yoga community hub — monthly sound bath series, visiting teacher programme, strong British-Indian diaspora audience"
+        },
+        {
+          "icon": "🏋️",
+          "name": "Cult.fit Pune Studios",
+          "city": "Pune",
+          "badge": "High Reach",
+          "note": "Cult.fit onboarding speciality instructors — sound healing + therapeutic yoga, 15 Pune studios, immediate openings"
         },
         {
           "icon": "🌴",
-          "name": "Fivelements Bali",
-          "city": "Bali",
+          "name": "Ananda in the Himalayas",
+          "city": "Uttarakhand",
           "badge": "High Value",
-          "note": "Premium retreat venue, Ayurveda + sound healing — visiting teacher residency model"
+          "note": "Premium retreat centre — 3-7 day Sound + Nada Yoga immersions, visiting teacher residency model, ₹40K+ per retreat block"
         }
       ],
       "differentiation": [
@@ -1269,7 +922,8 @@
           "insight": "Sound healing + Yoga combined is the fastest-growing wellness category in UAE & Singapore expat markets — opportunity to lead retreats at 5-10x India rate",
           "tag": "Global Reach"
         }
-      ]
+      ],
+      "market_context": "European wellness centres are integrating Indian healing modalities at scale. Triyoga London, Yoga Vidya Germany and SHA Wellness Netherlands are actively seeking visiting Indian facilitators."
     },
     "wisdom": {
       "yoga_sutras": [
@@ -1380,442 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
-    },
-    "attendance": {
-      "cls_001_2026-08-04_rp_01": true,
-      "cls_001_2026-08-04_rp_02": true,
-      "cls_001_2026-08-04_rp_03": true,
-      "cls_001_2026-08-04_rp_04": true,
-      "cls_003_2026-08-04_rp_09": true,
-      "cls_003_2026-08-04_rp_10": true,
-      "cls_003_2026-08-04_rp_11": true,
-      "cls_003_2026-08-04_rp_12": true,
-      "cls_003_2026-08-04_rp_13": true,
-      "cls_003_2026-08-04_rp_14": true,
-      "cls_003_2026-08-04_rp_15": true,
-      "cls_003_2026-08-04_rp_16": true,
-      "cls_003_2026-08-04_rp_17": true,
-      "cls_001_2026-08-06_rp_01": true,
-      "cls_001_2026-08-06_rp_02": true,
-      "cls_001_2026-08-06_rp_03": true,
-      "cls_001_2026-08-06_rp_04": true,
-      "cls_003_2026-08-06_rp_09": true,
-      "cls_003_2026-08-06_rp_10": true,
-      "cls_003_2026-08-06_rp_11": true,
-      "cls_003_2026-08-06_rp_12": true,
-      "cls_003_2026-08-06_rp_13": true,
-      "cls_003_2026-08-06_rp_14": true,
-      "cls_003_2026-08-06_rp_15": true,
-      "cls_003_2026-08-06_rp_16": true,
-      "cls_003_2026-08-06_rp_17": true,
-      "cls_004_2026-08-06_rp_01": true,
-      "cls_004_2026-08-06_rp_02": true,
-      "cls_004_2026-08-06_rp_03": true,
-      "cls_004_2026-08-06_rp_04": true,
-      "cls_004_2026-08-06_b2449c02-5f82-4266-a4bd-541b01c6f3f5": true,
-      "cls_004_2026-08-06_545c665c-0645-40f1-8e5f-5653f81bf90b": true
-    },
-    "invoices": {},
-    "venues": [],
-    "week_overrides": {
-      "2026-W31-adhoc": [
-        {
-          "id": "fe1c2ca8-c891-46ab-b237-330c62ba2035",
-          "name": "TPT Dongle & Co Sound Meditation",
-          "type": "dropin",
-          "day": "Sunday",
-          "time": "09:00",
-          "venue": "TPT Dongle & Co",
-          "capacity": 1,
-          "enrolled": 0,
-          "rate_type": "dropin",
-          "rate": 750
-        }
-      ]
-    },
-    "venue_pipeline": [],
-    "wisdom_favourites": [],
-    "participants_by_class": {
-      "cls_001": [
-        {
-          "id": "rp_01",
-          "name": "Nikitha",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_02",
-          "name": "Bhuvana",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_03",
-          "name": "Ayantika",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_04",
-          "name": "Aditi G",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
-          "name": "Chaya P",
-          "plan": "monthly",
-          "rate": 2000,
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "545c665c-0645-40f1-8e5f-5653f81bf90b",
-          "name": "Shalini B",
-          "plan": "monthly",
-          "rate": 2000,
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_002": [
-        {
-          "id": "rp_05",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_07",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_06",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_08",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_003": [
-        {
-          "id": "rp_09",
-          "name": "Miraya",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_10",
-          "name": "Aarohi",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_11",
-          "name": "Reina",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_12",
-          "name": "Sahana",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_13",
-          "name": "Laya",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_14",
-          "name": "Mihika",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_15",
-          "name": "Varnika",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_16",
-          "name": "Dravid",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_17",
-          "name": "Prisha",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_18",
-          "name": "Diya",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_004": [
-        {
-          "id": "rp_01",
-          "name": "Nikitha",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_02",
-          "name": "Bhuvana",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_03",
-          "name": "Ayantika",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_04",
-          "name": "Aditi G",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
-          "name": "Chaya P",
-          "plan": "monthly",
-          "rate": 2000,
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "545c665c-0645-40f1-8e5f-5653f81bf90b",
-          "name": "Shalini B",
-          "plan": "monthly",
-          "rate": 2000,
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_005": [
-        {
-          "id": "rp_05",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_07",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_06",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_08",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "1c36c875-3e99-4cd8-b398-80dc7d385b0f": [
-        {
-          "id": "rp_05",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_07",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_06",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_08",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "3f96cb3e-1119-4aa1-8d6a-20b13cebfacb": [
-        {
-          "id": "rp_19",
-          "name": "Shirin",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_20",
-          "name": "Kunal",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "c0a6e4e5-a3ff-45cd-beea-235633927f83": [
-        {
-          "id": "rp_19",
-          "name": "Shirin",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_20",
-          "name": "Kunal",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "71097387-f3bb-47d3-8e28-e16fb628950b": [
-        {
-          "id": "rp_19",
-          "name": "Shirin",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "rp_20",
-          "name": "Kunal",
-          "plan": "monthly",
-          "sessions_total": null,
-          "sessions_attended": 0,
-          "rate": 0,
-          "invoice_status": "pending"
-        }
-      ]
+      "_featured_source": "upanishads"
     }
   },
-  "generated_at": "2026-08-04T00:00:21.285251+00:00"
+  "generated_at": "2026-08-06T00:00:09.860274+00:00"
 }
