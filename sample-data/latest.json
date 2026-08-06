@@ -153,6 +153,15 @@
         "invoice_status": "pending"
       },
       {
+        "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
+        "name": "Chaya P",
+        "plan": "monthly",
+        "rate": 2000,
+        "sessions_total": 8,
+        "sessions_attended": 0,
+        "invoice_status": "pending"
+      },
+      {
         "id": "rp_05",
         "name": "Priya N",
         "plan": "monthly",
@@ -1390,7 +1399,12 @@
       "cls_003_2026-08-06_rp_14": true,
       "cls_003_2026-08-06_rp_15": true,
       "cls_003_2026-08-06_rp_16": true,
-      "cls_003_2026-08-06_rp_17": true
+      "cls_003_2026-08-06_rp_17": true,
+      "cls_004_2026-08-06_rp_01": true,
+      "cls_004_2026-08-06_rp_02": true,
+      "cls_004_2026-08-06_rp_03": true,
+      "cls_004_2026-08-06_rp_04": true,
+      "cls_004_2026-08-06_b2449c02-5f82-4266-a4bd-541b01c6f3f5": true
     },
     "invoices": {},
     "venues": [],
@@ -1448,6 +1462,15 @@
           "sessions_total": null,
           "sessions_attended": 0,
           "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
+          "name": "Chaya P",
+          "plan": "monthly",
+          "rate": 2000,
+          "sessions_total": 8,
+          "sessions_attended": 0,
           "invoice_status": "pending"
         }
       ],
@@ -1616,6 +1639,15 @@
           "sessions_total": null,
           "sessions_attended": 0,
           "rate": 0,
+          "invoice_status": "pending"
+        },
+        {
+          "id": "b2449c02-5f82-4266-a4bd-541b01c6f3f5",
+          "name": "Chaya P",
+          "plan": "monthly",
+          "rate": 2000,
+          "sessions_total": 8,
+          "sessions_attended": 0,
           "invoice_status": "pending"
         }
       ],
