@@ -390,7 +390,7 @@ function seedLocalStorage(sections) {
   if (sections.week_overrides && !localStorage.getItem(LS.WEEK_OVERRIDES)) {
     lsSet(LS.WEEK_OVERRIDES, sections.week_overrides);
   }
-  if (sections.venue_pipeline && sections.venue_pipeline.length > 0 && !localStorage.getItem(LS.VENUE_PIPELINE)) {
+  if (sections.venue_pipeline && Object.keys(sections.venue_pipeline).length > 0 && !localStorage.getItem(LS.VENUE_PIPELINE)) {
     lsSet(LS.VENUE_PIPELINE, sections.venue_pipeline);
   }
   if (sections.wisdom_favourites && sections.wisdom_favourites.length > 0 && !localStorage.getItem(LS.WISDOM_FAVS)) {
@@ -463,16 +463,20 @@ function countExpectedSessions(classId, billingYYYYMM) {
 }
 
 // Returns the number of sessions a participant actually attended in a billing month for a class.
+// key format: classId_YYYY-MM-DD_participantId  (classId and participantId may contain underscores)
+// Strategy: find the ISO date segment (YYYY-MM-DD) using a regex, then check that the suffix
+// after the date equals the participantId and the prefix before the date contains the classId.
 function countAttendedSessions(participantId, classId, billingYYYYMM) {
   const rec = lsGet(LS.ATTENDANCE, {});
+  const datePattern = /^(.+)_(\d{4}-\d{2}-\d{2})_(.+)$/;
   return Object.entries(rec).filter(([key, present]) => {
     if (!present) return false;
-    // key: classId_YYYY-MM-DD_participantId
-    const parts = key.split('_');
-    if (parts.length < 3) return false;
-    const pid = parts[parts.length - 1];
-    const dateStr = parts[parts.length - 2];
-    return pid === participantId && dateStr.startsWith(billingYYYYMM);
+    const m = key.match(datePattern);
+    if (!m) return false;
+    const keyClassId = m[1];
+    const keyDate    = m[2];
+    const keyPid     = m[3];
+    return keyClassId === classId && keyPid === participantId && keyDate.startsWith(billingYYYYMM);
   }).length;
 }
 
@@ -892,10 +896,9 @@ function renderAttendance(participantsData) {
   const todayStr = today();
   const attendanceRecord = lsGet(LS.ATTENDANCE, {});
 
-  // Resolve billing month — default to NEXT calendar month so invoices are forward-looking
+  // Resolve billing month — default to CURRENT calendar month so attendance this month is reflected
   const now = new Date();
-  const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  const defaultBilling = `${nextMonth.getFullYear()}-${String(nextMonth.getMonth() + 1).padStart(2, '0')}`;
+  const defaultBilling = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
   const currentBilling = state.billingMonth || defaultBilling;
   const [billingYear, billingMonthNum] = currentBilling.split('-').map(Number);
 
