@@ -339,8 +339,9 @@ function seedLocalStorage(sections) {
     lsSet(LS.PARTICIPANTS, map);
   } else {
     // Restore from saved per-class map if available (saved by GitHubSync)
-    if (sections.participants_by_class && Object.keys(sections.participants_by_class).length > 0) {
-      // Full per-class map was saved — restore it directly, overwriting stale localStorage
+    // Only seed if localStorage has no participants yet — never overwrite live data
+    if (sections.participants_by_class && Object.keys(sections.participants_by_class).length > 0 && !rawP) {
+      // No existing localStorage data — seed from the saved JSON (first-time load)
       lsSet(LS.PARTICIPANTS, sections.participants_by_class);
     } else {
       // No per-class map — only seed classes that are truly empty (never touch existing)
