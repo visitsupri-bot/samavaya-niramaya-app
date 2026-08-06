@@ -20,6 +20,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -36,13 +37,20 @@ jobs:
       - name: Generate PWA icons
         run: python gen_icons.py
 
+      - name: Prepare deploy folder
+        run: |
+          mkdir -p _site
+          cp index.html style.css app.js manifest.json service-worker.js _site/
+          cp -r icons _site/icons
+          touch _site/.nojekyll
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
