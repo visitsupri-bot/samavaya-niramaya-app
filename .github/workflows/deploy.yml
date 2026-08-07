@@ -46,6 +46,12 @@ jobs:
       - name: Generate PWA icons
         run: python gen_icons.py
 
+      - name: Inject git SHA into service worker cache version
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          sed -i "s/__SHELL_VERSION__/${SHA}/g" service-worker.js
+          echo "Service worker cache version: sn-shell-${SHA}"
+
       - name: Prepare deploy folder
         run: |
           mkdir -p _site

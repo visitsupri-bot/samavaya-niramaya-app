@@ -4,8 +4,12 @@
 // change so the browser evicts the old shell cache and fetches fresh files.
 // Shell files use network-first so pushes to GitHub reflect immediately.
 
-const SHELL_CACHE = 'sn-shell-v2';
-const DATA_CACHE  = `sn-data-${new Date().toLocaleDateString('en-CA')}`;
+// SHELL_VERSION is replaced at deploy time by the CI workflow with the git SHA.
+// This ensures every deploy busts the shell cache automatically — no manual version bumps needed.
+const SHELL_CACHE = 'sn-shell-__SHELL_VERSION__';
+// Use ISO date (YYYY-MM-DD) derived from UTC to avoid timezone inconsistencies across devices
+const _today = new Date();
+const DATA_CACHE  = `sn-data-${_today.getUTCFullYear()}-${String(_today.getUTCMonth()+1).padStart(2,'0')}-${String(_today.getUTCDate()).padStart(2,'0')}`;
 
 const SHELL_FILES = [
   './',

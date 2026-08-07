@@ -164,6 +164,18 @@ async function commitToGitHub(pat) {
 
     // 1. Get current file SHA (required for updates)
     const shaRes = await fetch(apiUrl, { headers });
+    if (shaRes.status === 401) {
+      localStorage.removeItem(LS_PAT);
+      showSaveStatus('error', '❌ Token expired');
+      openPatModal(/* afterSave */ true);
+      console.warn('[GitHubSync] PAT expired or invalid — cleared. Please re-enter.');
+      return;
+    }
+    if (shaRes.status === 403) {
+      showSaveStatus('error', '❌ No permission');
+      alert('GitHub save failed: your token does not have write access to this repo.\nPlease create a new PAT with "Contents: Read and Write" permission.');
+      return;
+    }
     if (!shaRes.ok) throw new Error(`GitHub GET failed: ${shaRes.status} ${shaRes.statusText}`);
     const shaData = await shaRes.json();
     const currentSha = shaData.sha;
@@ -184,15 +196,25 @@ async function commitToGitHub(pat) {
         branch: GH_BRANCH,
       }),
     });
+    if (putRes.status === 409) {
+      // Conflict — another save happened concurrently; retry once with fresh SHA
+      showSaveStatus('error', '❌ Conflict — retry');
+      console.warn('[GitHubSync] 409 conflict — try saving again');
+      return;
+    }
     if (!putRes.ok) {
       const err = await putRes.json().catch(() => ({}));
-      throw new Error(`GitHub PUT failed: ${putRes.status} — ${err.message || putRes.statusText}`);
+      const msg = err.message || putRes.statusText;
+      showSaveStatus('error', `❌ ${putRes.status}`);
+      console.error(`[GitHubSync] Save failed (${putRes.status}): ${msg}`);
+      return;
     }
 
     showSaveStatus('saved');
     console.info('[GitHubSync] ✅ Saved to GitHub successfully');
   } catch (err) {
-    showSaveStatus('error', '❌ Error (see console)');
+    const isNetwork = err instanceof TypeError && err.message.includes('fetch');
+    showSaveStatus('error', isNetwork ? '❌ Offline' : '❌ Save failed');
     console.error('[GitHubSync] Save failed:', err);
   }
 }
