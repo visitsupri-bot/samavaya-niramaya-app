@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-07",
+  "date": "2026-08-08",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "grief_loss",
+      "featured_condition": "sinusitis",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "hatha_yoga_pradipika"
+      "_featured_source": "yoga_sutras"
     }
   },
-  "generated_at": "2026-08-07T00:00:11.791169+00:00"
+  "generated_at": "2026-08-08T00:00:11.885915+00:00"
 }
