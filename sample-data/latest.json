@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-08",
+  "date": "2026-08-09",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "sinusitis",
+      "featured_condition": "eye_strain",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-08-08T00:00:11.885915+00:00"
+  "generated_at": "2026-08-09T00:00:15.078680+00:00"
 }
