@@ -1,108 +1,73 @@
 {
-  "date": "2026-08-13",
+  "date": "2026-08-14",
   "sections": {
     "schedule": {
       "classes": [
         {
           "id": "cls_001",
-          "name": "Kids Yoga",
+          "name": "Morning Hatha",
           "day": "Monday",
-          "time": "09:00",
-          "venue": "TBD",
+          "time": "07:00",
+          "venue": "Ananda Studio, Pune",
           "type": "fixed",
-          "capacity": 15,
-          "enrolled": 9,
-          "rate": 1000
+          "capacity": 10,
+          "enrolled": 8,
+          "rate": 4800
         },
         {
           "id": "cls_002",
-          "name": "Morning Yoga",
-          "day": "Tuesday",
-          "time": "07:00",
-          "venue": "",
+          "name": "Evening Vinyasa",
+          "day": "Monday",
+          "time": "18:30",
+          "venue": "Skyflow Wellness, Pune",
           "type": "fixed",
-          "capacity": 10,
-          "enrolled": 6,
-          "rate": 2000
+          "capacity": 12,
+          "enrolled": 9,
+          "rate": 5200
         },
         {
           "id": "cls_003",
-          "name": "Morning Yoga",
-          "day": "Thursday",
-          "time": "07:00",
-          "venue": "",
-          "type": "fixed",
-          "capacity": 10,
-          "enrolled": 6,
-          "rate": 2000
+          "name": "Yin Yoga",
+          "day": "Wednesday",
+          "time": "19:00",
+          "venue": "Ananda Studio, Pune",
+          "type": "dropin",
+          "capacity": 8,
+          "enrolled": 5,
+          "rate": 800
         },
         {
           "id": "cls_004",
-          "name": "Evening Yoga Wednesday",
-          "day": "Wednesday",
-          "time": "18:00",
-          "venue": "",
+          "name": "Pranayama & Meditation",
+          "day": "Thursday",
+          "time": "06:30",
+          "venue": "Online (Zoom)",
           "type": "fixed",
-          "capacity": 10,
-          "enrolled": 4,
+          "capacity": 20,
+          "enrolled": 14,
           "rate": 2500
         },
         {
           "id": "cls_005",
-          "name": "Evening Yoga Thursday",
-          "day": "Thursday",
-          "time": "18:00",
-          "venue": "",
-          "type": "fixed",
-          "capacity": 10,
-          "enrolled": 4,
-          "rate": 2500
+          "name": "Weekend Warriors Flow",
+          "day": "Saturday",
+          "time": "08:00",
+          "venue": "Terrace Garden, Koregaon Park",
+          "type": "dropin",
+          "capacity": 15,
+          "enrolled": 11,
+          "rate": 600
         },
         {
           "id": "cls_006",
-          "name": "Evening Yoga Friday",
-          "day": "Friday",
-          "time": "18:00",
-          "venue": "",
-          "type": "fixed",
-          "capacity": 10,
-          "enrolled": 4,
-          "rate": 2500
-        },
-        {
-          "id": "cls_007",
-          "name": "Personal Yoga",
-          "day": "Monday",
-          "time": "07:00",
-          "venue": "",
-          "type": "fixed",
-          "capacity": 5,
-          "enrolled": 2,
-          "rate": 10000
-        },
-        {
-          "id": "57b6a4b0-8b64-4ec1-a347-6751f88505f0",
-          "name": "Personal Yoga",
-          "type": "fixed",
-          "day": "Wednesday",
-          "time": "07:40",
-          "venue": "Kaggadaspura",
-          "capacity": 12,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 10000
-        },
-        {
-          "id": "ab696628-f422-4710-9ac2-6d5791c9f8a1",
-          "name": "Personal Yoga",
-          "type": "fixed",
-          "day": "Friday",
-          "time": "07:40",
-          "venue": "Kaggadaspura",
-          "capacity": 12,
-          "enrolled": 0,
-          "rate_type": "monthly",
-          "rate": 10000
+          "name": "Sound Bath + Yoga Nidra",
+          "day": "Sunday",
+          "time": "10:00",
+          "venue": "Ananda Studio, Pune",
+          "type": "event",
+          "capacity": 20,
+          "enrolled": 18,
+          "rate": 1200
         }
       ],
       "week_theme": "Sthira Sukham Asanam — Stability & Ease",
@@ -116,191 +81,65 @@
     "participants": [
       {
         "id": "par_001",
-        "name": "Miraya",
+        "name": "Ananya S.",
         "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
+        "sessions_total": 12,
+        "sessions_attended": 11,
+        "rate": 4800,
+        "invoice_status": "paid"
       },
       {
         "id": "par_002",
-        "name": "Aarohi",
+        "name": "Rohan M.",
         "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
+        "sessions_total": 8,
+        "sessions_attended": 7,
+        "rate": 4200,
         "invoice_status": "pending"
       },
       {
         "id": "par_003",
-        "name": "Laya",
-        "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
+        "name": "Priya K.",
+        "plan": "dropin",
+        "sessions_total": null,
+        "sessions_attended": 3,
+        "rate": 800,
+        "invoice_status": "paid"
       },
       {
         "id": "par_004",
-        "name": "Sahana",
+        "name": "Vijay T.",
         "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
+        "sessions_total": 12,
+        "sessions_attended": 10,
+        "rate": 4800,
         "invoice_status": "pending"
       },
       {
         "id": "par_005",
-        "name": "Reina",
-        "plan": "monthly",
-        "sessions_total": 4,
+        "name": "Meera L.",
+        "plan": "event",
+        "sessions_total": 1,
         "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
+        "rate": 1500,
+        "invoice_status": "draft"
       },
       {
         "id": "par_006",
-        "name": "Prisha",
+        "name": "Aditya R.",
         "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
+        "sessions_total": 8,
+        "sessions_attended": 8,
+        "rate": 4200,
+        "invoice_status": "paid"
       },
       {
         "id": "par_007",
-        "name": "Varnika",
-        "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_008",
-        "name": "Dravid",
-        "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_009",
-        "name": "Diya",
-        "plan": "monthly",
-        "sessions_total": 4,
-        "sessions_attended": 0,
-        "rate": 1000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_010",
-        "name": "Nikitha",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_011",
-        "name": "Bhuvana",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_012",
-        "name": "Ayantika",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_013",
-        "name": "Aditi",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_014",
-        "name": "Shalini",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_015",
-        "name": "Chaya",
-        "plan": "monthly",
-        "sessions_total": 8,
-        "sessions_attended": 0,
-        "rate": 2000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_016",
-        "name": "Janani",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 2500,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_017",
-        "name": "Priya N",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 2500,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_018",
-        "name": "Sreedevi P",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 2500,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_019",
-        "name": "Sunanda",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 2500,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_020",
-        "name": "Shirin",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 10000,
-        "invoice_status": "pending"
-      },
-      {
-        "id": "par_021",
-        "name": "Kunal",
-        "plan": "monthly",
-        "sessions_total": 12,
-        "sessions_attended": 0,
-        "rate": 10000,
+        "name": "Sunita P.",
+        "plan": "dropin",
+        "sessions_total": null,
+        "sessions_attended": 1,
+        "rate": 800,
         "invoice_status": "pending"
       }
     ],
@@ -383,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "anxiety",
+      "featured_condition": "insomnia",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -966,12 +805,12 @@
       "market_headline": "Sound healing + yoga fusion is the fastest-growing wellness category across Indian metros",
       "trend_data": {
         "youtube_count": 26,
-        "trends_count": 0
+        "trends_count": 3
       },
       "trends": [
         {
           "platform": "YouTube India",
-          "headline": "10 videos found for 'Sound Bath Meditation' — viewer demand is upward on YouTube India",
+          "headline": "10 videos found for 'Sound Bath Meditation' — viewer demand is stable on YouTube India",
           "hashtags": [
             "#SoundBathMeditation",
             "#TibetanSingingBowls"
@@ -980,32 +819,32 @@
         },
         {
           "platform": "YouTube — Nada Yoga Sound",
-          "headline": "10 videos found for 'Nada Yoga Sound' — upward demand on YouTube India",
+          "headline": "10 videos found for 'Nada Yoga Sound' — stable demand on YouTube India",
           "hashtags": [
             "#NadaYogaSound",
             "#CrystalBowlsSound"
           ],
-          "opportunity": "Sound healing for children is an emerging niche on YouTube India — Nada Yoga Sound content has virtually no Indian competition while parent search demand is upward."
+          "opportunity": "Sound healing for children is an emerging niche on YouTube India — Nada Yoga Sound content has virtually no Indian competition while parent search demand is stable."
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Sound Bath Reels' Reels are upward — 6 videos confirm short-form demand",
+          "headline": "Instagram India: 'Sound Bath Reels' Reels are stable — 6 videos confirm short-form demand",
           "hashtags": [
             "#Soundhealing",
             "#Singingbowlstherapy",
             "#Soundbathnearme"
           ],
-          "opportunity": "Sound bath Reels on Sound Bath Reels are upward on Instagram India — short clips of crystal bowl sessions routinely reach 100K+ organic impressions with zero ad spend."
+          "opportunity": "Sound bath Reels on Sound Bath Reels are stable on Instagram India — short clips of crystal bowl sessions routinely reach 100K+ organic impressions with zero ad spend."
         },
         {
           "platform": "Google Trends India",
-          "headline": "India searches for 'sound healing' · 'singing bowls therapy' · 'sound bath near me' are upward — niche demand outpacing generic wellness content",
+          "headline": "'Sound Healing' searches are stable in India — peak 100/100, avg 12/100 this week",
           "hashtags": [
             "#Soundhealing",
             "#Singingbowlstherapy",
             "#Soundbathnearme"
           ],
-          "opportunity": "Search interest in Sound Bath Meditation is moving upward across India — virtually no practitioner in Tier-1 cities offering weekly public sound baths at accessible price points."
+          "opportunity": "Search interest in Sound Healing is moving stable across India — virtually no practitioner in Tier-1 cities offering weekly public sound baths at accessible price points."
         }
       ],
       "venues": [
@@ -1195,423 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "bhagavad_gita"
-    },
-    "participants_by_class": {
-      "cls_001": [
-        {
-          "id": "par_001",
-          "name": "Miraya",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_002",
-          "name": "Aarohi",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_003",
-          "name": "Laya",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_004",
-          "name": "Sahana",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_005",
-          "name": "Reina",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_006",
-          "name": "Prisha",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_007",
-          "name": "Varnika",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_008",
-          "name": "Dravid",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_009",
-          "name": "Diya",
-          "plan": "monthly",
-          "sessions_total": 4,
-          "sessions_attended": 0,
-          "rate": 1000,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_002": [
-        {
-          "id": "par_010",
-          "name": "Nikitha",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_011",
-          "name": "Bhuvana",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_012",
-          "name": "Ayantika",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_013",
-          "name": "Aditi",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_014",
-          "name": "Shalini",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_015",
-          "name": "Chaya",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_003": [
-        {
-          "id": "par_010",
-          "name": "Nikitha",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_011",
-          "name": "Bhuvana",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_012",
-          "name": "Ayantika",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_013",
-          "name": "Aditi",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_014",
-          "name": "Shalini",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_015",
-          "name": "Chaya",
-          "plan": "monthly",
-          "sessions_total": 8,
-          "sessions_attended": 0,
-          "rate": 2000,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_004": [
-        {
-          "id": "par_016",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_017",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_018",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_019",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_005": [
-        {
-          "id": "par_016",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_017",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_018",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_019",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_006": [
-        {
-          "id": "par_016",
-          "name": "Janani",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_017",
-          "name": "Priya N",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_018",
-          "name": "Sreedevi P",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_019",
-          "name": "Sunanda",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 2500,
-          "invoice_status": "pending"
-        }
-      ],
-      "cls_007": [
-        {
-          "id": "par_020",
-          "name": "Shirin",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 10000,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_021",
-          "name": "Kunal",
-          "plan": "monthly",
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "rate": 10000,
-          "invoice_status": "pending"
-        }
-      ],
-      "57b6a4b0-8b64-4ec1-a347-6751f88505f0": [
-        {
-          "id": "par_020",
-          "name": "Shirin",
-          "plan": "monthly",
-          "rate": 10000,
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_021",
-          "name": "Kunal",
-          "plan": "monthly",
-          "rate": 10000,
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        }
-      ],
-      "ab696628-f422-4710-9ac2-6d5791c9f8a1": [
-        {
-          "id": "par_020",
-          "name": "Shirin",
-          "plan": "monthly",
-          "rate": 10000,
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        },
-        {
-          "id": "par_021",
-          "name": "Kunal",
-          "plan": "monthly",
-          "rate": 10000,
-          "sessions_total": 12,
-          "sessions_attended": 0,
-          "invoice_status": "pending"
-        }
-      ]
-    },
-    "attendance": {
-      "cls_001_2026-08-06_par_001": true,
-      "cls_001_2026-08-06_par_002": true,
-      "cls_001_2026-08-06_par_003": true,
-      "cls_001_2026-08-06_par_004": true,
-      "cls_001_2026-08-06_par_005": true,
-      "cls_001_2026-08-06_par_006": true,
-      "cls_001_2026-08-06_par_007": true,
-      "cls_001_2026-08-06_par_008": true,
-      "cls_001_2026-08-06_par_009": false,
-      "cls_002_2026-08-06_par_010": true,
-      "cls_002_2026-08-06_par_011": true,
-      "cls_002_2026-08-06_par_012": true,
-      "cls_002_2026-08-06_par_013": true,
-      "cls_003_2026-08-06_par_010": true,
-      "cls_003_2026-08-06_par_011": true,
-      "cls_003_2026-08-06_par_012": true,
-      "cls_003_2026-08-06_par_013": true,
-      "cls_003_2026-08-06_par_014": true,
-      "cls_003_2026-08-06_par_015": true,
-      "cls_001_2026-08-10_par_001": true,
-      "cls_001_2026-08-10_par_002": true,
-      "cls_001_2026-08-10_par_005": true,
-      "cls_001_2026-08-10_par_006": true,
-      "cls_001_2026-08-10_par_007": true,
-      "cls_001_2026-08-10_par_008": true,
-      "cls_001_2026-08-10_par_009": true,
-      "cls_002_2026-08-11_par_010": true,
-      "cls_002_2026-08-11_par_013": true,
-      "cls_002_2026-08-11_par_014": true,
-      "cls_002_2026-08-11_par_015": true,
-      "cls_003_2026-08-13_par_010": true,
-      "cls_003_2026-08-13_par_013": true,
-      "cls_003_2026-08-13_par_014": true,
-      "cls_005_2026-08-13_par_016": true,
-      "cls_005_2026-08-13_par_017": true,
-      "cls_005_2026-08-13_par_018": true,
-      "cls_005_2026-08-13_par_019": true
-    },
-    "invoices": {},
-    "venues": [],
-    "week_overrides": {},
-    "venue_pipeline": [],
-    "wisdom_favourites": []
+      "_featured_source": "upanishads"
+    }
   },
-  "generated_at": "2026-08-13T00:00:16.054220+00:00"
+  "generated_at": "2026-08-14T00:00:11.237965+00:00"
 }
