@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-18",
+  "date": "2026-08-19",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "fatigue",
+      "featured_condition": "knee_pain",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -805,12 +805,12 @@
       "market_headline": "Sound healing + yoga fusion is the fastest-growing wellness category across Indian metros",
       "trend_data": {
         "youtube_count": 26,
-        "trends_count": 3
+        "trends_count": 0
       },
       "trends": [
         {
           "platform": "YouTube India",
-          "headline": "10 videos found for 'Sound Bath Meditation' — viewer demand is stable on YouTube India",
+          "headline": "10 videos found for 'Sound Bath Meditation' — viewer demand is upward on YouTube India",
           "hashtags": [
             "#SoundBathMeditation",
             "#TibetanSingingBowls"
@@ -819,32 +819,32 @@
         },
         {
           "platform": "YouTube — Nada Yoga Sound",
-          "headline": "10 videos found for 'Nada Yoga Sound' — stable demand on YouTube India",
+          "headline": "10 videos found for 'Nada Yoga Sound' — upward demand on YouTube India",
           "hashtags": [
             "#NadaYogaSound",
             "#CrystalBowlsSound"
           ],
-          "opportunity": "Sound healing for children is an emerging niche on YouTube India — Nada Yoga Sound content has virtually no Indian competition while parent search demand is stable."
+          "opportunity": "Sound healing for children is an emerging niche on YouTube India — Nada Yoga Sound content has virtually no Indian competition while parent search demand is upward."
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Sound Bath Reels' Reels are stable — 6 videos confirm short-form demand",
+          "headline": "Instagram India: 'Sound Bath Reels' Reels are upward — 6 videos confirm short-form demand",
           "hashtags": [
             "#Soundhealing",
             "#Singingbowlstherapy",
             "#Soundbathnearme"
           ],
-          "opportunity": "Sound bath Reels on Sound Bath Reels are stable on Instagram India — short clips of crystal bowl sessions routinely reach 100K+ organic impressions with zero ad spend."
+          "opportunity": "Sound bath Reels on Sound Bath Reels are upward on Instagram India — short clips of crystal bowl sessions routinely reach 100K+ organic impressions with zero ad spend."
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Sound Healing' searches are stable in India — peak 100/100, avg 4/100 this week",
+          "headline": "India searches for 'sound healing' · 'singing bowls therapy' · 'sound bath near me' are upward — niche demand outpacing generic wellness content",
           "hashtags": [
             "#Soundhealing",
             "#Singingbowlstherapy",
             "#Soundbathnearme"
           ],
-          "opportunity": "Search interest in Sound Healing is moving stable across India — virtually no practitioner in Tier-1 cities offering weekly public sound baths at accessible price points."
+          "opportunity": "Search interest in Sound Bath Meditation is moving upward across India — virtually no practitioner in Tier-1 cities offering weekly public sound baths at accessible price points."
         }
       ],
       "venues": [
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "upanishads"
+      "_featured_source": "hatha_yoga_pradipika"
     }
   },
-  "generated_at": "2026-08-18T00:00:16.214879+00:00"
+  "generated_at": "2026-08-19T00:00:13.503101+00:00"
 }
