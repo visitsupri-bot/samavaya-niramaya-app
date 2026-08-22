@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-21",
+  "date": "2026-08-22",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "grief_loss",
+      "featured_condition": "sinusitis",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1033,8 +1033,8 @@
           ]
         }
       ],
-      "_featured_source": "bhagavad_gita"
+      "_featured_source": "upanishads"
     }
   },
-  "generated_at": "2026-08-21T00:00:18.909620+00:00"
+  "generated_at": "2026-08-22T00:00:13.828504+00:00"
 }
