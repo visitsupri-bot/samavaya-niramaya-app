@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-22",
+  "date": "2026-08-23",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "sinusitis",
+      "featured_condition": "eye_strain",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -804,7 +804,7 @@
     "opportunity": {
       "market_headline": "Corporate wellness budgets up 22% in FY27 — structured yoga programmes in high demand",
       "trend_data": {
-        "youtube_count": 29,
+        "youtube_count": 30,
         "trends_count": 0
       },
       "trends": [
@@ -827,7 +827,7 @@
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Corporate Wellness Yoga' Reels are upward — 9 videos confirm short-form demand",
+          "headline": "Instagram India: 'Corporate Wellness Yoga' Reels are upward — 10 videos confirm short-form demand",
           "hashtags": [
             "#Corporatewellnesspro",
             "#Employeewellnessindi",
@@ -1033,8 +1033,8 @@
           ]
         }
       ],
-      "_featured_source": "upanishads"
+      "_featured_source": "hatha_yoga_pradipika"
     }
   },
-  "generated_at": "2026-08-22T00:00:13.828504+00:00"
+  "generated_at": "2026-08-23T00:00:11.380405+00:00"
 }
