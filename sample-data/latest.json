@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-23",
+  "date": "2026-08-24",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "eye_strain",
+      "featured_condition": "frozen_shoulder",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -804,13 +804,13 @@
     "opportunity": {
       "market_headline": "Corporate wellness budgets up 22% in FY27 — structured yoga programmes in high demand",
       "trend_data": {
-        "youtube_count": 30,
-        "trends_count": 0
+        "youtube_count": 27,
+        "trends_count": 3
       },
       "trends": [
         {
           "platform": "YouTube India",
-          "headline": "10 videos found for 'Corporate Yoga Office' — viewer demand is upward on YouTube India",
+          "headline": "10 videos found for 'Corporate Yoga Office' — viewer demand is stable on YouTube India",
           "hashtags": [
             "#CorporateYogaOffice",
             "#DeskYogaStretches"
@@ -819,31 +819,31 @@
         },
         {
           "platform": "YouTube — Mindfulness Stress Management",
-          "headline": "10 videos found for 'Mindfulness Stress Management' — upward demand on YouTube India",
+          "headline": "7 videos found for 'Mindfulness Stress Management' — stable demand on YouTube India",
           "hashtags": [
             "#EmployeeWellnessProgram"
           ],
-          "opportunity": "Workplace sound meditation content is upward — companies are booking group sound bath sessions as team wellness activities, with Mindfulness Stress Management content driving discovery."
+          "opportunity": "Workplace sound meditation content is stable — companies are booking group sound bath sessions as team wellness activities, with Mindfulness Stress Management content driving discovery."
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Corporate Wellness Yoga' Reels are upward — 10 videos confirm short-form demand",
+          "headline": "Instagram India: 'Corporate Wellness Yoga' Reels are stable — 10 videos confirm short-form demand",
           "hashtags": [
             "#Corporatewellnesspro",
             "#Employeewellnessindi",
             "#Workplacemindfulness"
           ],
-          "opportunity": "Corporate wellness Reels on Corporate Wellness Yoga are upward — HR professionals follow workplace wellness accounts and actively share content internally, creating viral discovery loops."
+          "opportunity": "Corporate wellness Reels on Corporate Wellness Yoga are stable — HR professionals follow workplace wellness accounts and actively share content internally, creating viral discovery loops."
         },
         {
           "platform": "Google Trends India",
-          "headline": "India searches for 'corporate wellness program India' · 'employee wellness India' · 'workplace mindfulness' are upward — niche demand outpacing generic wellness content",
+          "headline": "'Corporate Wellness Program India' searches are stable in India — peak 25/100, avg 0/100 this week",
           "hashtags": [
             "#Corporatewellnesspro",
             "#Employeewellnessindi",
             "#Workplacemindfulness"
           ],
-          "opportunity": "HR teams are searching upward for Corporate Yoga Office — Q4 budget cycles drive spike in corporate wellness procurement. Long-term contracts available with structured proposals."
+          "opportunity": "HR teams are searching stable for Corporate Wellness Program India — Q4 budget cycles drive spike in corporate wellness procurement. Long-term contracts available with structured proposals."
         }
       ],
       "venues": [
@@ -1033,8 +1033,8 @@
           ]
         }
       ],
-      "_featured_source": "hatha_yoga_pradipika"
+      "_featured_source": "yoga_sutras"
     }
   },
-  "generated_at": "2026-08-23T00:00:11.380405+00:00"
+  "generated_at": "2026-08-24T00:00:16.408974+00:00"
 }
