@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-27",
+  "date": "2026-08-28",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "anxiety",
+      "featured_condition": "insomnia",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -805,12 +805,12 @@
       "market_headline": "Therapeutic yoga for anxiety, PCOS and back pain — condition-specific demand exploding",
       "trend_data": {
         "youtube_count": 36,
-        "trends_count": 0
+        "trends_count": 5
       },
       "trends": [
         {
           "platform": "YouTube India",
-          "headline": "10 videos found for 'Yoga Anxiety Stress' — viewer demand is upward on YouTube India",
+          "headline": "10 videos found for 'Yoga Anxiety Stress' — viewer demand is stable on YouTube India",
           "hashtags": [
             "#YogaAnxietyStress",
             "#KidsYogaFun"
@@ -819,16 +819,16 @@
         },
         {
           "platform": "YouTube — Sound Bath Meditation",
-          "headline": "10 videos found for 'Sound Bath Meditation' — upward demand on YouTube India",
+          "headline": "10 videos found for 'Sound Bath Meditation' — stable demand on YouTube India",
           "hashtags": [
             "#SoundBathMeditation",
             "#TherapeuticYogaBack"
           ],
-          "opportunity": "Kids yoga and sound healing content is upward on YouTube — Sound Bath Meditation videos are underserved in India. Parents actively search for structured kids wellness content; sound bath sessions average 85% watch-through vs 40% for generic content."
+          "opportunity": "Kids yoga and sound healing content is stable on YouTube — Sound Bath Meditation videos are underserved in India. Parents actively search for structured kids wellness content; sound bath sessions average 85% watch-through vs 40% for generic content."
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are upward — 16 videos confirm short-form demand",
+          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 16 videos confirm short-form demand",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -836,11 +836,11 @@
             "#Therapeuticyogaindia",
             "#Yoganidrabenefits"
           ],
-          "opportunity": "Instagram Reels on Yoga Shorts Reels are upward — short-form yoga and sound healing content is driving discovery for Indian wellness practitioners. Hashtag reach for niche therapeutic content outperforms generic yoga 3:1 in India."
+          "opportunity": "Instagram Reels on Yoga Shorts Reels are stable — short-form yoga and sound healing content is driving discovery for Indian wellness practitioners. Hashtag reach for niche therapeutic content outperforms generic yoga 3:1 in India."
         },
         {
           "platform": "Google Trends India",
-          "headline": "India searches for 'yoga for anxiety' · 'sound healing near me' · 'kids yoga classes' are upward — niche demand outpacing generic wellness content",
+          "headline": "'Yoga For Anxiety' searches are stable in India — peak 72/100, avg 0/100 this week",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -848,7 +848,7 @@
             "#Therapeuticyogaindia",
             "#Yoganidrabenefits"
           ],
-          "opportunity": "Search demand for Yoga Anxiety Stress is upward across India — Tier-1 cities leading, Tier-2 cities catching up fast. Condition-specific yoga commands strong pricing power vs. generic classes."
+          "opportunity": "Search demand for Yoga For Anxiety is stable across India — Tier-1 cities leading, Tier-2 cities catching up fast. Condition-specific yoga commands strong pricing power vs. generic classes."
         }
       ],
       "venues": [
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "hatha_yoga_pradipika"
+      "_featured_source": "yoga_sutras"
     }
   },
-  "generated_at": "2026-08-27T00:00:11.300255+00:00"
+  "generated_at": "2026-08-28T00:00:11.047509+00:00"
 }
