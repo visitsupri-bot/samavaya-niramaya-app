@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-29",
+  "date": "2026-08-30",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "digestive_issues",
+      "featured_condition": "migraine",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -804,7 +804,7 @@
     "opportunity": {
       "market_headline": "Therapeutic yoga for anxiety, PCOS and back pain — condition-specific demand exploding",
       "trend_data": {
-        "youtube_count": 36,
+        "youtube_count": 37,
         "trends_count": 5
       },
       "trends": [
@@ -828,7 +828,7 @@
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 16 videos confirm short-form demand",
+          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 17 videos confirm short-form demand",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "bhagavad_gita"
+      "_featured_source": "upanishads"
     }
   },
-  "generated_at": "2026-08-29T00:00:14.013945+00:00"
+  "generated_at": "2026-08-30T00:00:15.365603+00:00"
 }
