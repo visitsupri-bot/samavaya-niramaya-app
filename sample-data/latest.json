@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-30",
+  "date": "2026-08-31",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "migraine",
+      "featured_condition": "hypertension",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "upanishads"
+      "_featured_source": "hatha_yoga_pradipika"
     }
   },
-  "generated_at": "2026-08-30T00:00:15.365603+00:00"
+  "generated_at": "2026-08-31T00:00:15.810725+00:00"
 }
