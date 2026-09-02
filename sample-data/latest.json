@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "fatigue",
+      "featured_condition": "knee_pain",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-09-01T00:00:13.510504+00:00"
+  "generated_at": "2026-09-02T00:00:15.037808+00:00"
 }
