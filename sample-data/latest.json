@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-04",
+  "date": "2026-09-05",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "grief_loss",
+      "featured_condition": "sinusitis",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -838,7 +838,7 @@
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Yoga Retreat India' searches are stable in India — peak 100/100, avg 1/100 this week",
+          "headline": "'Yoga Retreat India' searches are stable in India — peak 0/100, avg 0/100 this week",
           "hashtags": [
             "#Yogaretreatindia",
             "#Luxurywellnessretrea",
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "hatha_yoga_pradipika"
+      "_featured_source": "yoga_sutras"
     }
   },
-  "generated_at": "2026-09-04T00:00:13.085776+00:00"
+  "generated_at": "2026-09-05T00:00:12.176199+00:00"
 }
