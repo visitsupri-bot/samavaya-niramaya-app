@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-09",
+  "date": "2026-09-10",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "lower_back_pain",
+      "featured_condition": "anxiety",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -802,65 +802,69 @@
       }
     },
     "opportunity": {
-      "market_headline": "Luxury wellness retreats seeking resident Indian yoga teachers — premium rates available",
+      "market_headline": "Kids yoga demand surging — schools and parents seeking certified structured programmes",
       "trend_data": {
-        "youtube_count": 27,
-        "trends_count": 3
+        "youtube_count": 38,
+        "trends_count": 5
       },
       "trends": [
         {
           "platform": "YouTube India",
-          "headline": "10 videos found for 'Luxury Yoga Retreat' — viewer demand is stable on YouTube India",
+          "headline": "10 videos found for 'Yoga Anxiety Stress' — viewer demand is stable on YouTube India",
           "hashtags": [
-            "#LuxuryYogaRetreat",
-            "#WellnessRetreatRishikesh"
+            "#YogaAnxietyStress",
+            "#KidsYogaFun"
           ],
-          "opportunity": "Properties in Thailand, Bali, UAE and Europe are actively recruiting visiting facilitators for 2026-27 calendars. Indian lineage yoga + Nada Yoga commands premium rates in international markets."
+          "opportunity": "After-school wellness programmes featuring yoga and mindfulness are being adopted by international schools across Pune, Bangalore and Mumbai. Exam-season demand spikes Feb-Mar and Oct-Nov."
         },
         {
-          "platform": "YouTube — Ayurveda Retreat Kerala",
-          "headline": "10 videos found for 'Ayurveda Retreat Kerala' — stable demand on YouTube India",
+          "platform": "YouTube — Sound Bath Meditation",
+          "headline": "10 videos found for 'Sound Bath Meditation' — stable demand on YouTube India",
           "hashtags": [
-            "#AyurvedaRetreatKerala",
-            "#SilentRetreatMeditation"
+            "#SoundBathMeditation",
+            "#TherapeuticYogaBack"
           ],
-          "opportunity": "Family wellness retreat content featuring kids yoga and sound healing is stable — an underserved segment that commands premium pricing as parents seek holistic family experiences."
+          "opportunity": "Kids yoga and sound healing content is stable on YouTube — Sound Bath Meditation videos are underserved in India. Parents actively search for structured kids wellness content; sound bath sessions average 85% watch-through vs 40% for generic content."
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Luxury Wellness Retreat' Reels are stable — 7 videos confirm short-form demand",
+          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 18 videos confirm short-form demand",
           "hashtags": [
-            "#Yogaretreatindia",
-            "#Luxurywellnessretrea",
-            "#Ayurvedaretreat"
+            "#Yogaforanxiety",
+            "#Soundhealingnearme",
+            "#Kidsyogaclasses",
+            "#Therapeuticyogaindia",
+            "#Yoganidrabenefits"
           ],
-          "opportunity": "Retreat Reels on Luxury Wellness Retreat are stable — aspirational wellness content drives bookings directly from Instagram discovery, with retreat properties actively seeking visiting teachers to co-create content."
+          "opportunity": "Instagram Reels on Yoga Shorts Reels are stable — short-form yoga and sound healing content is driving discovery for Indian wellness practitioners. Hashtag reach for niche therapeutic content outperforms generic yoga 3:1 in India."
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Yoga Retreat India' searches are stable in India — peak 100/100, avg 0/100 this week",
+          "headline": "'Yoga For Anxiety' searches are stable in India — peak 100/100, avg 0/100 this week",
           "hashtags": [
-            "#Yogaretreatindia",
-            "#Luxurywellnessretrea",
-            "#Ayurvedaretreat"
+            "#Yogaforanxiety",
+            "#Soundhealingnearme",
+            "#Kidsyogaclasses",
+            "#Therapeuticyogaindia",
+            "#Yoganidrabenefits"
           ],
-          "opportunity": "Yoga Retreat India searches are stable — premium retreat seekers researching 3-7 day immersions are willing to pay ₹40,000+ per block. Sound healing + yoga fusion commands the highest per-night rates."
+          "opportunity": "Search demand for Yoga For Anxiety is stable across India — Tier-1 cities leading, Tier-2 cities catching up fast. Condition-specific yoga commands strong pricing power vs. generic classes."
         }
       ],
       "venues": [
         {
-          "icon": "🏡",
-          "name": "Shreyas Retreat",
+          "icon": "🏨",
+          "name": "The Leela Palace",
           "city": "Bangalore",
           "badge": "High Value",
-          "note": "Boutique luxury retreat seeking resident facilitators for 2027 calendar — Nada Yoga + Ayurvedic yoga sequences preferred"
+          "note": "Wellness Director actively seeking sound healing facilitators for weekend retreats — curated guest programme, strong corporate base"
         },
         {
-          "icon": "🌿",
-          "name": "Swaswara by CGH Earth",
-          "city": "Gokarna",
-          "badge": "High Value",
-          "note": "Ayurveda + yoga retreat on Karnataka coast — resident facilitator opportunity 2026-27, specialised therapeutic sequences valued"
+          "icon": "🏥",
+          "name": "Apollo Hospitals Wellness",
+          "city": "Chennai",
+          "badge": "Therapeutic",
+          "note": "Apollo integrative health expanding yoga therapy referral network — PCOS, cardiac rehab, oncology support specialisations in demand"
         },
         {
           "icon": "🏨",
@@ -871,17 +875,17 @@
         },
         {
           "icon": "🌴",
-          "name": "Ananda in the Himalayas",
-          "city": "Uttarakhand",
+          "name": "Novotel Hyderabad Convention",
+          "city": "Hyderabad",
           "badge": "High Value",
-          "note": "Premium retreat centre — 3-7 day Sound + Nada Yoga immersions, visiting teacher residency model, ₹40K+ per retreat block"
+          "note": "Convention hotel hosting corporate wellness summits — seeking visiting yoga + sound healing facilitators for pre-conference sessions"
         },
         {
           "icon": "🏨",
-          "name": "The Oberoi New Delhi",
-          "city": "New Delhi",
+          "name": "ITC Maratha",
+          "city": "Mumbai",
           "badge": "High Value",
-          "note": "Luxury property seeking resident yoga + sound healing facilitator — diplomatic and corporate guest clientele, premium rate structure"
+          "note": "5-star corporate wellness host — in-residence teacher opportunity Q4 2026, sound healing weekend retreat format, premium pricing"
         },
         {
           "icon": "🏛️",
@@ -891,18 +895,18 @@
           "note": "South Asian yoga community hub — monthly sound bath series, visiting teacher programme, strong British-Indian diaspora audience"
         },
         {
-          "icon": "🌴",
-          "name": "Kamalaya Koh Samui",
-          "city": "Koh Samui",
-          "badge": "High Value",
-          "note": "Asia's top wellness retreat — visiting facilitator programme for Nada Yoga + sound healing, international premium guest base"
+          "icon": "🏛️",
+          "name": "Ministry of AYUSH",
+          "city": "New Delhi",
+          "badge": "Govt",
+          "note": "National wellness missions seeking certified Yoga + Ayurveda practitioners — Fit India schools programme expanding nationwide"
         },
         {
-          "icon": "🏨",
-          "name": "Jumeirah Al Naseem",
-          "city": "Dubai",
-          "badge": "High Value",
-          "note": "Luxury resort seeking resident wellness facilitator — yoga + sound healing for international guests, visiting teacher programme open"
+          "icon": "🏋️",
+          "name": "Cult.fit Pune Studios",
+          "city": "Pune",
+          "badge": "High Reach",
+          "note": "Cult.fit onboarding speciality instructors — sound healing + therapeutic yoga, 15 Pune studios, immediate openings"
         }
       ],
       "differentiation": [
@@ -923,7 +927,7 @@
           "tag": "Global Reach"
         }
       ],
-      "market_context": "Properties in Thailand, Bali, UAE and Europe are actively recruiting visiting facilitators for 2026-27 calendars. Indian lineage yoga + Nada Yoga commands premium rates in international markets."
+      "market_context": "After-school wellness programmes featuring yoga and mindfulness are being adopted by international schools across Pune, Bangalore and Mumbai. Exam-season demand spikes Feb-Mar and Oct-Nov."
     },
     "wisdom": {
       "yoga_sutras": [
@@ -1034,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-09-09T00:00:10.027964+00:00"
+  "generated_at": "2026-09-10T00:00:12.635410+00:00"
 }
