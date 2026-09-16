@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "fatigue",
+      "featured_condition": "knee_pain",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "upanishads"
+      "_featured_source": "hatha_yoga_pradipika"
     }
   },
-  "generated_at": "2026-09-15T00:00:10.866832+00:00"
+  "generated_at": "2026-09-16T00:00:11.847541+00:00"
 }
