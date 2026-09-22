@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "frozen_shoulder",
+      "featured_condition": "diabetes_management",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -840,7 +840,7 @@
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Yoga For Anxiety' searches are stable in India — peak 0/100, avg 0/100 this week",
+          "headline": "'Yoga For Anxiety' searches are stable in India — peak 27/100, avg 0/100 this week",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-09-21T00:00:12.664274+00:00"
+  "generated_at": "2026-09-22T00:00:30.023113+00:00"
 }
