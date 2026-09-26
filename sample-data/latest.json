@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-26",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "insomnia",
+      "featured_condition": "digestive_issues",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -804,7 +804,7 @@
     "opportunity": {
       "market_headline": "UAE and Southeast Asia wellness tourism booming — Indian teachers in high demand",
       "trend_data": {
-        "youtube_count": 25,
+        "youtube_count": 26,
         "trends_count": 3
       },
       "trends": [
@@ -828,7 +828,7 @@
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Luxury Wellness Retreat' Reels are stable — 5 videos confirm short-form demand",
+          "headline": "Instagram India: 'Luxury Wellness Retreat' Reels are stable — 6 videos confirm short-form demand",
           "hashtags": [
             "#Yogaretreatindia",
             "#Luxurywellnessretrea",
@@ -838,7 +838,7 @@
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Yoga Retreat India' searches are stable in India — peak 14/100, avg 0/100 this week",
+          "headline": "'Yoga Retreat India' searches are stable in India — peak 100/100, avg 0/100 this week",
           "hashtags": [
             "#Yogaretreatindia",
             "#Luxurywellnessretrea",
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-09-25T00:00:12.212394+00:00"
+  "generated_at": "2026-09-26T00:00:12.335128+00:00"
 }
