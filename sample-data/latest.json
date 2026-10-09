@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "anxiety",
+      "featured_condition": "insomnia",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -838,7 +838,7 @@
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Sound Healing' searches are stable in India — peak 42/100, avg 5/100 this week",
+          "headline": "'Sound Healing' searches are stable in India — peak 78/100, avg 10/100 this week",
           "hashtags": [
             "#Soundhealing",
             "#Singingbowlstherapy",
@@ -1034,8 +1034,8 @@
           ]
         }
       ],
-      "_featured_source": "bhagavad_gita"
+      "_featured_source": "upanishads"
     }
   },
-  "generated_at": "2026-10-08T00:00:12.793589+00:00"
+  "generated_at": "2026-10-09T00:00:16.360551+00:00"
 }
