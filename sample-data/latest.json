@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "insomnia",
+      "featured_condition": "digestive_issues",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "yoga_sutras"
+      "_featured_source": "bhagavad_gita"
     }
   },
-  "generated_at": "2026-10-23T00:00:11.003992+00:00"
+  "generated_at": "2026-10-24T00:00:15.542045+00:00"
 }
