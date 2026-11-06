@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "anxiety",
+      "featured_condition": "insomnia",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "bhagavad_gita"
+      "_featured_source": "upanishads"
     }
   },
-  "generated_at": "2026-11-05T00:00:12.422852+00:00"
+  "generated_at": "2026-11-06T00:00:14.880162+00:00"
 }
