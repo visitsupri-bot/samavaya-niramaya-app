@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "sections": {
     "schedule": {
       "classes": [
@@ -222,7 +222,7 @@
       }
     },
     "tip": {
-      "featured_condition": "digestive_issues",
+      "featured_condition": "migraine",
       "conditions": {
         "lower_back_pain": {
           "label": "Lower Back Pain",
@@ -804,7 +804,7 @@
     "opportunity": {
       "market_headline": "Kids yoga demand surging — schools and parents seeking certified structured programmes",
       "trend_data": {
-        "youtube_count": 39,
+        "youtube_count": 37,
         "trends_count": 5
       },
       "trends": [
@@ -828,7 +828,7 @@
         },
         {
           "platform": "Instagram India",
-          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 19 videos confirm short-form demand",
+          "headline": "Instagram India: 'Yoga Shorts Reels' Reels are stable — 17 videos confirm short-form demand",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -840,7 +840,7 @@
         },
         {
           "platform": "Google Trends India",
-          "headline": "'Yoga For Anxiety' searches are stable in India — peak 61/100, avg 0/100 this week",
+          "headline": "'Yoga For Anxiety' searches are stable in India — peak 44/100, avg 0/100 this week",
           "hashtags": [
             "#Yogaforanxiety",
             "#Soundhealingnearme",
@@ -1038,8 +1038,8 @@
           ]
         }
       ],
-      "_featured_source": "hatha_yoga_pradipika"
+      "_featured_source": "yoga_sutras"
     }
   },
-  "generated_at": "2026-11-07T00:00:24.171443+00:00"
+  "generated_at": "2026-11-08T00:00:21.560934+00:00"
 }
